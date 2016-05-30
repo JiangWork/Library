@@ -1,0 +1,21 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+<description>Basic mapping example</description>
+<class name="SimpleBean" auto-complete="true">
+<map-to xml="simple"/>
+<field name="isNative">
+<bind-xml name="native"/>
+</field>
+<field name="name">
+<bind-xml name="simpleName"/>
+</field>
+<field name="number">
+<bind-xml name="number"/>
+</field>
+<field name="values" collection="collection" type="java.lang.String">
+<bind-xml name="values"/>
+</field>
+</class>
+</mapping>

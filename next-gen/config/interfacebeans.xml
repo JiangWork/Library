@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+     
+     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@${Connection.machine}:${Connection.port}:${Connection.sid}"/>
+        <property name="username" value="${Connection.user}"/>
+        <property name="password" value="${Connection.password}"/>
+        <property name="validationQuery" value="select * from dual"></property>
+        <property name="testOnReturn" value="true"></property>
+        <property name="testOnBorrow" value="true"></property>
+    </bean>
+    
+	<!-- TODO: need to cleanup -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
+          <property name="ignoreResourceNotFound" value="true"></property>
+        <property name="locations">
+            <list>
+                <value>file:/klaL/logs/config.prop</value> 
+                <value>file:C:/kla/config.prop</value>
+               <value>file:/kla/logs/config.prop</value>
+            </list>
+        </property>
+       
+    </bean>
+     <bean id="requestFactory" class="com.klatencor.klara.fe6xxinterface.common.message.RequestFactory" scope="singleton">
+		<property name="requestMap">
+			<props >
+				<prop key="13100">com.klatencor.klara.fe6xxinterface.common.message.request.IRListRequest</prop>
+				<prop key="13101">com.klatencor.klara.fe6xxinterface.common.message.request.RecipeListRequest</prop>
+				<prop key="13102">com.klatencor.klara.fe6xxinterface.common.message.request.ReserveFmIdRequest</prop>
+				<prop key="13103">com.klatencor.klara.fe6xxinterface.common.message.request.RetrieveIRRequest</prop>
+				<prop key="13104">com.klatencor.klara.fe6xxinterface.common.message.request.RetrieveBaseIRRequest</prop>
+				<prop key="13105">com.klatencor.klara.fe6xxinterface.common.message.request.RetrieveRecipeRequest</prop>
+				<prop key="13106">com.klatencor.klara.fe6xxinterface.common.message.request.StoreIRRequest</prop>
+				<prop key="13107">com.klatencor.klara.fe6xxinterface.common.message.request.StoreRecipeRequest</prop>
+				<prop key="13508">com.klatencor.klara.fe6xxinterface.common.message.request.PayLoadRequest</prop>
+				<prop key="13108">com.klatencor.klara.fe6xxinterface.common.message.request.ProtocolParameterRequest</prop>
+				<prop key="13109">com.klatencor.klara.fe6xxinterface.common.message.request.StoreExposureLogRequest</prop>
+		                <prop key="13110">com.klatencor.klara.fe6xxinterface.common.message.request.DeleteRecipeRequest</prop>
+                	</props>
+		</property>
+	</bean>
+	<bean id="interfaceHost" class="java.lang.String">
+			<constructor-arg type="java.lang.String">
+				<value>dbhost</value>
+			</constructor-arg>
+	</bean>
+	<!--  Current protocol version configuration -->
+	<bean id="protocolVersion" class="com.klatencor.klara.fe6xxinterface.common.dataclasses.ProtocolVersionInfo">
+	   <constructor-arg value="3" />
+	   <constructor-arg value="809" />
+	</bean>
+	<bean id="fe6xxin" class="com.klatencor.klara.fe6xxinterface.io.Fe6xxInputStream" scope="prototype">
+		<property name="requestFactory" ref="requestFactory"></property>
+	
+	</bean>
+	<bean id="restoreFile" class="com.klatencor.klara.fe6xxinterface.common.util.RestoreFile" scope="prototype">
+	  <property name="fe6xxInterfaceHost" ref="interfaceHost"></property>
+	</bean>  
+	<bean id="interfaceDbUtil" class="com.klatencor.klara.fe6xxinterface.jdbc.Fe6xxInterfaceDbUtil">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="HANDLER_13100" class="com.klatencor.klara.fe6xxinterface.common.handler.IrListHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+	</bean>
+	<bean id="HANDLER_13101" class="com.klatencor.klara.fe6xxinterface.common.handler.RecipeListHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+	</bean>
+	<bean id="HANDLER_13102" class="com.klatencor.klara.fe6xxinterface.common.handler.ReserveFmIdHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+	</bean>
+	<bean id="HANDLER_13103" class="com.klatencor.klara.fe6xxinterface.common.handler.RetrieveIRHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+		<property name="useRecipeExtractorExe" value="true"></property>
+	</bean>
+	<bean id="HANDLER_13104" class="com.klatencor.klara.fe6xxinterface.common.handler.RetrieveBaseIRHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+	</bean>
+	<bean id="HANDLER_13105" class="com.klatencor.klara.fe6xxinterface.common.handler.RetrieveRecipeHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+	</bean>
+	<bean id="HANDLER_13106" class="com.klatencor.klara.fe6xxinterface.common.handler.StoreIRHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+		<property name="restoreFile" ref="restoreFile"></property>
+	</bean>
+	<bean id="HANDLER_13107" class="com.klatencor.klara.fe6xxinterface.common.handler.StoreRecipeHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+		<property name="restoreFile" ref="restoreFile"></property>
+	</bean>
+	<bean id="HANDLER_13108" class="com.klatencor.klara.fe6xxinterface.common.handler.ProtocolParameterHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+	</bean>
+	<bean id="HANDLER_13109" class="com.klatencor.klara.fe6xxinterface.common.handler.StoreExposureLogHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+		<property name="interfaceHost" ref="interfaceHost"></property>
+        </bean>
+        <bean id="HANDLER_13110" class="com.klatencor.klara.fe6xxinterface.common.handler.DeleteRecipeHandler" scope="prototype">
+		<property name="dbUtil" ref="interfaceDbUtil"></property>
+	</bean>
+	<bean id="fe6xxAgent" class="com.klatencor.klara.fe6xxinterface.agent.Fe6xxAgent" scope="prototype">
+	  <property name="versionInfo" ref="protocolVersion"></property>
+	</bean>
+	<bean id="fe6xxInterfaceServer" class="com.klatencor.klara.fe6xxinterface.agent.Fe6xxInterfaceServer">
+		<property name="corePoolSize" value="500"></property>
+		<property name="queueCapacity" value="500"></property>
+		<property name="port" value="30953"></property>
+		<property name="workDir" value="/kla/klaS/tmp"></property>
+	</bean>
+</beans>
