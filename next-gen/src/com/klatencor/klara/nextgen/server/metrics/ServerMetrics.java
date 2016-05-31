@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 
 import com.klatencor.klara.nextgen.job.Job;
-import com.klatencor.klara.nextgen.server.ServerConstants;
+import com.klatencor.klara.nextgen.server.ServerConfiguration;
 
 /**
  * Provide statistical status of current running server. 
@@ -47,6 +47,8 @@ public class ServerMetrics {
 	
 	private static ServerMetrics sm;
 	
+	private boolean isRunning = false;
+	
 	private ServerMetrics() {
 		startupTime = new Date(System.currentTimeMillis());
 		messageQueue = new LinkedBlockingQueue<JobMessage>();
@@ -64,6 +66,9 @@ public class ServerMetrics {
 	}
 	
 	public void put(JobMessage jobMessage) {
+		if (!isRunning) {
+			return;
+		}
 		try {
 			if (!messageQueue.offer(jobMessage, 1, TimeUnit.SECONDS)) {
 				logger.error("Can't add jobMessage to queue: " + jobMessage);
@@ -77,12 +82,18 @@ public class ServerMetrics {
 	public void startup() {
 		startupTime = new Date();
 		messageWorker.start();
+		isRunning = true;
 		logger.info("ServerMetrics startups.");
 	}
 	
 	public void shutdown() {
 		messageWorker.shutdown();
+		isRunning = false;
 		logger.info("ServerMetrics is shutdown successfully.");
+	}
+	
+	public boolean isRunning() {
+		return this.isRunning;
 	}
 	
 	public List<String> getHistoricalMessages() {
@@ -90,7 +101,7 @@ public class ServerMetrics {
 		synchronized(historicalMessages) {
 			messages.addAll(historicalMessages);
 		}
-		return Collections.unmodifiableList(messages);
+		return messages;
 	}
 	
 	public int getUnprocessedMessage() {
@@ -110,7 +121,7 @@ public class ServerMetrics {
 				try {
 					JobMessage msg = messageQueue.take();
 					synchronized(historicalMessages) {
-						if (historicalMessages.size() >= ServerConstants.KEEP_MESSAGE_SIZE) {
+						if (historicalMessages.size() >= ServerConfiguration.KEEP_MESSAGE_SIZE) {
 							historicalMessages.remove(0);
 						}
 						historicalMessages.add(msg.formatMessage());

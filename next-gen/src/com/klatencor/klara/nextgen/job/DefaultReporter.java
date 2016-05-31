@@ -2,7 +2,7 @@ package com.klatencor.klara.nextgen.job;
 
 import org.apache.log4j.Logger;
 
-import com.klatencor.klara.nextgen.server.ServerConstants;
+import com.klatencor.klara.nextgen.server.ServerConfiguration;
 import com.klatencor.klara.nextgen.server.ServerContext;
 import com.klatencor.klara.nextgen.server.metrics.JobMessage;
 import com.klatencor.klara.nextgen.server.metrics.ServerMetrics;
@@ -28,10 +28,11 @@ public class DefaultReporter implements Reporter {
 	
 	@Override
 	public void report(JobMessage jobMsg) {
-		if (!ServerConstants.SHOULD_REPORT) return;
+		if (!ServerConfiguration.SHOULD_REPORT) return;
 		logger.info(jobMsg.formatMessage());
 		ServerMetrics sm = sc.getMetrics();
-		sm.put(jobMsg);
+		if (sm.isRunning()) sm.put(jobMsg); 
+		else logger.info("ServerMetrics is not up.");
 	}
 
 }

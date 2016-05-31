@@ -1,6 +1,6 @@
 package com.klatencor.klara.nextgen.server;
 
-public final class ServerConstants {
+public final class ServerConfiguration {
 	
 	public static final String APPLICATION_NAME = "";
 	

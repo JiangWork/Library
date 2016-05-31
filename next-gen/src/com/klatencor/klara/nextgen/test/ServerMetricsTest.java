@@ -12,7 +12,7 @@ public class ServerMetricsTest {
 
 	static Logger logger = Logger.getLogger(ServerMetricsTest.class);
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		ServerMetrics metrics = ServerMetrics.getInstance();
 		metrics.startup();
@@ -28,6 +28,7 @@ public class ServerMetricsTest {
 			}.start();
 		}
 		while(metrics.getUnprocessedMessage() != 0);
+		//Thread.sleep(100);
 		metrics.shutdown();
 		logger.info(metrics.getHistoricalMessages().size());
 		logger.info(metrics.getHistoricalMessages());
