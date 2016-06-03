@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
+import java.net.URL;
 
 import org.apache.log4j.Logger;
 import org.exolab.castor.mapping.Mapping;
@@ -21,14 +22,14 @@ public class CastorXmlParser<T> implements XmlParser<T> {
 
 	private static final Logger logger = Logger.getLogger(CastorXmlParser.class);
 	
-	private String mappingFile;
+	private String mappingPath;
 	
 	public CastorXmlParser() {
 		this(null);
 	}
 	
-	public CastorXmlParser(String mappingFile) {
-		this.mappingFile = mappingFile;
+	public CastorXmlParser(String mappingPath) {
+		this.mappingPath = mappingPath;
 	}
 	
 	@Override
@@ -54,6 +55,15 @@ public class CastorXmlParser<T> implements XmlParser<T> {
 		if (!file.canRead()) {
 			throw new ParsingException("can't read file: " + xmlPath);
 		}
+
+		File mappingFile = new File(mappingPath);
+		if (!mappingFile.canRead()) {
+			URL url = CastorXmlParser.class.getResource(mappingPath);
+		    mappingPath = url.getFile();
+		} else {
+			mappingPath = mappingFile.getAbsolutePath();
+		}
+		
 		Reader reader = null;
 		try {
 			reader = new FileReader(file);
@@ -61,14 +71,14 @@ public class CastorXmlParser<T> implements XmlParser<T> {
 			// ignored, shouldn't happen
 		}
 		logger.info(String.format("Parsing file %s using mapping file %s.", 
-				xmlPath, mappingFile));
+				xmlPath, mappingPath));
 		Unmarshaller unmarshaller = new Unmarshaller();
 		unmarshaller.setIgnoreExtraAttributes(true);
 		unmarshaller.setIgnoreExtraElements(true);
-		if (mappingFile != null) {
+		if (mappingPath != null) {
 			Mapping map = new Mapping();
 			try {
-				map.loadMapping(mappingFile);
+				map.loadMapping(mappingPath);
 				unmarshaller.setMapping(map);
 			} catch (Exception e) {  // re-throw
 				throw new ParsingException(e.getMessage(), e);

@@ -120,6 +120,7 @@ public class ServerMetrics {
 			while(shouldRun && !isInterrupted()) {
 				try {
 					JobMessage msg = messageQueue.take();
+					logger.debug(String.format("Processing message: %s", msg.formatMessage()));
 					synchronized(historicalMessages) {
 						if (historicalMessages.size() >= ServerConfiguration.KEEP_MESSAGE_SIZE) {
 							historicalMessages.remove(0);
@@ -175,20 +176,21 @@ public class ServerMetrics {
 			logger.info(jobRecord.formatJobRecord());
 			String jobName = jobRecord.getJobName();
 			JobStatistics stats = null;
-			if (!jobStats.containsKey(jobName)) {
-				stats = new JobStatistics();
-				stats.setJobName(jobName);
-			} else {
-				stats = jobStats.get(jobName);
+			synchronized(jobStats) {
+				if (!jobStats.containsKey(jobName)) {
+					stats = new JobStatistics();
+					stats.setJobName(jobName);
+				} else {
+					stats = jobStats.get(jobName);
+				}
+				stats.incCount(1);
+				stats.incTotalTime(jobRecord.getEndTime().getTime() 
+						- jobRecord.getStartTime().getTime());
+				jobStats.put(jobName, stats);
 			}
-			stats.incCount(1);
-			stats.incTotalTime(jobRecord.getEndTime().getTime() 
-					- jobRecord.getStartTime().getTime());
+			logger.info("Job statistics: " + stats.formartJobStatistics());
 			synchronized(runningJobs) {
 				runningJobs.remove(jobId);
-			}
-			synchronized(jobStats) {
-				jobStats.put(jobName, stats);
 			}
 		}
 		

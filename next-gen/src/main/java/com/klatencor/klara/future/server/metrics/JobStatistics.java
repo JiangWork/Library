@@ -55,5 +55,8 @@ public class JobStatistics {
 		this.factor = factor;
 	}
 	
-	
+	public String formartJobStatistics() {
+		return String.format("JobName:%s, Count:%d, TotalTime:%d, Factor:%d", 
+				jobName, count, totalTime, factor);
+	}
 }
