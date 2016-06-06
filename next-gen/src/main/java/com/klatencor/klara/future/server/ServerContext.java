@@ -4,7 +4,7 @@ import com.klatencor.klara.future.server.metrics.ServerMetrics;
 
 /**
  * A {@link ServerContext} contains general server information
- * that can be accessed by other classes.
+ * that can be accessed by other classes.  
  * 
  * @author jiangzhao
  * @date  May 23, 2016
@@ -13,19 +13,13 @@ import com.klatencor.klara.future.server.metrics.ServerMetrics;
 public class ServerContext {
 	
 	private String serverName;
-	private static ServerContext serverContext;
 	private ServerMetrics metrics;
+	
 
-	private ServerContext() {
-		metrics = ServerMetrics.getInstance();
+	public ServerContext() {
+	
 	}
 	
-	public synchronized static  ServerContext getInstance() {
-		if (serverContext == null) {
-			serverContext = new ServerContext();
-		}
-		return serverContext;
-	}
 	
 	public String getServerName() {
 		return serverName;
@@ -41,7 +35,5 @@ public class ServerContext {
 
 	public void setMetrics(ServerMetrics metrics) {
 		this.metrics = metrics;
-	}
-	
-	
+	}	
 }

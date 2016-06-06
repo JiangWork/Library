@@ -1,12 +1,10 @@
 package com.klatencor.klara.future.server.metrics;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -45,24 +43,15 @@ public class ServerMetrics {
 	/** <jobName, statistics> **/
 	private Map<String, JobStatistics> jobStats;
 	
-	private static ServerMetrics sm;
-	
 	private boolean isRunning = false;
 	
-	private ServerMetrics() {
+	public ServerMetrics() {
 		startupTime = new Date(System.currentTimeMillis());
 		messageQueue = new LinkedBlockingQueue<JobMessage>();
 		messageWorker = new JobMessageWorker();
 		historicalMessages = new ArrayList<String>();
 		runningJobs = new HashMap<Long, JobRecord>();
 		jobStats = new HashMap<String, JobStatistics>();
-	}
-	
-	public synchronized static ServerMetrics getInstance() {
-		if (sm == null) {
-			sm = new ServerMetrics();
-		}
-		return sm;
 	}
 	
 	public void put(JobMessage jobMessage) {
@@ -96,6 +85,18 @@ public class ServerMetrics {
 		return this.isRunning;
 	}
 	
+	public Date getStartupTime() {
+		return startupTime;
+	}
+
+	public void setStartupTime(Date startupTime) {
+		this.startupTime = startupTime;
+	}
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+	
 	public List<String> getHistoricalMessages() {
 		List<String> messages = new ArrayList<String>();
 		synchronized(historicalMessages) {
@@ -107,7 +108,6 @@ public class ServerMetrics {
 	public int getUnprocessedMessage() {
 		return messageQueue.size();
 	}
-	
 	
 	public class JobMessageWorker extends Thread {		
 		private boolean shouldRun = true;

@@ -15,9 +15,11 @@ public class ServerMetricsTest {
 	
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-		ServerMetrics metrics = ServerMetrics.getInstance();
+		ServerMetrics metrics = new ServerMetrics();
 		metrics.startup();
-		final Reporter reporter = new DefaultReporter(ServerContext.getInstance());
+		ServerContext ctx = new ServerContext();
+		ctx.setMetrics(metrics);
+		final Reporter reporter = new DefaultReporter(ctx);
 		for (int i = 1; i < 100; ++i) {
 			final int index = i;
 			new Thread() {
