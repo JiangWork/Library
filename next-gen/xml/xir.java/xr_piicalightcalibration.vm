@@ -1,0 +1,61 @@
+                                        <PiicLightCalibration>
+#ifnotnull($inspArea.getLightCal().getPIICLightCalComposite())
+                                                <ViewName>$util.format($inspArea.getLightCal().getPIICLightCalComposite().getCpstViewName())</ViewName>
+                                                <Method>$util.format($util.getPIICLightCalMethod($inspArea))</Method>
+#set($noLightCalPoint=$inspArea.getLightCal().getPIICLightCalComposite().getLightCalPointsArray().length)
+#foreach($iteration in [0..$noLightCalPoint])
+                                                <Point>
+#set($value = $util.getPoint($inspArea.getLightCal().getPIICLightCalComposite().getLightCalPointsArray(),$iteration,true))
+                                                        <Point_X>$util.format($value)</Point_X>
+                                                        <Point_Y>$util.format($util.getPoint($inspArea.getLightCal().getPIICLightCalComposite().getLightCalPointsArray(),$iteration,false))</Point_Y>
+                                                        <Units>#if($value != "")mm#end</Units>
+                                                </Point>
+#end
+                                                <ActualBlack></ActualBlack>
+                                                <ActualWhite></ActualWhite>
+                                                <TransmittedBlackGoal>$util.format($inspArea.getLightCal().getPIICLightCalComposite().getTransBlackGoal())</TransmittedBlackGoal>
+                                                <TransmittedWhiteGoal>$util.format($inspArea.getLightCal().getPIICLightCalComposite().getTransWhiteGoal())</TransmittedWhiteGoal>
+                                                <Material>
+                                                        <MaterialName></MaterialName>
+                                                        <Point>
+                                                                <Point_X></Point_X>
+                                                                <Point_Y></Point_Y>
+                                                                <Units></Units>
+                                                        </Point>
+                                                </Material>
+                                                <Digitizer>
+                                                        <TransGain></TransGain>
+                                                        <TransOffSet></TransOffSet>
+                                                        <ReflGain></ReflGain>
+                                                        <ReflOffset></ReflOffset>
+                                                </Digitizer>
+                                                
+#end
+#ifnull($inspArea.getLightCal().getPIICLightCalComposite())
+                                                <ViewName></ViewName>
+                                                <Method></Method>
+                                                <Point>
+                                                        <Point_X></Point_X>
+                                                        <Point_Y></Point_Y>
+                                                        <Units></Units>
+                                                </Point>
+                                                <ActualBlack></ActualBlack>
+                                                <ActualWhite></ActualWhite>
+                                                <TransmittedBlackGoal></TransmittedBlackGoal>
+                                                <TransmittedWhiteGoal></TransmittedWhiteGoal>
+                                                <Material>
+                                                        <MaterialName></MaterialName>
+                                                        <Point>
+                                                                <Point_X></Point_X>
+                                                                <Point_Y></Point_Y>
+                                                                <Units></Units>
+                                                        </Point>
+                                                </Material>
+                                                <Digitizer>
+                                                        <TransGain></TransGain>
+                                                        <TransOffSet></TransOffSet>
+                                                        <ReflGain></ReflGain>
+                                                        <ReflOffset></ReflOffset>
+                                                </Digitizer>
+#end
+                                        </PiicLightCalibration>

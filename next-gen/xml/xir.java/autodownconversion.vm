@@ -1,0 +1,49 @@
+#parse("header.vm")
+<tr>
+	<td align="center" valign="top">&nbsp;
+		<table border="0" width="75%" id="table2" style="border-collapse: collapse" bordercolor="#000000">
+				<tr>
+					<td width="152" align="right"><font face="Arial" size="2">IR Name: </font></td>
+					<td width="789"><font face="Arial" size="2">$irname</font></td>
+				</tr>
+				<tr>
+					<td width="152" align="right"><font face="Arial" size="2">Source Version:</font></td>
+					<td width="789"><font face="Arial" size="2">$sourceversion</font></td>
+				</tr>
+				<tr>
+					<td width="152" align="right"><font face="Arial" size="2">Successful&nbsp;conversion: </font></td>
+					<td width="789"><font face="Arial" size="2">$success</font></td>
+				</tr>
+				<tr>
+					<td width="152" align="right"><font face="Arial" size="2">Failed&nbsp;conversion: </font></td>
+					<td width="789"><font face="Arial" size="2">$fail</font></td>
+				</tr>
+				<tr>
+					<td width="152" align="right"><font face="Arial" size="2">Total&nbsp;conversions: </font></td>
+					<td width="789"><font face="Arial" size="2">$total</font></td>
+				</tr>
+			</table>
+			&nbsp;
+			<table border="1" id="table4" width="75%" style="border-collapse: collapse" bordercolor="#000000">
+				<tr>
+					<td width="394" align="center"><b><font size="2" face="Arial">Target&nbsp;Version</font></b></td>
+					<td align="center"><b><font size="2" face="Arial">Status</font></b></td>
+				</tr>
+				#set ($versioncount = $versionlist.size() - 1)
+				#if ($versioncount >= 0)
+								
+					#foreach( $index in [0..$versioncount] )
+					<tr>
+						<td width="394"><font face="Arial" size="2">&nbsp;$versionlist.elementAt($index)</font></td>
+						#if($statuslist.elementAt($index)=="1")
+							<td bgcolor="#00FF00"><font face="Arial" size="2">&nbsp;Success</font></td>
+						#else
+							<td bgcolor="#FF0000"><font face="Arial" size="2">&nbsp;Failure</font></td>
+						#end
+					</tr>
+					#end
+				#end
+		</table>
+	</td>
+</tr>
+#parse("footer.vm")

@@ -1,0 +1,33 @@
+			<Behavior 
+				AutoSetup="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getAutoSetup()))" 
+				AutoInspect="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getAutoInspect()))" 
+				AutoReview="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getAutoReview()))" 
+				AutoUnload="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getAutoUnload()))" 
+				AbortJobOnError="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getAbortJobOnError()))" 
+				PrintAfterInspection="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getPrintAfterInspection()))" 
+				PrintAfterReview="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getPrintAfterReview()))" 
+				PrintFullReport="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getprintFullReport()))" 
+				StoreAfterInspection="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getStoreAfterInspection()))" 
+				StoreAfterReview="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getStoreAfterReview()))" 
+				StoreImages="$util.format($util.getStoreImages())" 
+				DisplayNewDefects="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getdisplayType()))" 
+				IadDefectConcat="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getIadDefectConcat()))" #* 
+				PiicEnabled="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getEnablePIIC()))" 
+				ExpandPiicImageSize="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getExpandPiicImgSize()))" *#
+				VDLEnabled="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getEnableVDL()))" 
+				VDLArrayX="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getXArrayVDL()))" 
+				VDLFilename="$util.format($insp.getRecipe().getBehavior().getVdlFilename())" 
+				InspectionCount="$util.format($insp.getRecipe().getBehavior().getInspectionCount())" 
+				AbortFailCount="$util.format($insp.getRecipe().getBehavior().getAbortFailCount())" 
+				AbortWarnCount="$util.format($insp.getRecipe().getBehavior().getAbortWarnCount())" 
+				ZCalForP90="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getZCalForP90()))" 
+				ZCalForP125="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getZCalForP125()))" 
+				AutoDnir="$util.format($util.formatBehavior($insp.getRecipe().getBehavior().getAutoDNIR()))" 
+				DiagCalType="$util.format($util.getDiagCalTypeStr())"
+#if($insp.getRecipe().getBehavior().getEnableVDL()==1 ) 
+				VdlParameters="$util.format($util.getVDLParameters())" 
+#else
+				VdlParameters="None" 
+#end
+				SpotCal="$util.formatBehavior($insp.getRecipe().getBehavior().getSpotCal())" >
+			</Behavior>

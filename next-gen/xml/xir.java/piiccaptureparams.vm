@@ -1,0 +1,23 @@
+					<PiicCaptureParams>
+#set($capSize=$inspArea.getPiicCapParamsSize())
+#if($capSize >0)
+#set($params=$inspArea.getPiicCapParams())
+#foreach($index in [0..$capSize])
+						<CaptureParameters>
+							<TdiImgHeight>$util.format($params.elementAt($index).getTdiImgColHeight())</TdiImgHeight>
+							<SwBtmTopUnusablePixs>$util.format($params.elementAt($index).getSwTopUnusablePixs())</SwBtmTopUnusablePixs>
+							<MaxP0P1YOffsetPix></MaxP0P1YOffsetPix>
+							<AlgoOverlap></AlgoOverlap>
+							<ArfName></ArfName>
+						</CaptureParameters>
+#end
+#else
+                       <CaptureParameters>
+							<TdiImgHeight></TdiImgHeight>
+							<SwBtmTopUnusablePixs></SwBtmTopUnusablePixs>
+							<MaxP0P1YOffsetPix></MaxP0P1YOffsetPix>
+							<AlgoOverlap></AlgoOverlap>
+							<ArfName></ArfName>
+						</CaptureParameters>
+#end
+					</PiicCaptureParams>

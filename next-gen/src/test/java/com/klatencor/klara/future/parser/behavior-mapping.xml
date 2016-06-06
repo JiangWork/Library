@@ -1,0 +1,44 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+
+<description>A mapping settings for Behavior class</description>
+
+<class name="com.klatencor.klara.future.object.recipe.Behavior" auto-complete="true">
+    <map-to xml="Behavior"/>
+    <field name="recipeName">
+        <bind-xml name="RecipeName" node="attribute"/>
+    </field>
+    <field name="recipeVersion">
+        <bind-xml name="RecipeVersion" node="attribute"/>
+    </field>
+    <field name="systemType">
+        <bind-xml name="RecipeVersion" node="attribute"/>
+    </field>
+    <field name="minimumRecpeVersion">
+        <bind-xml name="RecipeVersion" node="attribute"/>
+    </field>
+    <field name="opaqueSubstrateMode">
+        <bind-xml name="OpaqueSubstrateMode" node="attribute"/>
+    </field>
+    <field name="note">
+        <bind-xml name="Note" node="attribute"/>
+    </field>
+    <field name="databaseName">
+        <bind-xml name="DatabaseName" node="attribute"/>
+    </field>
+    <field name="plateMirror">
+        <bind-xml name="PlateMirror" node="attribute"/>
+    </field>
+    <field name="dbImageRotation">
+        <bind-xml name="DbImageRotation" node="attribute"/>
+    </field>
+    <field name="platePolarity">
+        <bind-xml name="PlatePolarity" node="attribute"/>
+    </field>
+    <field name="plateTone">
+        <bind-xml name="PlateTone" node="attribute"/>
+</class>
+
+</mapping>

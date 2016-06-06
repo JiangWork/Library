@@ -1,0 +1,37 @@
+					<StarLightCalibration
+#ifnotnull($inspArea.getStarlightCalibration())
+						Method="$util.format($util.getStarlightCalMethod($inspArea))">
+						<PixelSize
+#set($value = $util.getCoordinateX($inspArea.getStarlightCalibration().getPixelSize()))
+						   X="$util.format($value)"
+						   Y="$util.format($util.getCoordinateY($inspArea.getStarlightCalibration().getPixelSize()))"/>
+						<Points>
+#set($nostarCalPoint = $inspArea.getStarlightCalibration().getNumSLCalPts())
+#if($nostarCalPoint > 0)
+#set($nostarCalPoint = $nostarCalPoint - 1)
+#foreach($iteration in [0..$nostarCalPoint])
+							<Point	
+#set($value = $util.getPoint($inspArea.getStarlightCalibration().getsLCalPointArray(),$iteration,true))
+								X="$util.format($value)"
+								Y="$util.format($util.getPoint($inspArea.getStarlightCalibration().getsLCalPointArray(),$iteration,false))"/>
+#end
+#else
+							<Point
+							   X=""
+							   Y=""/>
+#end
+						</Points>
+						<StarlightCalibrationResult>$util.format($inspArea.getStarlightCalibration().getSlCalResults())</StarlightCalibrationResult>
+#end
+#ifnull($inspArea.getStarlightCalibration())
+                                                
+						Method="">
+						<PixelSize
+						   X=""
+						   Y="" />
+						<Point
+						   X=""
+						   Y=""/>
+						<StarlightCalibrationResult></StarlightCalibrationResult>
+#end
+					</StarLightCalibration>

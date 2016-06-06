@@ -26,9 +26,9 @@ public class Behavior {
 	private String vDLEnabled;
 	private String vDLArrayX;
 	private String vDLFilename;
-	private int inspectionCount;
-	private int abortFailCount; 
-	private int abortWarnCount;
+	private String inspectionCount;
+	private String abortFailCount; 
+	private String abortWarnCount;
 	private String zCalForP90;
 	private String zCalForP125;
 	private String autoDnir;
@@ -131,22 +131,22 @@ public class Behavior {
 	public void setVDLFilename(String vDLFilename) {
 		this.vDLFilename = vDLFilename;
 	}
-	public int getInspectionCount() {
+	public String getInspectionCount() {
 		return inspectionCount;
 	}
-	public void setInspectionCount(int inspectionCount) {
+	public void setInspectionCount(String inspectionCount) {
 		this.inspectionCount = inspectionCount;
 	}
-	public int getAbortFailCount() {
+	public String getAbortFailCount() {
 		return abortFailCount;
 	}
-	public void setAbortFailCount(int abortFailCount) {
+	public void setAbortFailCount(String abortFailCount) {
 		this.abortFailCount = abortFailCount;
 	}
-	public int getAbortWarnCount() {
+	public String getAbortWarnCount() {
 		return abortWarnCount;
 	}
-	public void setAbortWarnCount(int abortWarnCount) {
+	public void setAbortWarnCount(String abortWarnCount) {
 		this.abortWarnCount = abortWarnCount;
 	}
 	public String getZCalForP90() {
@@ -185,5 +185,4 @@ public class Behavior {
 	public void setSpotCal(String spotCal) {
 		this.spotCal = spotCal;
 	}
-	
 }

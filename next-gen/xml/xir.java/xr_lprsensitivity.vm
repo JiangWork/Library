@@ -1,0 +1,129 @@
+					<LprSensitivity>
+#ifnotnull($inspArea.getLprSense())
+						<Algorithm>$util.format($inspArea.getLprAlgo())</Algorithm>
+						<PixelSize>
+#set($value = $util.getCoordinateX($inspArea.getLprSense().getPixelSize()))
+							<PixelSize_X>$util.format($value)</PixelSize_X>
+							<PixelSize_Y>$util.format($util.getCoordinateY($inspArea.getLprSense().getPixelSize()))</PixelSize_Y>
+							<Units>#if($value != "")mm#end</Units>
+						</PixelSize>
+						<ConcatRadius>$util.format($inspArea.getLprSense().getConcatRadius())</ConcatRadius>
+						<FocusOffset>$util.format($inspArea.getLprSense().getFocusOffset())</FocusOffset>
+						<EdgeSpeedRatio>$util.format($inspArea.getLprSense().getEdgeSpeedRatio())</EdgeSpeedRatio>
+						<AcquisitionVeiw>$util.format($inspArea.getLprSense().getViewName())</AcquisitionVeiw>
+						<Option></Option>
+						<OpcEnable>$util.format($util.getLPRsenseOPCorTransLossorHighSenseEnable($inspArea,false,true,false))</OpcEnable>
+						<TransLossEnable>$util.format($util.getLPRsenseOPCorTransLossorHighSenseEnable($inspArea,true,false,false))</TransLossEnable>
+						<HighSensitivityEnable>$util.format($util.getLPRsenseOPCorTransLossorHighSenseEnable($inspArea,false,false,true))</HighSensitivityEnable>
+						<DefectTypeList>
+#set($flexknob=$inspArea.getLprSense().getFlexKnobsArray())
+#foreach($knob in $flexknob)
+#set($type=$knob.getFkType())
+#if($type==0)
+							<Defect>
+								<DefectType>$util.format($knob.getFkName())</DefectType>
+								<Value>$util.format($knob.getFkValue())</Value>
+								<Min>$util.format($knob.getFkMin())</Min>
+								<Max>$util.format($knob.getFkMax())</Max>
+								<DisplayMode>$util.format($knob.getFkEditMode())</DisplayMode>
+								<DefectID>$util.format($knob.getFkDefectID())</DefectID>
+								<MaxSmallBndry>$util.format($knob.getFkMaxSmallBndry())</MaxSmallBndry>
+								<MaxMedBndry>$util.format($knob.getFkMaxMedBndry())</MaxMedBndry>
+								<MaxLargeBndry>$util.format($knob.getFkMaxLargeBndry())</MaxLargeBndry>
+								<Small>$util.format($util.getFlexKnobString($knob.getFkSmallSeverity()))</Small>
+								<Medium>$util.format($util.getFlexKnobString($knob.getFkMedSeverity()))</Medium>
+								<Large>$util.format($util.getFlexKnobString($knob.getFkLargeSeverity()))</Large>
+								<XLarge>$util.format($util.getFlexKnobString($knob.getFkExLargeSeverity()))</XLarge>
+								<Unit>$util.format($knob.getFKunit())</Unit>
+							</Defect>
+#elseif($type==1)
+							<Int>
+								<DefectType>$util.format($knob.getFkName())</DefectType>
+								<Value>$util.format($knob.getFkValue())</Value>
+								<Min>$util.format($knob.getFkMin())</Min>
+								<Max>$util.format($knob.getFkMax())</Max>
+								<DisplayMode>$util.format($knob.getFkEditMode())</DisplayMode>
+								<Unit>$util.format($knob.getFKunit())</Unit>
+							</Int>
+#elseif($type==2)
+							<Bool>
+								<DefectType>$util.format($knob.getFkName())</DefectType>
+								<Value>$util.format($knob.getFkValue())</Value>
+								<DisplayMode>$util.format($knob.getFkEditMode())</DisplayMode>
+								<Unit>$util.format($knob.getFKunit())</Unit>
+							</Bool>
+#elseif($type==3)
+							<Float>
+								<DefectType>$util.format($knob.getFkName())</DefectType>
+								<Value>$util.format($knob.getFkFloatvalue())</Value>
+								<Min>$util.format($knob.getFkFloatmin())</Min>
+								<Max>$util.format($knob.getFkFloatmax())</Max>
+								<DisplayMode>$util.format($knob.getFkEditMode())</DisplayMode>
+								<Precision>$util.format($knob.getFkFloatprecision())</Precision>
+								<Unit>$util.format($knob.getFKunit())</Unit>
+							</Float>
+#elseif($type==4)
+							<Option>
+								<DefectType>$util.format($knob.getFkName())</DefectType>
+								<Value>$util.format($knob.getFkValue())</Value>
+								<DisplayMode>$util.format($knob.getFkEditMode())</DisplayMode>
+								<OptionValue>$util.format($util.getFlexKnobOptions($knob))</OptionValue>
+								<Unit>$util.format($knob.getFKunit())</Unit>
+							</Option>
+#elseif($type==5)
+							<FileSel>
+								<DefectType>$util.format($knob.getFkName())</DefectType>
+								<Value>$util.format($knob.getFSValue())</Value>
+								<Extension>$util.format($knob.getFSExt())</Extension>
+								<DisplayMode>$util.format($knob.getFkEditMode())</DisplayMode>
+								<Directory>$util.format($knob.getFSDir())</Directory>
+								<Unit>$util.format($knob.getFKunit())</Unit>
+							</FileSel>
+#elseif($type==6)
+							<Rank>
+								<DefectType>$util.format($knob.getFkName())</DefectType>
+								<DisplayMode>$util.format($knob.getFkEditMode())</DisplayMode>
+								<RankValue>$util.format($util.getFlexKnobOptions($knob))</RankValue>
+								<Unit>$util.format($knob.getFKunit())</Unit>
+							</Rank>
+#elseif($type==7)
+							<FileEdit>
+								<DefectType>$util.format($knob.getFkName())</DefectType>
+								<Value>$util.format($knob.getFSValue())</Value>
+								<Extension>$util.format($knob.getFSExt())</Extension>
+								<DisplayMode>$util.format($knob.getFkEditMode())</DisplayMode>
+								<Directory>$util.format($knob.getFSDir())</Directory>
+								<Edit>$util.format($knob.getFileEdit())</Edit>
+								<Unit>$util.format($knob.getFKunit())</Unit>
+							</FileEdit>
+#end
+#end
+						</DefectTypeList>
+						<LithoFilter>$util.format($util.getLithoFilter($inspArea))</LithoFilter>
+#end
+#ifnull($inspArea.getLprSense())
+                                                <Algorithm></Algorithm>
+						<PixelSize>
+							<PixelSize_X></PixelSize_X>
+							<PixelSize_Y></PixelSize_Y>
+							<Units></Units>
+						</PixelSize>
+						<ConcatRadius></ConcatRadius>
+						<FocusOffset></FocusOffset>
+						<EdgeSpeedRatio></EdgeSpeedRatio>
+						<Option></Option>
+						<AcquisitionVeiw></AcquisitionVeiw>
+						<OpcEnable></OpcEnable>
+						<TransLossEnable></TransLossEnable>
+						<HighSensitivityEnable></HighSensitivityEnable>
+						<DefectTypeList>
+							<DefectType></DefectType>
+							<Sensitivity></Sensitivity>
+							<Small></Small>
+							<Medium></Medium>
+							<Large></Large>
+							<XLarge></XLarge>
+						</DefectTypeList>
+						<LithoFilter></LithoFilter>					
+#end
+					</LprSensitivity>

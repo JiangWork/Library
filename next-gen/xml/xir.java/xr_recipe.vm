@@ -1,0 +1,8 @@
+		<Recipe>		
+#parse("xr_recipegeneral.vm")
+#parse("xr_behaviour.vm")
+#parse("xr_platealignment.vm")
+#parse("xr_zcalibration.vm")
+#parse("xr_inspectionarea.vm")
+		</Recipe>
+	

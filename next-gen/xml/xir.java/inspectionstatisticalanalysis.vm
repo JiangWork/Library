@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InspectionStatisticsReport>
+	<GeneralReportInformation
+		ReportGenerationDate="$util.format($date)"
+		ReferenceFile="$util.format($sense.getReferenceFileName())"
+		SpecificationFile="$util.format($sense.getSpecFileName())"
+		KT9XeSystem="$util.format($kt9xsystem)"
+		MatchRangeType="$util.format($matchRangeType)"	>
+		<InspectionReportsUsedForAnalysis>
+#set ( $selectedIrs = $sense.getInspectionIRVector())
+#foreach($selectedIr in $selectedIrs)
+			<InspectionReport 
+				PlateName="$util.format($selectedIr.getPlateName())" 
+				InspectionName="$util.format($selectedIr.getIrName())"
+				InspectionStartTime="$util.format($selectedIr.getInspStartTime())"
+				FmId="$util.format($selectedIr.getFmId())" 
+				InspectionStation="$util.format($selectedIr.getSystemName())">
+				<PixelSizes>
+#set($pixelSizeList = $selectedIr.getPixelSizeList())
+#if($pixelSizeList.size() >0)
+#foreach($pSize in $pixelSizeList)
+					<PixelSize>$pSize.getX()</PixelSize>
+#end
+#else
+					<PixelSize></PixelSize>
+#end
+				</PixelSizes>
+			</InspectionReport>
+#end
+		</InspectionReportsUsedForAnalysis>
+	</GeneralReportInformation>
+	<Parameters>
+		<Surface>$util.format($sense.getSurface())</Surface> 
+		<MatchRange 
+			X="$util.formatWidth("1",3, $sense.divide($sense.getMatchRange(), 1000.0))" 
+			Y="$util.formatWidth("1",3, $sense.divide($sense.getMatchRange(), 1000.0))"/>
+		<ReferenceLocOffset 
+			X="$util.formatWidth("1",3, $sense.divide($sense.getLocOffsetX(), 1000.0))" 
+			Y="$util.formatWidth("1",3, $sense.divide($sense.getLocOffsetY(), 1000.0))" /> 
+		<AreaOfInterest>
+			<LowerLeft 
+				X="$util.formatWidth("1",3, $sense.divide($sense.getLowerLeftX(), 1000.0))" 
+				Y="$util.formatWidth("1",3, $sense.divide($sense.getLowerLeftY(), 1000.0))" />
+			<UpperRight 
+				X="$util.formatWidth("1",3, $sense.divide($sense.getUpperRightX(), 1000.0))" 
+				Y="$util.formatWidth("1",3, $sense.divide($sense.getUpperRightY(), 1000.0))" />  
+		</AreaOfInterest>
+	</Parameters>
+	<InspectionStatisticsSummary>
+#set ( $summary = $analysisAlgo.getSummary())
+   		<MatchedDefects>
+#set($defectVector = $summary.getSummaryDefectVector())
+#foreach($defect in $defectVector )
+#if($defect.isMatchDefect())
+			<Defect 
+				 CaptureRate="$util.format($defect.getCaptureRate())"
+				Spec="$util.format($defect.getSpecValue())"
+				ReferenceDefectClassification="$util.format($defect.getRefClassification())" >
+				<ReferenceLocation 
+					X="$util.format($util.getCoordinateX($defect.getCoordinate()))" 
+					Y="$util.format($util.getCoordinateY($defect.getCoordinate()))" />
+				<ReferenceSize 
+					X="$util.formatWidth("1",3, $sense.divide($defect.getDefectSizeX(), 1000.0))"
+					Y="$util.formatWidth("1",3, $sense.divide($defect.getDefectSizeY(), 1000.0))"/>	
+			</Defect>
+#end
+#end	
+		</MatchedDefects>		
+		<UnMatchedDefects>
+#set($defectVector = $summary.getSummaryDefectVector())
+#foreach($defect in $defectVector )
+#if(!$defect.isMatchDefect())
+			<Defect
+				CaptureRate="$util.format($defect.getUnmatchedCaptureRate())" >
+				<IRLocation 
+					X="$util.format($util.getCoordinateX($defect.getCoordinate()))" 
+					Y="$util.format($util.getCoordinateY($defect.getCoordinate()))" />
+			</Defect>
+#end
+#end
+		</UnMatchedDefects>		
+	</InspectionStatisticsSummary>
+#set ( $analysisVector = $analysisAlgo.getInspectionAnalysisVector())
+#foreach($analysis in $analysisVector )
+#set($irData = $analysis.getIrData())
+	<IndividualInspectionStatistics>
+		<InspectionReport 
+				PlateName="$util.format($irData.getPlateName())" 
+				InspectionName="$util.format($irData.getIrName())"
+				InspectionStartTime="$util.format($irData.getInspStartTime())"
+				FmId="$util.format($irData.getFmId())" 
+				InspectionStation="$util.format($irData.getFmId())">
+			<PixelSizes>
+#set($pixelSizeList = $irData.getPixelSizeList())
+#if($pixelSizeList.size() >0)
+#foreach($pSize in $pixelSizeList)
+				<PixelSize>$pSize.getX()</PixelSize>
+#end
+#else
+				<PixelSize></PixelSize>
+#end
+			</PixelSizes>
+			<MatchedDefects>
+#set($defectVector = $analysis.getDefectVector())
+#foreach($defect in $defectVector )
+#if($defect.isMatchDefect())
+				<Defect 
+					Spec="$util.format($defect.getSpecValue())"
+					ReferenceDefectClassification="$util.format($defect.getRefClassification())" 
+					SystemDefectClassification="$util.format($defect.getSystemClassification())" 
+					UserDefectClassification="$util.format($defect.getUserClassification())" >
+					<ReferenceLocation  
+						X="$util.format($util.getCoordinateX($defect.getCoordinate()))" 
+						Y="$util.format($util.getCoordinateY($defect.getCoordinate()))" />
+					<IRLocation  
+						X="$util.format($util.getCoordinateX($defect.getActualDefectCordinate()))" 
+						Y="$util.format($util.getCoordinateY($defect.getActualDefectCordinate()))" />
+					<ReferenceSize  
+						X="$util.formatWidth("1",3, $sense.divide($defect.getDefectSizeX(), 1000.0))"
+						Y="$util.formatWidth("1",3, $sense.divide($defect.getDefectSizeY(), 1000.0))"/>
+				</Defect>
+#end
+#end	
+			</MatchedDefects>		
+			<UnMatchedDefects>
+#set($defectVector = $analysis.getDefectVector())
+#foreach($defect in $defectVector )
+#if(!$defect.isMatchDefect())
+				<Defect 
+					SystemDefectClassification="$util.format($defect.getSystemClassification())"
+					UserDefectClassification="$util.format($defect.getUserClassification())" >
+					<IRLocation  
+						X="$util.format($util.getCoordinateX($defect.getCoordinate()))" 
+						Y="$util.format($util.getCoordinateY($defect.getCoordinate()))" />
+					<IRSize  
+						X="$util.formatWidth("1",3, $sense.divide($defect.getDefectSizeX(), 1000.0))"
+						Y="$util.formatWidth("1",3, $sense.divide($defect.getDefectSizeY(), 1000.0))"/>
+				</Defect>
+#end
+#end
+			</UnMatchedDefects>
+		</InspectionReport>
+	</IndividualInspectionStatistics>
+#end
+</InspectionStatisticsReport>

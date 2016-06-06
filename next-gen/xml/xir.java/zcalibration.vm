@@ -1,0 +1,49 @@
+#ifnotnull($insp.getRecipe().getZCalibration())
+#set($irVersion = $insp.getIRVersion() )
+			<ZCalibration 
+				Method="$util.format($util.getzCalMethod($insp.getRecipe().getZCalibration().getzCalMethod()))" 
+				SwathingView="$util.getViewNameUsingMapping($insp.getRecipe().getZCalibration().getSwathingView(),$insp.getRecipe().getZCalibration().getSwathingViewAlias())" 
+				SwathYSpacing="$util.format($insp.getRecipe().getZCalibration().getSwathYSpacing())" 
+				CFView="$util.getViewNameUsingMapping($insp.getRecipe().getZCalibration().getConfocalView(),$insp.getRecipe().getZCalibration().getConfocalViewAlias())" 
+				Measured="$util.format($insp.getRecipe().getZCalibration().getComplete())" 
+#if( $irVersion >= 623)
+				ExpandedBorderView="$util.getViewNameUsingMapping($insp.getRecipe().getZCalibration().getBorderView(),$insp.getRecipe().getZCalibration().getBorderViewAlias())" 
+				ExpandedBorderType="$util.format($util.getBorderType($insp.getRecipe().getZCalibration().getzCalBorderType()))" >
+#else
+				ExpandedBorderView="" 
+				ExpandedBorderType="" >
+#end
+				<Border 
+					Type="$util.format($util.getBorderType($insp.getRecipe().getZCalibration().getBorderType()))" >
+					<BorderPoint 
+						location="Lower Left" 
+						X="$util.getCoordinatePoint($insp.getRecipe().getZCalibration().getZCalPointsArray(),0,true)" 
+						Y="$util.getCoordinatePoint($insp.getRecipe().getZCalibration().getZCalPointsArray(),0,false)" />
+					<BorderPoint 
+						location="Upper Right" 
+						X="$util.getCoordinatePoint($insp.getRecipe().getZCalibration().getZCalPointsArray(),1,true)" 
+						Y="$util.getCoordinatePoint($insp.getRecipe().getZCalibration().getZCalPointsArray(),1,false)" />
+				</Border>
+			</ZCalibration>
+#end
+#ifnull($insp.getRecipe().getZCalibration())
+			<ZCalibration 
+				Method="" 
+				SwathingView="" 
+				CFView="" 
+				Measured="" 
+				ExpandedBorderView="" 
+				ExpandedBorderType="" >
+				<Border 
+					Type="" >
+					<BorderPoint 
+						location="" 
+						X="" 
+						Y="" />
+					<BorderPoint 
+						location="" 
+						X="" 
+						Y="" />
+				</Border>
+			</ZCalibration>
+#end

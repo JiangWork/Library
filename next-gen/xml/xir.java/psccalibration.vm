@@ -1,0 +1,191 @@
+					<ImageCalibration
+#ifnotnull($inspArea.getPreSwathCalibration())
+						Method="$util.getPSCCalMethod($inspArea)"
+						Measured="False">
+#set($nopscCalpoints=$inspArea.getPreSwathCalibration().getSize())
+						<ImageCalibrationPoints>
+#if($nopscCalpoints > 0)
+#foreach($noiteration in [0..$nopscCalpoints])
+#set($value = $util.format($util.getPoint($inspArea.getPreSwathCalibration().getPreSwathPoints(),$noiteration,true)))
+#if($value != "")
+							<ImageCalibrationPoint 
+								Id="$noiteration" 
+								X="$value"
+								Y="$util.format($util.getPoint($inspArea.getPreSwathCalibration().getPreSwathPoints(),$noiteration,false))"/>
+#end
+#end
+#else
+							<ImageCalibrationPoint
+								Id=""
+								X=""
+								Y=""/>
+#end
+						</ImageCalibrationPoints>
+#set($opData = $util.getPscOperatorData($inspArea.getPreSwathCalibration().getPSCOpertaorValues()))	
+						<ImageCalibrationOperatorValues 
+							Rendering="$util.format($opData.getRendering())" 
+							Xbias="$util.format($opData.getxBias())" 
+							Ybias="$util.format($opData.getyBias())" 
+							InsideCR="$util.format($opData.getInsideCR())" 
+							OutsideCR="$util.format($opData.getOutSideCR())" 
+							TotalPoints="$util.format($opData.getTotalPoints())" 
+							ValidPoints="$util.format($opData.getValidPoints())">
+#set($lightModeArr = $opData.getPscOperatorLightMode())
+#if($lightModeArr.size() > 0)
+#foreach($lightMode in $lightModeArr)
+							<LightMode>
+#set($alignData = $lightMode.getPscAlignmentOffSetData())
+#set($alignDataArr = $alignData.getPscAlignmentOffsetPoint())
+								<AlignmentOffsets>
+									<Points>
+#set($index = 0)
+#if($alignDataArr.size() > 0)
+#foreach($data in $alignDataArr)
+										<Point 
+											Id="$index" 
+											X="$util.format($data.getxValue())" 
+											Y="$util.format($data.getyValue())" />
+#set($index = $index + 1)
+#end
+#else
+										<Point 
+											Id="" 
+											X="" 
+											Y="" />
+#end
+									</Points>
+								</AlignmentOffsets>
+								<RetrunCode 
+									L1="$util.format($lightMode.getReturnCodeL1())" 
+									L2="$util.format($lightMode.getReturnCodeL2())" />
+#set($residuesData = $lightMode.getPscOperatorResiduesData())
+#set($residuesDataArr = $residuesData.getResiduesPointVector())
+								<Residues>
+									<Points>
+#set($index = 0)
+#if($residuesDataArr.size() > 0)
+#foreach($data in $residuesDataArr)
+										<Point 
+											Id="$index" 
+											Hist_1x1max="$util.format($data.getMax1())" 
+											Hist_2x2max="$util.format($data.getMax2())" />
+#set($index = $index + 1)
+#end
+#else
+										<Point 
+											Id="" 
+											Hist_1x1max="" 
+											Hist_2x2max="" />
+#end
+									</Points>
+									<AllPoints>
+#set($residuesAllDataArr = $residuesData.getResiduesAllPointsVector())
+#if($residuesAllDataArr.size() > 0)
+#foreach($data in $residuesAllDataArr)
+										<AllPoint 
+											Type="$util.format($data.getTag())" 
+											Max="$util.format($data.getMax())" 
+											Mean="$util.format($data.getMean())" 
+											Std="$util.format($data.getStd())" />
+#end
+#else
+										<AllPoint 
+											Type="" 
+											Max="" 
+											Mean="" 
+											Std="" />
+#end
+									</AllPoints>
+								</Residues>
+							</LightMode>
+#end
+#else
+							<LightMode>
+								<AlignmentOffsets>
+									<Points>
+										<Point 
+											Id="" 
+											X="" 
+											Y="" />
+									</Points>
+								</AlignmentOffsets>
+								<RetrunCode 
+									L1="" 
+									L2="" />
+								<Residues>
+									<Points>
+										<Point 
+											Id="" 
+											Hist_1x1max="" 
+											Hist_2x2max="" />
+									</Points>
+									<AllPoints>
+										<AllPoint 
+											Type="" 
+											Max="" 
+											Mean="" 
+											Std="" />
+									</AllPoints>
+								</Residues>
+							</LightMode>
+#end
+							<UseWSpotCal>$util.format($opData.getUseWSpotCal())</UseWSpotCal>
+							<WpiRenderMode>$util.format($opData.getWpiRenderMode())</WpiRenderMode>
+							<ImageCalibrationStatus>$util.format($opData.getPscStatus())</ImageCalibrationStatus>
+						</ImageCalibrationOperatorValues>
+#*						<PscInfo>$util.format($util.getPscCalInfo($inspArea))</PscInfo>*#
+						<LithoModel Name="$util.format($inspArea.getPreSwathCalibration().getLithoModel().getName())"/>
+#end
+#ifnull($inspArea.getPreSwathCalibration())
+ 						Method=""
+ 						Measured="">
+						<ImageCalibrationPoints>
+							<ImageCalibrationPoint
+								Id=""
+								X=""
+								Y=""/>
+						</ImageCalibrationPoints>								
+						<ImageCalibrationOperatorValues 
+							Rendering="" 
+							Xbias="" 
+							Ybias="" 
+							InsideCR="" 
+							OutsideCR="" 
+							TotalPoints="" 
+							ValidPoints="">
+							<LightMode>
+								<AlignmentOffsets>
+									<Points>
+										<Point 
+											Id="" 
+											X="" 
+											Y="" />
+									</Points>
+								</AlignmentOffsets>
+								<RetrunCode 
+									L1="" 
+									L2="" />
+								<Residues>
+									<Points>
+										<Point 
+											Id="" 
+											Hist_1x1max="" 
+											Hist_2x2max="" />
+									</Points>
+									<AllPoints>
+										<AllPoint 
+											Type="" 
+											Max="" 
+											Mean="" 
+											Std="" />
+									</AllPoints>
+								</Residues>
+							</LightMode>
+							<UseWSpotCal></UseWSpotCal>
+							<WpiRenderMode></WpiRenderMode>
+							<ImageCalibrationStatus></ImageCalibrationStatus>
+						</ImageCalibrationOperatorValues>
+#*						<PscInfo></PscInfo>*#
+						<LithoModel Name=""/>
+#end
+					</ImageCalibration>

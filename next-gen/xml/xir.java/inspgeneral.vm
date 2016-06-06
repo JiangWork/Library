@@ -1,0 +1,36 @@
+		<GeneralInspectionData
+			Plate="$util.format($insp.getSetName())" 
+			InspectionName="$util.format($insp.getExtensionName())" 
+			Barcode="$util.format($insp.getBarcode())" 
+			KT9xFmid="$util.format($insp.getFmId())" 
+			InspectionTool="$util.format($insp.getSystem())" 
+			InspectionStartDate="$util.format($util.getUtcTime($insp.getInspectionStarted().asJavaUtilDateWithGMToffset()))" 
+			InspectionEndDate="$util.format($util.getUtcTime($insp.getInspectionEnded().asJavaUtilDateWithGMToffset()))" 
+			ReviewStartDate="$util.format($util.getUtcTime($insp.getReviewStarted().asJavaUtilDateWithGMToffset()))" 
+			ReviewEndDate="$util.format($util.getUtcTime($insp.getReviewEnded().asJavaUtilDateWithGMToffset()))" 
+			DataStoredDate="$util.format($util.getUtcTime($insp.getDataStored().asJavaUtilDateWithGMToffset()))" 
+			SystemType="$util.getSystemTypeAsString()" 
+			IrVersion="$util.format($insp.getIRVersion())" 
+			IrMinVersion="$util.format($insp.getMinVersion())" 
+			SetupTime="$util.format($insp.getSetupTime())" 
+			InspectionTime="$util.format($insp.getInspectionTime())" 
+			ReviewTime="$util.format($insp.getReviewTime())" 
+			PlateSize="$util.format($insp.getPlateSizeInMicrons())" 
+			Defects="All Defects" 
+			DefectPointLocation="Reference Point Relative"> 
+			<InspectedSurfaces>
+#set($surfaces = $util.getInspectionSurface())
+#if($surfaces.size() > 0)
+#foreach($surface in $surfaces)
+				<Surface>$util.format($surface)</Surface>
+#end
+#else
+				<Surface></Surface>
+#end
+			</InspectedSurfaces>
+#set($swaths= $insp.getStartSwath() )
+#if($insp.getIRVersion() > 600 )
+#set($swaths=($swaths + 1))
+#end
+			<InspectionStatus Status="$util.format($util.getInspectionStatus())" SwathStarted="$swaths" SwathsInspected="$insp.getSwathsInspected()" TotalSwaths="$insp.getTotalSwaths()" InspNthSwath="$util.format($util.getInspNthSwath())"/> 
+		</GeneralInspectionData> 

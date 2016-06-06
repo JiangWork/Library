@@ -1,0 +1,119 @@
+#set($subtrateMode=$recipe.getOpaqueSubstrateMode())
+			<GeneralRecipeData 
+				RecipeName="$util.format($recipe.getSetName())" 
+				RecipeVersion="$util.format($recipe.getRecipeVersion())"
+				SystemType="$util.format($util.getSystemTypeAsString())" 
+				MinimumRecpeVersion="$util.format($recipe.getMinVersion())" 
+				OpaqueSubstrateMode="$util.formatBehavior($subtrateMode)"
+				Note="$util.format($recipe.getNote())"
+#set($dbName=$util.format($recipe.getDataBasePath()))
+#if($dbName.length() > 0 )
+				DatabaseName="$util.format($recipe.getDataBasePath())" 
+				PlateMirror="$util.format($util.getPlateMirrorStr($recipe.getPlateOrientation()))" 
+				DbImageRotation="$util.format($util.getDBImageRotation($recipe.getPlateOrientation()))" 
+				PlatePolarity="$util.format($util.getPlatePolarity($recipe.getToneControl()))" 
+				PlateTone="$util.format($util.getPlateToneStr($recipe.getToneControl()))">
+#else
+				DatabaseName="" 
+				PlateMirror="" 
+				DbImageRotation="" 
+				PlatePolarity="" 
+				PlateTone="">
+#end
+				<PlateInfo 
+					PlateType="$util.getPlateTypeString()"
+					/>
+#set($plateTypeInfo=$recipe.getPlateTypeInfo())
+#set($materialVector=$plateTypeInfo.getMaterialVector())
+				<PlateOpticalAttributes>
+					<PlateType 
+#if($plateTypeInfo.getType().trim().length()>0)
+						Type="$util.format($plateTypeInfo.getType())" 
+#else
+						Type="$util.getPlateTypeString()" 
+#end
+						Description="$util.format($plateTypeInfo.getDescription())" 
+						AlgPlateType="$util.format($plateTypeInfo.getAlgPlateType())" 
+						MOPF="$util.format($plateTypeInfo.getMopf())" 
+						ZCalModel="$util.format($plateTypeInfo.getzCalModel())">
+#if($materialVector.size() > 0)
+#foreach($plateTypeInfoMaterial in $materialVector)
+						<Material 
+							Name="$util.format($plateTypeInfoMaterial.getName())" 
+							Height="$util.format($plateTypeInfoMaterial.getHeight())">
+#set($lightModeVector=$plateTypeInfoMaterial.getLightModeVector())
+#if($lightModeVector.size() > 0)
+#foreach($lightMode in $lightModeVector)
+							<LightMode 
+								Illum="$util.format($lightMode.getIllum())" 
+								Grayscale="$util.format($lightMode.getGrayscale())" 
+								QuartzPhaseDegrees="$util.format($lightMode.getQuartzPhaseDegrees())" 
+								UseForGain="$util.format($lightMode.getUseForGain())"/>
+#end
+#else
+							<LightMode 
+								Illum="" 
+								Grayscale="" 
+								QuartzPhaseDegrees="" 
+								UseForGain=""/>
+#end
+						</Material> 
+#end
+#else
+						<Material 
+							Name="" 
+							Height="">
+							<LightMode 
+								Illum="" 
+								Grayscale="" 
+								QuartzPhaseDegrees="" 
+								UseForGain=""/>
+						</Material> 
+#end
+#set($focusOffSetVector=$plateTypeInfo.getFocusOffsetVector())
+#if($focusOffSetVector.size() > 0)
+#foreach($focusOffSet in $focusOffSetVector)
+						<FocusOffset>
+#set($viewVector=$focusOffSet.getViewVector())
+#if($viewVector.size() > 0)
+#foreach($view in $viewVector)
+							<View 
+								Name="$util.getFocusOffSetViewName($view.getName(),$view.getAlias())" 
+								Alias="$view.getAlias()" 
+								Offset="$view.getOffset()"/>
+#end
+#else
+
+							<View 
+								Name="" 
+								Alias="" 
+								Offset=""/>
+#end
+						</FocusOffset>
+#end						
+#else
+						<FocusOffset>
+							<View 
+								Name="" 
+								Alias="" 
+								Offset=""/>
+						</FocusOffset>
+
+#end
+					</PlateType>
+				</PlateOpticalAttributes>
+#set($rteState=$recipe.getRTEstate())
+#set($recipeVersion = $recipe.getRecipeVersion())
+				<RteParameters
+#if($recipeVersion >= 600)
+					RteBoxSize="$util.format($recipe.getRTEboxSize())" 
+					RteSense="$util.format($recipe.getRTEsense())" 
+					RteState="$rteState" 
+					RteRotateAndMirror="$util.formatBehavior($recipe.getrTERotateAndMirror())"/>
+#else
+					RteBoxSize="" 
+					RteSense="" 
+					RteState=""
+					RteRotateAndMirror="" />
+#end
+			</GeneralRecipeData>

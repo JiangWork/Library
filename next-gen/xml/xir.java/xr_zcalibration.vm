@@ -1,0 +1,49 @@
+#ifnotnull($recipe.getZCalibration())
+#set($recipeVersion = $recipe.getRecipeVersion() )
+			<ZCalibration 
+				Method="$util.format($util.getzCalMethod($recipe.getZCalibration().getzCalMethod()))" 
+				SwathingView="$util.getViewNameUsingMapping($recipe.getZCalibration().getSwathingView(),$recipe.getZCalibration().getSwathingViewAlias())" 
+				SwathYSpacing="$util.format($recipe.getZCalibration().getSwathYSpacing())" 
+				CFView="$util.getViewNameUsingMapping($recipe.getZCalibration().getConfocalView(),$recipe.getZCalibration().getConfocalViewAlias())"
+				Measured="$util.format($recipe.getZCalibration().getComplete())" 
+#if( $recipeVersion >= 623)
+				ExpandedBorderView="$util.getViewNameUsingMapping($recipe.getZCalibration().getBorderView(),$recipe.getZCalibration().getBorderViewAlias())"
+				ExpandedBorderType="$util.format($util.getBorderType($recipe.getZCalibration().getzCalBorderType()))" >
+#else
+				ExpandedBorderView="" 
+				ExpandedBorderType="" >
+#end
+				<Border 
+					Type="$util.format($util.getBorderType($recipe.getZCalibration().getBorderType()))" >
+					<BorderPoint 
+						location="Lower Left" 
+						X="$util.getCoordinatePoint($recipe.getZCalibration().getZCalPointsArray(),0,true)" 
+						Y="$util.getCoordinatePoint($recipe.getZCalibration().getZCalPointsArray(),0,false)" />
+					<BorderPoint 
+						location="Upper Right" 
+						X="$util.getCoordinatePoint($recipe.getZCalibration().getZCalPointsArray(),1,true)" 
+						Y="$util.getCoordinatePoint($recipe.getZCalibration().getZCalPointsArray(),1,false)" />
+				</Border>
+			</ZCalibration>
+#end
+#ifnull($recipe.getZCalibration())
+			<ZCalibration 
+				Method="" 
+				SwathingView="" 
+				CFView="" 
+				Measured="" 
+				ExpandedBorderView="" 
+				ExpandedBorderType="" >
+				<Border 
+					Type="" >
+					<BorderPoint 
+						location="" 
+						X="" 
+						Y="" />
+					<BorderPoint 
+						location="" 
+						X="" 
+						Y="" />
+				</Border>
+			</ZCalibration>
+#end

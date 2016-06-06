@@ -1,0 +1,42 @@
+			<PlateAlignment
+				InspectionMethod="$util.getPlateAlignMentMethod()" 
+				AcquisitionView="$util.getAcquisitionView()" >
+				<AlignmentPointInfo LightMode="$util.getLightMode(0)" Magnification="20X" AlignmentType="$util.getAlignMentType(0)" />
+				<AlignmentPoints>
+#set($referenceX = $util.getPointX($recipe.getAlignmentPoints(),0))	
+#set($referenceY = $util.getPointY($recipe.getAlignmentPoints(),0))	
+					<AlignmentPoint Type="Reference" X="$referenceX" Y="$referenceY">
+					</AlignmentPoint>
+#set($primaryX= $util.getPointX($recipe.getAlignmentPoints(),1))	
+#set($primaryY= $util.getPointY($recipe.getAlignmentPoints(),1))	
+					<AlignmentPoint Type="Primary" X="$primaryX" Y="$primaryY">
+					</AlignmentPoint>
+#set($secondaryX= $util.getPointX($recipe.getAlignmentPoints(),2))	
+#set($secondaryY= $util.getPointY($recipe.getAlignmentPoints(),2))	
+					<AlignmentPoint Type="Secondary" X="$secondaryX" Y="$secondaryY">
+					</AlignmentPoint>
+#set($tertiaryX= $util.getPointX($recipe.getAlignmentPoints(),3))	
+#set($tertiaryY= $util.getPointY($recipe.getAlignmentPoints(),3))	
+					<AlignmentPoint Type="Tertiary" X="$tertiaryX" Y="$tertiaryY">
+					</AlignmentPoint>
+				</AlignmentPoints>
+				<DatabaseAlignmentPointInfo   LightMode="$util.getLightMode(0)" Magnification="20X" AlignmentType="$util.getAlignMentType(0)" />
+				<DatabaseAlignmentPoints>
+#set($referenceX = $util.getPointX($recipe.getPlateAlignment().getDBAlignArray(),0))
+#set($referenceY = $util.getPointY($recipe.getPlateAlignment().getDBAlignArray(),0))
+					<DatabaseAlignmentPoint Type="Reference" X="$referenceX" Y="$referenceY" >
+					</DatabaseAlignmentPoint>
+#set($primaryX= $util.getPointX($recipe.getPlateAlignment().getDBAlignArray(),1))
+#set($primaryY= $util.getPointY($recipe.getPlateAlignment().getDBAlignArray(),1))
+					<DatabaseAlignmentPoint Type="Primary" X="$primaryX" Y="$primaryY" >
+					</DatabaseAlignmentPoint>
+#set($secondaryX= $util.getPointX($recipe.getPlateAlignment().getDBAlignArray(),2))
+#set($secondaryY= $util.getPointY($recipe.getPlateAlignment().getDBAlignArray(),2))
+					<DatabaseAlignmentPoint Type="Secondary" X="$secondaryX" Y="$secondaryY" >
+					</DatabaseAlignmentPoint>
+#set($tertiaryX= $util.getPointX($recipe.getPlateAlignment().getDBAlignArray(),3))
+#set($tertiaryY= $util.getPointY($recipe.getPlateAlignment().getDBAlignArray(),3))
+					<DatabaseAlignmentPoint Type="Tertiary" X="$tertiaryX" Y="$tertiaryY" >
+					</DatabaseAlignmentPoint>
+				</DatabaseAlignmentPoints>
+			</PlateAlignment>

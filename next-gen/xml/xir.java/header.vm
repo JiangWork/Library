@@ -1,0 +1,33 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>$titlebar</title>
+</head>
+
+<body topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0">
+
+<table border="0" width="100%" id="table1" style="border-collapse: collapse" height="100%">
+	<tr>
+		<td bgcolor="#25215E" height="10%">
+			<table border="0" width="100%" height="100%" id="table3" style="border-collapse: collapse" cellspacing="3">
+	 			<tr>
+					<td colspan="2" nowrap><p align="left"><i><b><font color="#FFFFFF" face="Arial" size="5">KLA Tencor</font></b></i></td>
+					<td rowspan="3" width="740"><p align="center"><b><font face="Arial" size="2" color="#FFFFFF">$title</font></b></td>
+					<td rowspan="2" nowrap><p align="right"><i><b><font color="#FFFFFF" face="Verdana" size="2">Accelerating Yield</font></b></i></td>
+				</tr>
+				<tr>
+					<td nowrap rowspan="2"><b><font face="Arial" size="2" color="#FFFFFF">$systemname</font></b></td>
+					<td nowrap rowspan="2"><b><font face="Arial" size="2" color="#FFFFFF">&nbsp;&nbsp; $kt9xversion</font></b></td>
+				</tr>
+				<tr>
+					<td nowrap><p align="right"><b><font face="Arial" size="2" color="#FFFFFF">$systemdatetime</font></b></td>
+    			</tr>
+		</table>
+			
+		</td>
+		
+	</tr>
+	
+	

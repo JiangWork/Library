@@ -1,0 +1,107 @@
+<DefectList>
+#set ($surface = 0)
+#set ( $defectListVector = $insp.getDefectListVector())
+#foreach( $defectList in $defectListVector )
+#set ($index = 1)
+#parse("sysstemclassdefectsummary.vm")
+#parse("userclassdefectsummary.vm")
+		<DefectDetailsList
+			 Surface="$util.format($util.getSurfaceStr($surface)) Defect List">
+#set($length = $defectList.getDefectVector().size() - 1 )
+#set($defectVector = $defectList.getDefectVector() )
+#if($length >= 0)
+#foreach($def in [0..$length])
+#set($slxDefect = $defectVector.elementAt($def))
+			<Defect
+				Index="$util.format($index)"
+				X="$util.format($util.divide($slxDefect.getLocation().getX(),1000.0))"
+				Y="$util.format($util.divide($slxDefect.getLocation().getY(),1000.0))"
+				DefectType="$util.format($util.defectType($slxDefect.getDefectType()))"
+				Size="$util.format($util.defectSize($slxDefect.getDefectSize()))"
+				SizeX="$util.format($util.getCoordinateX($slxDefect.getSize()))"
+				SizeY="$util.format($util.getCoordinateY($slxDefect.getSize()))"
+				UserClassification="$util.format($slxDefect.getUserClassificationString())"
+				Note="$util.format($util.getDefectListNote($slxDefect))"
+				Residue2x2="$util.format($slxDefect.getResidue2x2())"
+				Residue3x3="$util.format($slxDefect.getResidue3x3())"
+				Litho2Error="$util.format($slxDefect.getResidueError())"
+#if($util.isInspTypeIsDieToDie($slxDefect) == "true")
+#set($noOfReferencePositionCount = $util.getNoOfReferencePositionCount($slxDefect))
+				NoOfReferencePosition="$util.format($noOfReferencePositionCount)"
+				FirstReferencePositionX="$util.format($util.divide($slxDefect.getReferencePos().getX(),1000.0))"
+				FirstReferencePositionY="$util.format($util.divide($slxDefect.getReferencePos().getY(),1000.0))"
+#if($noOfReferencePositionCount > 1)				
+				SecondReferencePositionX="$util.format($util.divide($slxDefect.getSecondRefPos().getX(),1000.0))"
+				SecondReferencePositionY="$util.format($util.divide($slxDefect.getSecondRefPos().getY(),1000.0))"
+#else
+				SecondReferencePositionX=""
+				SecondReferencePositionY=""
+#end				
+#else
+				NoOfReferencePosition="0"
+				FirstReferencePositionX=""
+				FirstReferencePositionY=""
+				SecondReferencePositionX=""
+				SecondReferencePositionY=""
+#end
+#set($iaIndex = $slxDefect.getIAIndex() + 1 )
+#set($calcSwath = $slxDefect.getSwath() + 1 )
+
+				Swath="$util.format($calcSwath)"
+#if($util.getPatchOffSet() > 0)
+				InspectionArea="$util.format($iaIndex)"
+				PatchOffSetX="$util.format($util.divide($slxDefect.getPatchOffset().getX(),1000.0))"
+				PatchOffSetY="$util.format($util.divide($slxDefect.getPatchOffset().getY(),1000.0))">
+#else
+				InspectionArea="$util.format($iaIndex)">
+#end
+#if($util.getCatchSensitivityInDefect() > 0)				
+#ifnull($slxDefect.getSenseSliderVector())
+                                <Sliders NumberOfSliders="0">
+                                        <Slider 
+                                              SliderName="" 
+                                              SliderValue=""> 
+                                        </Slider>
+                                </Sliders>
+#end
+#ifnotnull($slxDefect.getSenseSliderVector())
+#set($senseSliderVector = $slxDefect.getSenseSliderVector() )
+#set($senseSliderVectorLength = $senseSliderVector.size() - 1 )
+                                <Sliders NumberOfSliders="$senseSliderVector.size()">
+#if($senseSliderVector.size() > 0)
+#foreach($senseSliderIndex in [0..$senseSliderVectorLength])
+#set($senseSlider =  $senseSliderVector.elementAt($senseSliderIndex))
+                                         <Slider
+                                                SliderName="$util.getSliderNameUsingSensitivity($iaIndex,$senseSlider)" 
+                                                SliderValue="$util.getMappedSliderValue($senseSlider)">
+                                         </Slider>
+#end
+#else
+                                        <Slider 
+                                              SliderName="" 
+                                              SliderValue=""> 
+                                        </Slider>
+#end
+                                </Sliders>
+#end
+#end
+			</Defect>
+#set ($index = $index + 1)
+#end
+#else
+			<Defect
+				Index=""
+				X=""
+				Y=""
+				DefectType=""
+				Size=""
+				SizeX=""
+				SizeY=""
+				UserClassification=""
+				Note="">
+			</Defect>
+#end
+		</DefectDetailsList>
+#set ($surface = $surface + 1)
+#end
+</DefectList>

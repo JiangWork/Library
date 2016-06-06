@@ -1,0 +1,15 @@
+#foreach( $defectSummary in  $defectSummaryVector )
+			<Defect
+#set ($defectType =$defectSummary.getDefectType()) 			
+#if($defectType=="Total")
+				DefectType="$util.format($defectSummary.getDefectType())"
+#else
+				DefectType="$util.format($defectSummary.getDefectType())"
+#end				
+				Small="$util.format($defectSummary.getSmall())"
+				Medium="$util.format($defectSummary.getMedium())"
+				Large="$util.format($defectSummary.getLarge())"
+				ExtraLarge="$util.format($defectSummary.getExtraLarge())"
+				Total="$util.format($defectSummary.getTotal())">
+			</Defect>	
+#end
