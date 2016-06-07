@@ -71,7 +71,8 @@ public abstract class Job {
 	public void setState(State state) {
 		this.state = state;
 	}
-	
+		
+
 	public static enum State {
 		CREATED("created"),
 		SETUP("setup"),
