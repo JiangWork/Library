@@ -1,0 +1,137 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+
+<description>A mapping settings for ImageCalibration class</description>
+
+<class name="com.klatencor.klara.future.object.recipe.ImageCalibration" auto-complete="true">
+    <map-to xml="ImageCalibration"/>  
+
+    <field name="method">
+        <bind-xml name="Method" node="attribute"/>
+    </field>
+    <field name="measured">
+        <bind-xml name="Measured" node="attribute"/>
+    </field>
+    <field name="ponits" collection="arraylist" type="com.klatencor.klara.future.object.recipe.Triple">
+        <bind-xml name="ImageCalibrationPoint" location="ImageCalibrationPoints"/>
+    </field>
+    <field name="opValues" type="com.klatencor.klara.future.object.recipe.ImageCalibration$ImageCalibrationOperatorValues">
+        <bind-xml name="ImageCalibrationOperatorValues"/>
+    </field>
+    <field name="lithoModel" type="com.klatencor.klara.future.object.recipe.ImageCalibration$LithoModel">
+        <bind-xml name="LithoModel"/>
+    </field>
+
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.Triple" auto-complete="true">
+    <field name="left">
+        <bind-xml name="Id" node="attribute"/>
+    </field>
+    <field name="middle">
+        <bind-xml name="X" node="attribute"/>
+    </field>
+    <field name="right">
+        <bind-xml name="Y" node="attribute"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.ImageCalibration$ImageCalibrationOperatorValues" auto-complete="true">
+    <field name="rendering">
+        <bind-xml name="Rendering" node="attribute"/>
+    </field>
+    <field name="xbias">
+        <bind-xml name="Xbias" node="attribute"/>
+    </field>
+    <field name="insideCR">
+        <bind-xml name="InsideCR" node="attribute"/>
+    </field>
+    <field name="outsideCR">
+        <bind-xml name="OutsideCR" node="attribute"/>
+    </field>
+    <field name="totalPoints">
+        <bind-xml name="TotalPoints" node="attribute"/>
+    </field>
+    <field name="validPoints">
+        <bind-xml name="ValidPoints" node="attribute"/>
+    </field>
+    <field name="lightMode" type="com.klatencor.klara.future.object.recipe.ImageCalibration$LightMode">
+        <bind-xml name="LightMode"/>
+    </field>
+    <field name="useWSpotCal">
+        <bind-xml name="UseWSpotCal"/>
+    </field>
+    <field name="wpiRenderMode">
+        <bind-xml name="WpiRenderMode"/>
+    </field>
+    <field name="imageCalibrationStatus">
+        <bind-xml name="ImageCalibrationStatus"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.ImageCalibration$LightMode" auto-complete="true">
+    <field name="points" collection="arraylist" type="com.klatencor.klara.future.object.recipe.Triple">
+        <bind-xml name="Point" location="AlignmentOffsets/Points" />
+    </field>
+    <field name="returnCode" type="com.klatencor.klara.future.object.recipe.ImageCalibration$ReturnCode">
+        <bind-xml name="RetrunCode" />
+    </field>
+     <field name="residues" type="com.klatencor.klara.future.object.recipe.ImageCalibration$Residues">
+        <bind-xml name="Residues" />
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.ImageCalibration$ReturnCode" auto-complete="true">
+    <field name="l1">
+        <bind-xml name="L1" node="attribute"/>
+    </field>
+    <field name="l2">
+        <bind-xml name="L2" node="attribute"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.ImageCalibration$Residues" auto-complete="true">
+    <field name="points" collection="arraylist" type="com.klatencor.klara.future.object.recipe.ImageCalibration$Residues$Point">
+        <bind-xml name="Point" location="Points" />
+    </field>
+    <field name="allPoints" collection="arraylist" type="com.klatencor.klara.future.object.recipe.ImageCalibration$Residues$AllPoint">
+        <bind-xml name="AllPoint" location="AllPoints" />
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.ImageCalibration$Residues$Point" auto-complete="true">
+    <field name="Id">
+        <bind-xml name="Id" node="attribute"/>
+    </field>
+    <field name="hist11">
+        <bind-xml name="Hist_1x1max" node="attribute"/>
+    </field>
+    <field name="hist22">
+        <bind-xml name="Hist_2x2max" node="attribute"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.ImageCalibration$Residues$AllPoint" auto-complete="true">
+    <field name="type">
+        <bind-xml name="Type" node="attribute"/>
+    </field>
+    <field name="max">
+        <bind-xml name="Max" node="attribute"/>
+    </field>
+    <field name="mean">
+        <bind-xml name="Mean" node="attribute"/>
+    </field>
+    <field name="std">
+        <bind-xml name="Std" node="attribute"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.ImageCalibration$LithoModel" auto-complete="true">
+    <field name="name">
+        <bind-xml name="Name" node="attribute"/>
+    </field>
+</class>
+
+</mapping>

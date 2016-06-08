@@ -1,0 +1,116 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+
+<description>A mapping settings for Sensitivity class</description>
+
+<class name="com.klatencor.klara.future.object.recipe.Sensitivity" auto-complete="true">
+    <map-to xml="Sensitivity"/>  
+
+    <field name="acquisitionView">
+        <bind-xml name="AcquisitionView" node="attribute"/>
+    </field>
+    <field name="edgeSpeedRatio">
+        <bind-xml name="EgeSpeedRatio" node="attribute"/>
+    </field>
+    <field name="concatRadius">
+        <bind-xml name="ConcatRadius" node="attribute"/>
+    </field>
+    <field name="opcEnable">
+        <bind-xml name="OpcEnable" node="attribute"/>
+    </field>
+    <field name="transLossEnable">
+        <bind-xml name="TransLossEnable" node="attribute"/>
+    </field>
+    <field name="highSensitivityEnable">
+        <bind-xml name="HighSensitivityEnable" node="attribute"/>
+    </field>
+    <field name="pixelSize" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="PixelSize"/>
+    </field>
+    <field name="defectList" type="com.klatencor.klara.future.object.recipe.Sensitivity$DefectList">
+        <bind-xml name="DefectTypeList"/>
+    </field>
+    <field name="upaLevel">
+        <bind-xml name="UpaLevel">
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.Point" auto-complete="true">
+    <field name="x">
+        <bind-xml name="X" node="attribute"/>
+    </field>
+    <field name="y">
+        <bind-xml name="Y" node="attribute"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.Sensitivity$DefectList" auto-complete="true">
+    <field name="defectList" collection="arraylist" type="com.klatencor.klara.future.object.recipe.Sensitivity$Defect">
+        <bind-xml name="Defect"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.Sensitivity$Defect" auto-complete="true">
+    <field name="defectType">
+        <bind-xml name="DefectType" node="attribute"/>
+    </field>
+    <field name="value">
+        <bind-xml name="Value" node="attribute"/>
+    </field>
+    <field name="min">
+        <bind-xml name="Min" node="attribute"/>
+    </field>
+    <field name="max">
+        <bind-xml name="Max" node="attribute"/>
+    </field>
+    <field name="displayMode">
+        <bind-xml name="DisplayMode" node="attribute"/>
+    </field>
+    <field name="defectID">
+        <bind-xml name="DefectID" node="attribute"/>
+    </field>
+    <field name="maxSmallBndry">
+        <bind-xml name="MaxSmallBndry" node="attribute"/>
+    </field>
+    <field name="maxMedBndry">
+        <bind-xml name="MaxMedBndry" node="attribute"/>
+    </field>
+    <field name="maxLargeBndry">
+        <bind-xml name="MaxLargeBndry" node="attribute"/>
+    </field>
+    <field name="small">
+        <bind-xml name="Small" node="attribute"/>
+    </field>
+    <field name="medium">
+        <bind-xml name="Medium" node="attribute"/>
+    </field>
+    <field name="large">
+        <bind-xml name="Large" node="attribute"/>
+    </field>
+    <field name="xLarge">
+        <bind-xml name="XLarge" node="attribute"/>
+    </field>
+    <field name="extension">
+        <bind-xml name="Extension" node="attribute"/>
+    </field>
+    <field name="directory">
+        <bind-xml name="Directory" node="attribute"/>
+    </field>
+    <field name="edit">
+        <bind-xml name="Edit" node="attribute"/>
+    </field>
+    <field name="optionValue">
+        <bind-xml name="OptionValue" node="attribute"/>
+    </field>
+    <field name="rankValue">
+        <bind-xml name="RankValue" node="attribute"/>
+    </field>
+    <field name="precision">
+        <bind-xml name="Precision" node="attribute"/>
+    </field>
+
+</class>
+
+</mapping>

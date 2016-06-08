@@ -87,28 +87,8 @@ $inspArea.setInspectionTypeFromIR($inspArea.getInspTypeFromIr())
 #end
 #end
 					</Dropout>
-#parse("xr_sensitivity.vm")#*
-#set($capParam=$inspArea.getCaptureParams())
-#ifnotnull($capParam)
-					<CaptureParameters
-						TdiImgHeight="$util.format($capParam.getTdiImgColHeight())" 
-						SwBtmTopUnusablePixs="$util.format($capParam.getSwBottomUnusablePixs())" 
-						SwTopUnusablePixs="$util.format($capParam.getSwTopUnusablePixs())" 
-						MaxP0P1YOffsetPix="$util.format($capParam.getMaxP0P1YOffset())" 
-						AlgoOverlap="$util.format($capParam.getAlgoOvlp())" 
-						ArfName="$util.format($util.getCaptureParamArfName($capParam))" />
-#end
-#ifnull($capParam)
-					<CaptureParameters
-						TdiImgHeight="" 
-						SwBtmTopUnusablePixs="" 
-						SwTopUnusablePixs="" 
-						MaxP0P1YOffsetPix="" 
-						AlgoOverlap="" 
-						ArfName="" />
-#end *#
+#parse("xr_sensitivity.vm")
 #parse("xr_lightcalibration.vm")
-#*#parse("xr_piicalightcalibration.vm")*#
 #parse("xr_psccalibration.vm")
 #parse("xr_starlightcalibration.vm")
 #ifnotnull($inspArea.getSenseRegion())
@@ -173,13 +153,6 @@ $inspArea.setInspectionTypeFromIR($inspArea.getInspTypeFromIr())
 						</SenseRegion>
 					</SenseRegionList>
 #end
-#*					<LprAlgo>$util.format($inspArea.getLprAlgo())</LprAlgo>
-#parse("xr_lprsensitivity.vm")
-					<PiicAlgoName>$util.format($util.getPiicAlgoNames($inspArea))</PiicAlgoName>
-#parse("xr_piicview.vm")
-#parse("xr_piiccaptureparams.vm")
-#parse("xr_piicsensitivity.vm")
-					<PiidDefectSelection></PiidDefectSelection>*#
 				</InspectionArea>
 #end
 #end

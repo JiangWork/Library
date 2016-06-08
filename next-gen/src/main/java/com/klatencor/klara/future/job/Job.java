@@ -1,6 +1,7 @@
 package com.klatencor.klara.future.job;
 
 import com.klatencor.klara.future.server.ServerContext;
+import com.klatencor.klara.future.server.metrics.JobMessage;
 
 /**
 * 
@@ -19,9 +20,6 @@ public abstract class Job {
 	
 	/**report the job status.**/
 	private Reporter reporter;
-
-	/**The {@link serverContext} to provide information**/
-	private ServerContext sc;
 	
 	/**The state of this job.**/
 	private State state = State.CREATED;
@@ -56,13 +54,6 @@ public abstract class Job {
 		this.reporter = reporter;
 	}
 	
-	public ServerContext getSc() {
-		return sc;
-	}
-
-	public void setSc(ServerContext sc) {
-		this.sc = sc;
-	}
 
 	public State getState() {
 		return state;
@@ -71,7 +62,16 @@ public abstract class Job {
 	public void setState(State state) {
 		this.state = state;
 	}
-		
+			
+	public void doReport(String message) {
+		JobMessage jobMsg = new JobMessage(
+				System.currentTimeMillis(),
+				this.jobId,
+				this.jobName,
+				this.state,
+				message);
+		reporter.report(jobMsg);
+	}
 
 	public static enum State {
 		CREATED("created"),

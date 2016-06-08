@@ -2,10 +2,10 @@ package com.klatencor.klara.future.server;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.klatencor.klara.future.dao.SQLExecutor;
+import com.klatencor.klara.future.job.Reporter;
 import com.klatencor.klara.future.server.metrics.ServerMetrics;
 
 /**
@@ -18,64 +18,47 @@ import com.klatencor.klara.future.server.metrics.ServerMetrics;
  */
 public class ServerContext {
 
-	private BeanFactory beanFactory;
-
-	// *** For test ***//
 	private String serverName;
 	private ServerMetrics metrics;
 	private SQLExecutor sqlExecutor;
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
-
-	public ServerContext() {
-
-	}
-
-	public DataSource getDataSource() {
-		return beanFactory.getBean("dataSource", DataSource.class);
-	}
-
+	private Reporter reporter;
+	
 	public String getServerName() {
-		return beanFactory.getBean("serverName", String.class);
+		return serverName;
 	}
-
-	public ServerMetrics getMetrics() {
-		return beanFactory.getBean("metrics", ServerMetrics.class);
-	}
-
-	public SQLExecutor getSqlExecutor() {
-		return beanFactory.getBean("sqlExecutor", SQLExecutor.class);
-	}
-
-	public JdbcTemplate getJdbcTemplate() {
-		return beanFactory.getBean("jdbcTemplate", JdbcTemplate.class);
-	}
-
-	public void setSqlExecutor(SQLExecutor sqlExecutor) {
-		this.sqlExecutor = sqlExecutor;
-	}
-
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-
 	public void setServerName(String serverName) {
 		this.serverName = serverName;
 	}
-
+	public ServerMetrics getMetrics() {
+		return metrics;
+	}
 	public void setMetrics(ServerMetrics metrics) {
 		this.metrics = metrics;
 	}
-
+	public SQLExecutor getSqlExecutor() {
+		return sqlExecutor;
+	}
+	public void setSqlExecutor(SQLExecutor sqlExecutor) {
+		this.sqlExecutor = sqlExecutor;
+	}
+	public DataSource getDataSource() {
+		return dataSource;
+	}
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
-
-	public BeanFactory getBeanFactory() {
-		return beanFactory;
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
 	}
-
-	public void setBeanFactory(BeanFactory beanFactory) {
-		this.beanFactory = beanFactory;
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+	public Reporter getReporter() {
+		return reporter;
+	}
+	public void setReporter(Reporter reporter) {
+		this.reporter = reporter;
 	}
 }

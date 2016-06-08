@@ -3,7 +3,6 @@ package com.klatencor.klara.future.job;
 import org.apache.log4j.Logger;
 
 import com.klatencor.klara.future.server.ServerConfiguration;
-import com.klatencor.klara.future.server.ServerContext;
 import com.klatencor.klara.future.server.metrics.JobMessage;
 import com.klatencor.klara.future.server.metrics.ServerMetrics;
 
@@ -20,17 +19,17 @@ public class DefaultReporter implements Reporter {
 
 	private static final Logger logger = Logger.getLogger(DefaultReporter.class);
 	
-	private ServerContext sc;
+	// where should i report to
+	private ServerMetrics sm;
 	
-	public DefaultReporter(ServerContext sc) {
-		this.sc = sc;
+	public DefaultReporter(ServerMetrics sm) {
+		this.sm = sm;
 	}
 	
 	@Override
 	public void report(JobMessage jobMsg) {
 		if (!ServerConfiguration.SHOULD_REPORT) return;
 		logger.info(jobMsg.formatMessage());
-		ServerMetrics sm = sc.getMetrics();
 		if (sm.isRunning()) sm.put(jobMsg); 
 		else logger.info("ServerMetrics is not up.");
 	}

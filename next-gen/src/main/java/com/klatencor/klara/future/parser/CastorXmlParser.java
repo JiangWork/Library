@@ -59,7 +59,7 @@ public class CastorXmlParser<T> implements XmlParser<T> {
 		File mappingFile = new File(mappingPath);
 		if (!mappingFile.canRead()) {
 			URL url = CastorXmlParser.class.getResource(mappingPath);
-		    mappingPath = url.getFile();
+		    if (url != null) mappingPath = url.getFile();
 		} else {
 			mappingPath = mappingFile.getAbsolutePath();
 		}

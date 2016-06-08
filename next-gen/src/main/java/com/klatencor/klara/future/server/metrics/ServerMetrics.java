@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
 
@@ -42,6 +43,8 @@ public class ServerMetrics {
 	
 	/** <jobName, statistics> **/
 	private Map<String, JobStatistics> jobStats;
+	
+	private AtomicLong jobIdCounter;
 	
 	private boolean isRunning = false;
 	

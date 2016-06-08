@@ -6,8 +6,6 @@ import com.klatencor.klara.future.job.DefaultReporter;
 import com.klatencor.klara.future.job.Job;
 import com.klatencor.klara.future.job.JobRunner;
 import com.klatencor.klara.future.job.Reporter;
-import com.klatencor.klara.future.server.ServerContext;
-import com.klatencor.klara.future.server.metrics.ServerMetrics;
 
 public class ServerMetricsTest {
 
@@ -17,9 +15,7 @@ public class ServerMetricsTest {
 		// TODO Auto-generated method stub
 		ServerMetrics metrics = new ServerMetrics();
 		metrics.startup();
-		ServerContext ctx = new ServerContext();
-		ctx.setMetrics(metrics);
-		final Reporter reporter = new DefaultReporter(ctx);
+		final Reporter reporter = new DefaultReporter(metrics);
 		for (int i = 1; i < 100; ++i) {
 			final int index = i;
 			new Thread() {
