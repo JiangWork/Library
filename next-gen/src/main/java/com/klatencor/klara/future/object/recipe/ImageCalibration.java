@@ -8,7 +8,7 @@ public class ImageCalibration {
 	private String measured;
 	private List<Triple> ponits;
 	private ImageCalibrationOperatorValues opValues;
-	private LithoModel lithoModel;
+	private String lithoModel;
 
 	public String getMethod() {
 		return method;
@@ -34,13 +34,15 @@ public class ImageCalibration {
 	public void setOpValues(ImageCalibrationOperatorValues opValues) {
 		this.opValues = opValues;
 	}
-	public LithoModel getLithoModel() {
+	public String getLithoModel() {
 		return lithoModel;
 	}
-	public void setLithoModel(LithoModel lithoModel) {
+	public void setLithoModel(String lithoModel) {
 		this.lithoModel = lithoModel;
 	}
-	
+
+
+
 	public static class ImageCalibrationPoints {
 		private List<Triple> points;
 
@@ -241,18 +243,5 @@ public class ImageCalibration {
 				this.std = std;
 			}
 		}
-	}
-	
-	public static class LithoModel {
-		private String name;
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-		
 	}
 }

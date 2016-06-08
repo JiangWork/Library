@@ -20,8 +20,8 @@
     <field name="opValues" type="com.klatencor.klara.future.object.recipe.ImageCalibration$ImageCalibrationOperatorValues">
         <bind-xml name="ImageCalibrationOperatorValues"/>
     </field>
-    <field name="lithoModel" type="com.klatencor.klara.future.object.recipe.ImageCalibration$LithoModel">
-        <bind-xml name="LithoModel"/>
+    <field name="lithoModel">
+        <bind-xml name="Name" location="LithoModel" node="attribute"/>
     </field>
 
 </class>
@@ -125,12 +125,6 @@
     </field>
     <field name="std">
         <bind-xml name="Std" node="attribute"/>
-    </field>
-</class>
-
-<class name="com.klatencor.klara.future.object.recipe.ImageCalibration$LithoModel" auto-complete="true">
-    <field name="name">
-        <bind-xml name="Name" node="attribute"/>
     </field>
 </class>
 
