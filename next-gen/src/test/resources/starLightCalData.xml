@@ -1,0 +1,15 @@
+					<StarLightCalibration
+						Method="Manual">
+						<PixelSize
+						   X="0.000"
+						   Y="0.000"/>
+						<Points>
+							<Point
+							   X=""
+							   Y=""/>
+							   <Point
+							   X="2"
+							   Y="3"/>
+						</Points>
+						<StarlightCalibrationResult>sb</StarlightCalibrationResult>
+						</StarLightCalibration>
