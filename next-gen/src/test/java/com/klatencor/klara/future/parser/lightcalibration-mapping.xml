@@ -4,6 +4,8 @@
 <mapping>
 
 <description>A mapping settings for LightCalibration class</description>
+    
+<include href="common-mapping.xml"/>
 
 <class name="com.klatencor.klara.future.object.recipe.LightCalibration" auto-complete="true">
     <map-to xml="LightCalibration"/>  
@@ -61,15 +63,6 @@
     </field>
     <field name="digitizer" type="com.klatencor.klara.future.object.recipe.LightCalibration$SPLightCalDigitizer">
         <bind-xml name="Digitizer"/>
-    </field>
-</class>
-
-<class name="com.klatencor.klara.future.object.recipe.Point" auto-complete="true">
-    <field name="x">
-        <bind-xml name="X" node="attribute"/>
-    </field>
-    <field name="y">
-        <bind-xml name="Y" node="attribute"/>
     </field>
 </class>
 

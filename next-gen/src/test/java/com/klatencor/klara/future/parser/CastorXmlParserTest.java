@@ -2,13 +2,15 @@ package com.klatencor.klara.future.parser;
 
 import com.klatencor.klara.future.object.recipe.GeneralRecipeData;
 import com.klatencor.klara.future.object.recipe.ImageCalibration;
+import com.klatencor.klara.future.object.recipe.InspectionArea;
 import com.klatencor.klara.future.object.recipe.LightCalibration;
+import com.klatencor.klara.future.object.recipe.StarLightCalibration;
 
 public class CastorXmlParserTest {
 
 	public static void main(String[] args) throws ParsingException {
 		// TODO Auto-generated method stub
-		imageCal();
+		inspeactArea();
 	}
 	
 	
@@ -35,6 +37,22 @@ public class CastorXmlParserTest {
 		= new CastorXmlParser<ImageCalibration>("imagecalibration-mapping.xml");
 		ImageCalibration data = parser.parse("imageCalibrationData.xml");
 		System.out.println(data.getMeasured());
+	}
+	
+	public static void starLightCal() throws ParsingException {
+		// TODO Auto-generated method stub
+		CastorXmlParser<StarLightCalibration> parser 
+		= new CastorXmlParser<StarLightCalibration>("starlightcalibration-mapping.xml");
+		StarLightCalibration data = parser.parse("starLightCalData.xml");
+		System.out.println(data.getMethod());
+	}
+	
+	public static void inspeactArea() throws ParsingException {
+		// TODO Auto-generated method stub
+		CastorXmlParser<InspectionArea> parser 
+		= new CastorXmlParser<InspectionArea>("inspection-area-mapping.xml");
+		InspectionArea data = parser.parse("inspectionAreaData.xml");
+		System.out.println(data.getAlgo());
 	}
 
 }

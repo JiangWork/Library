@@ -5,12 +5,14 @@
 
 <description>A mapping settings for InspectionArea class</description>
 
+<include href="common-mapping.xml"/>
+<include href="sensitivity-mapping.xml"/>
+<include href="lightcalibration-mapping.xml"/>
+<include href="imagecalibration-mapping.xml"/>
+<include href="starlightcalibration-mapping.xml"/>
+
 <class name="com.klatencor.klara.future.object.recipe.InspectionArea" auto-complete="true">
     <map-to xml="InspectionArea"/>  
-    <include href="sensitivity-mapping.xml"/>
-    <include href="lightcalibration-mapping.xml"/>
-    <include href="imagecalibration-mapping.xml"/>
-    <include href="starlightcalibration-mapping.xml"/>
 
     <field name="id">
         <bind-xml name="Id" node="attribute"/>
@@ -78,8 +80,8 @@
     <field name="dieLastTop" type="com.klatencor.klara.future.object.recipe.Point">
         <bind-xml name="DieLastTop"/>
     </field>
-    <field name="row" collection="arraylist" type="java.lang.String" location="Dropout">
-        <bind-xml name="Row"/>
+    <field name="row" collection="arraylist" type="java.lang.String" >
+        <bind-xml name="Row" location="Dropout"/>
     </field>
     <field name="sensitivity" type="com.klatencor.klara.future.object.recipe.Sensitivity">
         <bind-xml name="Sensitivity"/>
@@ -93,17 +95,8 @@
     <field name="starLightCalibration" type="com.klatencor.klara.future.object.recipe.StarLightCalibration">
         <bind-xml name="StarLightCalibration"/>
     </field>
-    <field name="senseRegionList" collection="arraylist" type="com.klatencor.klara.future.object.recipe.SenseRegion" location="SenseRegionList">
-        <bind-xml name="SenseRegion"/>
-    </field>
-</class>
-
-<class name="com.klatencor.klara.future.object.recipe.Point" auto-complete="true">
-    <field name="x">
-        <bind-xml name="X" node="attribute"/>
-    </field>
-    <field name="y">
-        <bind-xml name="Y" node="attribute"/>
+    <field name="senseRegionList" collection="arraylist" type="com.klatencor.klara.future.object.recipe.SenseRegion" >
+        <bind-xml name="SenseRegion" location="SenseRegionList"/>
     </field>
 </class>
 
@@ -111,8 +104,8 @@
     <field name="type">
         <bind-xml name="Type" node="attribute"/>
     </field>
-    <field name="orgin">
-        <bind-xml name="Orgin" type="com.klatencor.klara.future.object.recipe.Point"/>
+    <field name="origin" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="Origin" />
     </field>
     <field name="regionCount">
         <bind-xml name="RowColumn">
@@ -126,11 +119,11 @@
         </class>
         </bind-xml>
     </field>
-    <field name="size">
-        <bind-xml name="Size" type="com.klatencor.klara.future.object.recipe.Point"/>
+    <field name="size" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="Size" />
     </field>    
-    <field name="pitch">
-        <bind-xml name="Pitch" type="com.klatencor.klara.future.object.recipe.Point"/>
+    <field name="pitch" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="Pitch" />
     </field>    
 </class>
 

@@ -5,6 +5,8 @@
 
 <description>A mapping settings for Sensitivity class</description>
 
+<include href="common-mapping.xml"/>
+
 <class name="com.klatencor.klara.future.object.recipe.Sensitivity" auto-complete="true">
     <map-to xml="Sensitivity"/>  
 
@@ -33,16 +35,7 @@
         <bind-xml name="DefectTypeList"/>
     </field>
     <field name="upaLevel">
-        <bind-xml name="UpaLevel">
-    </field>
-</class>
-
-<class name="com.klatencor.klara.future.object.recipe.Point" auto-complete="true">
-    <field name="x">
-        <bind-xml name="X" node="attribute"/>
-    </field>
-    <field name="y">
-        <bind-xml name="Y" node="attribute"/>
+        <bind-xml name="UpaLevel"/>
     </field>
 </class>
 

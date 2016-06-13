@@ -3,7 +3,7 @@ package com.klatencor.klara.future.object.recipe;
 public class SenseRegion {
 
 	private String type;
-	private Point orgin;
+	private Point origin;
 	private Point regionCount;
 	private Point size;
 	private Point pitch;
@@ -14,11 +14,11 @@ public class SenseRegion {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Point getOrgin() {
-		return orgin;
+	public Point getOrigin() {
+		return origin;
 	}
-	public void setOrgin(Point orgin) {
-		this.orgin = orgin;
+	public void setOrigin(Point origin) {
+		this.origin = origin;
 	}
 	public Point getRegionCount() {
 		return regionCount;

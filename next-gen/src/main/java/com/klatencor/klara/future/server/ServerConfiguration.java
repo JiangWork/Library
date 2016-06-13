@@ -2,14 +2,13 @@ package com.klatencor.klara.future.server;
 
 public final class ServerConfiguration {
 	
-	public static final String APPLICATION_NAME = "";
+	public static final String APPLICATION_NAME = "NextGen KT9Xe";
 	
-	public static final String WORKING_DIRECTORY = "/kla/klaS/";
+	public static final String WORKING_DIRECTORY = "/kla/klaS/future";
 	
-	public static final String STORAGE_DIRECTORY = "/kla/klaS/";
+	public static final String STORAGE_DIRECTORY = "/kla/klaS/future";
 	
-	
-	public static final String LOG_DIRECTORY = "klaL/logs/nextgen";
+	public static final String LOG_DIRECTORY = "klaL/logs/future";
 	
 	public static final boolean SHOULD_REPORT = true;
 	
