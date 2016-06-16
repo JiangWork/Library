@@ -34,7 +34,12 @@ public class StoreRecipeJob extends DefaultJob {
 		Recipe recipe = parser.parse(xmlPath);
 		
 		RecipeDao recipeDao = new RecipeDao();
-		getParameters();
+		JobParameters parameters = getParamters();
+		int count = parameters.getInt("max.count");
+		JobResult result = new JobResult();
+		result.setStatus(false);
+		result.setReason("Ouch, something is wrong.");
+		this.setJobResult(result);
 		
 	}
 

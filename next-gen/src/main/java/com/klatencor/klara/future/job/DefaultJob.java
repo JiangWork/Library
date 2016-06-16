@@ -1,7 +1,5 @@
 package com.klatencor.klara.future.job;
 
-import java.util.Map;
-
 import com.klatencor.klara.future.server.Server;
 import com.klatencor.klara.future.server.metrics.JobMessage;
 
@@ -26,12 +24,17 @@ public class DefaultJob implements ReportableJob {
 	/**The state of this job.**/
 	private JobState state = JobState.CREATED;	
 	
-	private Map<String, String> paramters;
+	/**the parameters of this job**/
+	private JobParameters parameters;
+	
+	/**the processed result**/
+	private JobResult result;
 	
 	public DefaultJob(long jobId, String jobName, Reporter reporter) {
 		this.jobId = jobId;
 		this.jobName = jobName;
 		this.reporter = reporter;
+		result = new JobResult();
 	}
 
 	/**
@@ -108,13 +111,21 @@ public class DefaultJob implements ReportableJob {
 	}
 
 	@Override
-	public void setParameters(Map<String, String> parameters) {
-		// TODO Auto-generated method stub
-		this.paramters = parameters;
+	public void setParameters(JobParameters parameters) {
+		this.parameters = parameters;
+	}
+
+	@Override
+	public JobResult getJobResult() {
+		return result;
 	}
 	
-	public Map<String, String> getParameters() {
-		return this.paramters;
+	public void setJobResult(JobResult result) {
+		this.result = result;
+	}
+	
+	public JobParameters getParamters() {
+		return parameters;
 	}
 	
 

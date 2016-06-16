@@ -39,26 +39,22 @@
 namespace java com.klatencor.klara.future.thrift.common
 
 
-enum JobType {
-  STORE_RECIPE = 1,
-  STORE_IR = 2
-}
-
 
 struct Request {
   1: string who,
-  2: JobType type,
-  3: map<string,string> parameters
+  2: map<string,string> parameters
 }
 
 
-struct Reponse {
+struct Response {
   1: bool status,
   2: string failure,
   3: map<string,string> ret
 }
 
 service FutureService {
-    Reponse storeRecipe(1:i64 time, 2:Request request),
+    Response storeRecipe(1:i64 time, 2:Request request),
+    oneway void shutdown(1:bool force),
+    Response whatTime(),
 }
 

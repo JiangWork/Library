@@ -55,6 +55,7 @@ public class ServerMetrics {
 		historicalMessages = new ArrayList<String>();
 		runningJobs = new HashMap<Long, JobRecord>();
 		jobStats = new HashMap<String, JobStatistics>();
+		jobIdCounter = new AtomicLong(1);
 	}
 	
 	public void put(JobMessage jobMessage) {
@@ -75,7 +76,7 @@ public class ServerMetrics {
 		startupTime = new Date();
 		messageWorker.start();
 		isRunning = true;
-		logger.info("ServerMetrics startups.");
+		logger.info("ServerMetrics startups at " + startupTime);
 	}
 	
 	public void shutdown() {
@@ -117,11 +118,15 @@ public class ServerMetrics {
 	}
 	
 	public boolean hasUncompletedJob() {
+		return getUncompletedJobNumber() != 0;
+	}
+	
+	public int getUncompletedJobNumber() {
 		int runningJobCount = 0;
 		synchronized(runningJobs) {
 			runningJobCount = runningJobs.size();
 		}
-		return runningJobCount != 0;
+		return runningJobCount;
 	}
 	
 	public class JobMessageWorker extends Thread {		

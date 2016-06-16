@@ -33,7 +33,7 @@ public class PersonDao {
 	}
 
 	public static void transaction() {
-		SqlExecutor.transact(new DaoCommand<Void>() {
+		SqlExecutor.transaction(new DaoCommand<Void>() {
 
 			@Override
 			public Void execute(SqlExecutor executor) {

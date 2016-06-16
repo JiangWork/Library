@@ -17,6 +17,12 @@ public interface JobDefinition {
 	public void setParameters(JobParameters parameters);
 	
 	/**
+	 * Get the job processed result.
+	 * @return a {@link JobResult}.
+	 */
+	public JobResult getJobResult();
+	
+	/**
 	 * Setup the running environment.
 	 * 
 	 * @throws Exception
@@ -24,13 +30,15 @@ public interface JobDefinition {
 	public void setup() throws Exception;
 	
 	/**
-	 * Execue the job.
+	 * Execute the job.
 	 * @throws Exception
 	 */
 	public void execute() throws Exception;
 	
 	/**
 	 * Clean the job, like temporary files.
+	 * Always will be invoked even {@code setup}
+	 * or {@code execute} is not successful.
 	 * @throws Exception
 	 */
 	public void clean() throws Exception;

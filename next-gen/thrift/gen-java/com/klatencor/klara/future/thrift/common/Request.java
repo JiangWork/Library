@@ -39,8 +39,7 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("Request");
 
   private static final org.apache.thrift.protocol.TField WHO_FIELD_DESC = new org.apache.thrift.protocol.TField("who", org.apache.thrift.protocol.TType.STRING, (short)1);
-  private static final org.apache.thrift.protocol.TField TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("type", org.apache.thrift.protocol.TType.I32, (short)2);
-  private static final org.apache.thrift.protocol.TField PARAMETERS_FIELD_DESC = new org.apache.thrift.protocol.TField("parameters", org.apache.thrift.protocol.TType.MAP, (short)3);
+  private static final org.apache.thrift.protocol.TField PARAMETERS_FIELD_DESC = new org.apache.thrift.protocol.TField("parameters", org.apache.thrift.protocol.TType.MAP, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -49,22 +48,12 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
   }
 
   public String who; // required
-  /**
-   * 
-   * @see JobType
-   */
-  public JobType type; // required
   public Map<String,String> parameters; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     WHO((short)1, "who"),
-    /**
-     * 
-     * @see JobType
-     */
-    TYPE((short)2, "type"),
-    PARAMETERS((short)3, "parameters");
+    PARAMETERS((short)2, "parameters");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -81,9 +70,7 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
       switch(fieldId) {
         case 1: // WHO
           return WHO;
-        case 2: // TYPE
-          return TYPE;
-        case 3: // PARAMETERS
+        case 2: // PARAMETERS
           return PARAMETERS;
         default:
           return null;
@@ -130,8 +117,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.WHO, new org.apache.thrift.meta_data.FieldMetaData("who", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.TYPE, new org.apache.thrift.meta_data.FieldMetaData("type", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, JobType.class)));
     tmpMap.put(_Fields.PARAMETERS, new org.apache.thrift.meta_data.FieldMetaData("parameters", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
@@ -145,12 +130,10 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
 
   public Request(
     String who,
-    JobType type,
     Map<String,String> parameters)
   {
     this();
     this.who = who;
-    this.type = type;
     this.parameters = parameters;
   }
 
@@ -160,9 +143,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
   public Request(Request other) {
     if (other.isSetWho()) {
       this.who = other.who;
-    }
-    if (other.isSetType()) {
-      this.type = other.type;
     }
     if (other.isSetParameters()) {
       Map<String,String> __this__parameters = new HashMap<String,String>(other.parameters);
@@ -177,7 +157,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
   @Override
   public void clear() {
     this.who = null;
-    this.type = null;
     this.parameters = null;
   }
 
@@ -202,38 +181,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
   public void setWhoIsSet(boolean value) {
     if (!value) {
       this.who = null;
-    }
-  }
-
-  /**
-   * 
-   * @see JobType
-   */
-  public JobType getType() {
-    return this.type;
-  }
-
-  /**
-   * 
-   * @see JobType
-   */
-  public Request setType(JobType type) {
-    this.type = type;
-    return this;
-  }
-
-  public void unsetType() {
-    this.type = null;
-  }
-
-  /** Returns true if field type is set (has been assigned a value) and false otherwise */
-  public boolean isSetType() {
-    return this.type != null;
-  }
-
-  public void setTypeIsSet(boolean value) {
-    if (!value) {
-      this.type = null;
     }
   }
 
@@ -282,14 +229,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
       }
       break;
 
-    case TYPE:
-      if (value == null) {
-        unsetType();
-      } else {
-        setType((JobType)value);
-      }
-      break;
-
     case PARAMETERS:
       if (value == null) {
         unsetParameters();
@@ -305,9 +244,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
     switch (field) {
     case WHO:
       return getWho();
-
-    case TYPE:
-      return getType();
 
     case PARAMETERS:
       return getParameters();
@@ -325,8 +261,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
     switch (field) {
     case WHO:
       return isSetWho();
-    case TYPE:
-      return isSetType();
     case PARAMETERS:
       return isSetParameters();
     }
@@ -355,15 +289,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
         return false;
     }
 
-    boolean this_present_type = true && this.isSetType();
-    boolean that_present_type = true && that.isSetType();
-    if (this_present_type || that_present_type) {
-      if (!(this_present_type && that_present_type))
-        return false;
-      if (!this.type.equals(that.type))
-        return false;
-    }
-
     boolean this_present_parameters = true && this.isSetParameters();
     boolean that_present_parameters = true && that.isSetParameters();
     if (this_present_parameters || that_present_parameters) {
@@ -384,11 +309,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
     list.add(present_who);
     if (present_who)
       list.add(who);
-
-    boolean present_type = true && (isSetType());
-    list.add(present_type);
-    if (present_type)
-      list.add(type.getValue());
 
     boolean present_parameters = true && (isSetParameters());
     list.add(present_parameters);
@@ -412,16 +332,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
     }
     if (isSetWho()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.who, other.who);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetType()).compareTo(other.isSetType());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetType()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.type, other.type);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -461,14 +371,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
       sb.append("null");
     } else {
       sb.append(this.who);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("type:");
-    if (this.type == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.type);
     }
     first = false;
     if (!first) sb.append(", ");
@@ -530,15 +432,7 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // TYPE
-            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.type = com.klatencor.klara.future.thrift.common.JobType.findByValue(iprot.readI32());
-              struct.setTypeIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 3: // PARAMETERS
+          case 2: // PARAMETERS
             if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
               {
                 org.apache.thrift.protocol.TMap _map0 = iprot.readMapBegin();
@@ -578,11 +472,6 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
         oprot.writeString(struct.who);
         oprot.writeFieldEnd();
       }
-      if (struct.type != null) {
-        oprot.writeFieldBegin(TYPE_FIELD_DESC);
-        oprot.writeI32(struct.type.getValue());
-        oprot.writeFieldEnd();
-      }
       if (struct.parameters != null) {
         oprot.writeFieldBegin(PARAMETERS_FIELD_DESC);
         {
@@ -617,18 +506,12 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
       if (struct.isSetWho()) {
         optionals.set(0);
       }
-      if (struct.isSetType()) {
+      if (struct.isSetParameters()) {
         optionals.set(1);
       }
-      if (struct.isSetParameters()) {
-        optionals.set(2);
-      }
-      oprot.writeBitSet(optionals, 3);
+      oprot.writeBitSet(optionals, 2);
       if (struct.isSetWho()) {
         oprot.writeString(struct.who);
-      }
-      if (struct.isSetType()) {
-        oprot.writeI32(struct.type.getValue());
       }
       if (struct.isSetParameters()) {
         {
@@ -645,16 +528,12 @@ public class Request implements org.apache.thrift.TBase<Request, Request._Fields
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, Request struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(3);
+      BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
         struct.who = iprot.readString();
         struct.setWhoIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.type = com.klatencor.klara.future.thrift.common.JobType.findByValue(iprot.readI32());
-        struct.setTypeIsSet(true);
-      }
-      if (incoming.get(2)) {
         {
           org.apache.thrift.protocol.TMap _map6 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
           struct.parameters = new HashMap<String,String>(2*_map6.size);

@@ -23,7 +23,6 @@ public class ThriftUtils {
 	
 	public static FutureService.Client newClient(String hostName, int port) {
 		FutureService.Client client = null;
-		logger.info("Obtaining client: " + client);
 		for (int i = 0; i < 3; ++i) {
 			try {
 				TTransport transport = new TSocket(hostName, port);
@@ -31,23 +30,23 @@ public class ThriftUtils {
 				TProtocol protocol = new TBinaryProtocol(transport);
 				client = new FutureService.Client(protocol);
 				clientInfo.put(client, transport);
-				logger.info("Obtained client: " + client);
+				logger.info("Obtained client successfully " + client);
 				break;
 			} catch (TTransportException e) {
 				logger.error(
-						"Obtain client at try " + i + ": " + e.getMessage(), e);
+						"Fail to obtain client at try " + i + ": " + e.getMessage(), e);
 			}
 		}
 		return client;
 	}
 	
-	public static void closeClient(FutureService.Client client) {
+	public static void closeClient(FutureService.Iface client) {
 		if (client != null) {
 			if (clientInfo.containsKey(client)) {
-				logger.info("Closing client: " + client);
 				TTransport transport = clientInfo.get(client);
 				transport.close();
 				clientInfo.remove(client);
+				logger.info("Close client " + client + " successfully.");
 			}
 		}
 	}
@@ -56,7 +55,6 @@ public class ThriftUtils {
 		 TServerTransport serverTransport = new TServerSocket(port);
 		 TProcessor processor = new FutureService.Processor<FutureService.Iface>(impl);
 		 TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(serverTransport).processor(processor));
-		 
 		 return server;
 	}
 }

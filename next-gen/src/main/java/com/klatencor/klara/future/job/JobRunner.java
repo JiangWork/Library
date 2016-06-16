@@ -2,20 +2,24 @@ package com.klatencor.klara.future.job;
 
 import org.apache.log4j.Logger;
 
+import com.klatencor.klara.future.server.Server;
 import com.klatencor.klara.future.server.metrics.JobMessage;
+import com.klatencor.klara.future.thrift.common.Response;
 
 /**
 * 
 * A {@link JobRunner} is used to run a {@link Job}.
 * It invokes the each phase of a job step by step
-* and report the status to certain destination. The {@link Job.JobState} also will
+* and report the status to certain destination. The {@link JobState} also will
 * be altered. We would like use it as following:
 * <p>
 * <code>
 *  Reporter reporter = new ReporterImpl(); <p>
 *  Job job = new JobImpl(); <p>
-*  JobRunner jobRunner = new JobRunner(job, reporter);
-*  jobRunner.run();
+*  JobRunner jobRunner = new JobRunner(job, reporter); <p>
+*  jobRunner.run(); <p>
+*  jobRunner.getResult(); <p>
+*  or jobRunner.getResponse();
 * </code>
 * 
 * @author jiangzhao
@@ -67,6 +71,8 @@ public class JobRunner {
 			status = false;
 			logger.error(e.getMessage(), e);
 			doReport("setup job fails, see logs for details.");
+			job.getJobResult().setStatus(false);
+			job.getJobResult().setReason(e.getMessage());
 		} 
 		return status;
 	}
@@ -82,6 +88,8 @@ public class JobRunner {
 			status = false;
 			logger.error(e.getMessage(), e);
 			doReport("run job fails, see logs for details.");
+			job.getJobResult().setStatus(false);
+			job.getJobResult().setReason(e.getMessage());
 		} 
 		return status;
 	}
@@ -99,5 +107,22 @@ public class JobRunner {
 			doReport("clean job fails, see logs for details.");
 		}
 		return status;
+	}
+	
+	/**
+	 * Get job processed result.
+	 * @return the job result.
+	 */
+	public JobResult getJobResult() {
+		return job.getJobResult();
+	}
+	
+	/**
+	 * Package the {@link JobResult} into {@link Response}
+	 * which will be later send back to the caller via Thrift.
+	 * @return a response.
+	 */
+	public Response getResponse() {
+		return job.getJobResult().createResponse();
 	}
 }

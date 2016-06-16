@@ -43,7 +43,7 @@
     <constructor-arg ref="serverMetrics"/>
 </bean>
 
-<bean id="serverContext" class="com.klatencor.klara.future.server.serverContext">
+<bean id="serverContext" class="com.klatencor.klara.future.server.ServerContext">
     <property name="serverName" value="Xml-based KT9Xe"/>
     <property name="metrics" ref="serverMetrics"/>
     <property name="sqlExecutor" ref="sqlExecutor"/>
