@@ -1,12 +1,14 @@
 package com.klatencor.klara.future.dao;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+
 // A encapsulation of SQL command
 public interface DaoCommand<T> {
 
 	/**
 	 * Construct and run the SQL statement. 
-	 * @param executor the SQL executor.
-	 * @return the SQL query output.
+	 * @param jdbcTemplate encapsulation of SQL statement execution.
+	 * @return the SQL execution result.
 	 */
-	public T run(SQLExecutor executor);
+	public T run(JdbcTemplate jdbcTemplate);
 }

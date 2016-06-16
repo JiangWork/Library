@@ -8,7 +8,7 @@ import com.klatencor.klara.future.server.metrics.JobMessage;
 * 
 * A {@link JobRunner} is used to run a {@link Job}.
 * It invokes the each phase of a job step by step
-* and report the status to certain destination. The {@link Job.State} also will
+* and report the status to certain destination. The {@link Job.JobState} also will
 * be altered. We would like use it as following:
 * <p>
 * <code>
@@ -25,10 +25,10 @@ import com.klatencor.klara.future.server.metrics.JobMessage;
 public class JobRunner {
 
 	private static final Logger logger = Logger.getLogger(JobRunner.class);
-	private Job job;
+	private DefaultJob job;
 	private Reporter reporter;
 	
-	public JobRunner(Job job, Reporter reporter) {
+	public JobRunner(DefaultJob job, Reporter reporter) {
 		this.job = job;
 		this.reporter = reporter;
 	}
@@ -42,7 +42,7 @@ public class JobRunner {
 			// left on purpose
 		}
 		doClean();
-		job.setState(Job.State.DONE);
+		job.setState(JobState.DONE);
 		doReport("all done.");
 	}
 	
@@ -58,7 +58,7 @@ public class JobRunner {
 	
 	private boolean doSetup() {
 		boolean status = true;
-		job.setState(Job.State.SETUP);
+		job.setState(JobState.SETUP);
 		doReport("setup job begins.");
 		try {
 			job.setup();
@@ -73,7 +73,7 @@ public class JobRunner {
 	
 	private boolean doExecute() {
 		boolean status = true;
-		job.setState(Job.State.RUNNING); 
+		job.setState(JobState.RUNNING); 
 		doReport("run job begins.");
 		try {
 			job.execute();
@@ -88,7 +88,7 @@ public class JobRunner {
 	
 	private boolean doClean() {
 		boolean status = true;
-		job.setState(Job.State.CLEAN);
+		job.setState(JobState.CLEAN);
 		doReport("clean job begins");
 		try {
 			job.clean();

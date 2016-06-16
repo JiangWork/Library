@@ -33,10 +33,7 @@
  *  list<t1>    Ordered list of one type
  *  set<t1>     Set of unique elements of one type
  *
- * Did you also notice that Thrift supports C style comments?
  */
-
-// Just in case you were wondering... yes. We support simple C comments too.
 
 
 namespace java com.klatencor.klara.future.thrift.common
@@ -61,7 +58,7 @@ struct Reponse {
   3: map<string,string> ret
 }
 
-service Future {
+service FutureService {
     Reponse storeRecipe(1:i64 time, 2:Request request),
 }
 

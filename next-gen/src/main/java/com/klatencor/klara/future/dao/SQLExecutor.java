@@ -65,7 +65,7 @@ public class SQLExecutor {
 			return transactionTemplate.execute(new TransactionCallback<T>(){
 				@Override
 				public T doInTransaction(TransactionStatus status) {
-					return command.run(SQLExecutor.this);
+					return command.run(getJdbcTemplate());
 				}
 			});
 		} catch(Exception e) {
@@ -89,7 +89,7 @@ public class SQLExecutor {
 
 		logger.info("execute daoCommand starts, txID: " + txId);
 		try{
-			return command.run(this);
+			return command.run(getJdbcTemplate());
 		} catch(Exception e) {
 			status = false;
 			logger.error(e.getMessage(), e);
@@ -103,8 +103,8 @@ public class SQLExecutor {
 	public void execute(final String sql) {
 		doExecution(new DaoCommand<Void>() {
 			@Override
-			public Void run(SQLExecutor executor) {
-				executor.jdbcTemplate.execute(sql);
+			public Void run(JdbcTemplate jdbcTemplate) {
+				jdbcTemplate.execute(sql);
 				return null;
 			}
 			

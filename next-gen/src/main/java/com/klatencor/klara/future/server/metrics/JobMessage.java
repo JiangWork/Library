@@ -2,7 +2,7 @@ package com.klatencor.klara.future.server.metrics;
 
 import java.util.Date;
 
-import com.klatencor.klara.future.job.Job.State;
+import com.klatencor.klara.future.job.JobState;
 
 public class JobMessage {
 	
@@ -12,7 +12,7 @@ public class JobMessage {
 	
 	private String jobName;
 	
-	private State state;
+	private JobState state;
 	
 	private String msg;
 	
@@ -20,7 +20,7 @@ public class JobMessage {
 		
 	}
 
-	public JobMessage(long time, long jobId, String jobName, State state, String msg) {
+	public JobMessage(long time, long jobId, String jobName, JobState state, String msg) {
 		this.time = time;
 		this.jobId = jobId;
 		this.jobName = jobName;
@@ -44,11 +44,11 @@ public class JobMessage {
 		this.jobId = jobId;
 	}
 
-	public State getState() {
+	public JobState getState() {
 		return state;
 	}
 
-	public void setState(State state) {
+	public void setState(JobState state) {
 		this.state = state;
 	}
 

@@ -1,0 +1,26 @@
+<PlateAlignment
+	InspectionMethod="Full DB Align" 
+	AcquisitionView="55RT" >
+	<AlignmentPointInfo LightMode="Transmitted" Magnification="20X" AlignmentType="0.055" />
+	<AlignmentPoints>
+		<AlignmentPoint Type="Reference" X="11250.000" Y="141150.000">
+		</AlignmentPoint>
+		<AlignmentPoint Type="Primary" X="11249.999" Y="141150.000">
+		</AlignmentPoint>
+		<AlignmentPoint Type="Secondary" X="11249.999" Y="11149.999">
+		</AlignmentPoint>
+		<AlignmentPoint Type="Tertiary" X="134250.000" Y="11149.999">
+		</AlignmentPoint>
+	</AlignmentPoints>
+	<DatabaseAlignmentPointInfo   LightMode="Transmitted" Magnification="20X" AlignmentType="0.055" />
+	<DatabaseAlignmentPoints>
+		<DatabaseAlignmentPoint Type="Reference" X="11250.000" Y="141150.000" >
+		</DatabaseAlignmentPoint>
+		<DatabaseAlignmentPoint Type="Primary" X="11250.000" Y="141150.000" >
+		</DatabaseAlignmentPoint>
+		<DatabaseAlignmentPoint Type="Secondary" X="11250.000" Y="11149.999" >
+		</DatabaseAlignmentPoint>
+		<DatabaseAlignmentPoint Type="Tertiary" X="134250.000" Y="11149.999" >
+		</DatabaseAlignmentPoint>
+	</DatabaseAlignmentPoints>
+</PlateAlignment>

@@ -1,0 +1,20 @@
+<ZCalibration 
+	Method="Undefined" 
+	SwathingView="0550_binary_RT" 
+	SwathYSpacing="10000000" 
+	CFView="0550_binary_RT"
+	Measured="0" 
+	ExpandedBorderView="Undefined"
+	ExpandedBorderType="Unpatterned" >
+	<Border 
+		Type="AroundIA" >
+		<BorderPoint 
+			location="Lower Left" 
+			X="29218.800" 
+			Y="-99740.700" />
+		<BorderPoint 
+			location="Upper Right" 
+			X="135999.100" 
+			Y="-7676.300" />
+	</Border>
+</ZCalibration>

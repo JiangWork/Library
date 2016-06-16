@@ -8,7 +8,7 @@ public class JobStatistics {
 	
 	private long totalTime;
 	
-	// used to estimate the running time for this kind of jobName
+	// used to estimate the running time of this kind of job
 	private long factor;
 
 	public int incCount(int add) {

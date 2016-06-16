@@ -7,38 +7,77 @@
 
 <class name="com.klatencor.klara.future.object.recipe.Behavior" auto-complete="true">
     <map-to xml="Behavior"/>
-    <field name="recipeName">
-        <bind-xml name="RecipeName" node="attribute"/>
+    <field name="autoSetup">
+        <bind-xml name="AutoSetup" node="attribute"/>
     </field>
-    <field name="recipeVersion">
-        <bind-xml name="RecipeVersion" node="attribute"/>
+    <field name="autoInspect">
+        <bind-xml name="AutoInspect" node="attribute"/>
     </field>
-    <field name="systemType">
-        <bind-xml name="RecipeVersion" node="attribute"/>
+    <field name="autoReview">
+        <bind-xml name="AutoReview" node="attribute"/>
     </field>
-    <field name="minimumRecpeVersion">
-        <bind-xml name="RecipeVersion" node="attribute"/>
+    <field name="autoUnload">
+        <bind-xml name="AutoUnload" node="attribute"/>
     </field>
-    <field name="opaqueSubstrateMode">
-        <bind-xml name="OpaqueSubstrateMode" node="attribute"/>
+    <field name="abortJobOnError">
+        <bind-xml name="AbortJobOnError" node="attribute"/>
     </field>
-    <field name="note">
-        <bind-xml name="Note" node="attribute"/>
+    <field name="printAfterInspection">
+        <bind-xml name="PrintAfterInspection" node="attribute"/>
     </field>
-    <field name="databaseName">
-        <bind-xml name="DatabaseName" node="attribute"/>
+    <field name="printAfterReview">
+        <bind-xml name="PrintAfterReview" node="attribute"/>
     </field>
-    <field name="plateMirror">
-        <bind-xml name="PlateMirror" node="attribute"/>
+    <field name="printFullReport">
+        <bind-xml name="PrintFullReport" node="attribute"/>
     </field>
-    <field name="dbImageRotation">
-        <bind-xml name="DbImageRotation" node="attribute"/>
+    <field name="storeAfterInspection">
+        <bind-xml name="StoreAfterInspection" node="attribute"/>
     </field>
-    <field name="platePolarity">
-        <bind-xml name="PlatePolarity" node="attribute"/>
+    <field name="storeImages">
+        <bind-xml name="StoreImages" node="attribute"/>
     </field>
-    <field name="plateTone">
-        <bind-xml name="PlateTone" node="attribute"/>
+    <field name="displayNewDefects">
+        <bind-xml name="DisplayNewDefects" node="attribute"/>
+    </field>
+    <field name="iadDefectConcat">
+        <bind-xml name="IadDefectConcat" node="attribute"/>
+    </field>
+    <field name="vDLEnabled">
+        <bind-xml name="VDLEnabled" node="attribute"/>
+    </field>
+    <field name="vDLArrayX">
+        <bind-xml name="VDLArrayX" node="attribute"/>
+    </field>
+    <field name="vDLFilename">
+        <bind-xml name="VDLFilename" node="attribute"/>
+    </field>
+    <field name="inspectionCount">
+        <bind-xml name="InspectionCount" node="attribute"/>
+    </field>
+    <field name="abortFailCount">
+        <bind-xml name="AbortFailCount" node="attribute"/>
+    </field>
+    <field name="abortWarnCount">
+        <bind-xml name="AbortWarnCount" node="attribute"/>
+    </field>
+    <field name="zCalForP90">
+        <bind-xml name="ZCalForP90" node="attribute"/>
+    </field>
+    <field name="zCalForP125">
+        <bind-xml name="ZCalForP125" node="attribute"/>
+    </field>
+    <field name="autoDnir">
+        <bind-xml name="AutoDnir" node="attribute"/>
+    </field>
+    <field name="diagCalType">
+        <bind-xml name="DiagCalType" node="attribute"/>
+    </field>
+    <field name="vdlParameters">
+        <bind-xml name="VdlParameters" node="attribute"/>
+    </field>
+    <field name="spotCal">
+        <bind-xml name="SpotCal" node="attribute"/>
     </field>
         
 </class>

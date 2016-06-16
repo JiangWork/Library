@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.klatencor.klara.future.job.Job.State;
+import com.klatencor.klara.future.job.JobState;
 
 /**
  * 
@@ -20,14 +20,14 @@ public class JobRecord {
 	private String jobName;
 	private Date startTime;
 	private Date endTime;
-	private State state;
+	private JobState state;
 	private List<String> messages;
 	
 	public JobRecord(long jobId, String jobName) {
 		this.jobId = jobId;
 		this.jobName = jobName;
 		messages = new ArrayList<String>();
-		state = State.CREATED;
+		state = JobState.CREATED;
 	}
 
 	public long getJobId() {
@@ -74,11 +74,11 @@ public class JobRecord {
 		this.messages.add(String.format("%s %s", new Date(reportedTime), message));
 	}
 	
-	public State getState() {
+	public JobState getState() {
 		return state;
 	}
 
-	public void setState(State state) {
+	public void setState(JobState state) {
 		this.state = state;
 	}
 	

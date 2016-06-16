@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
 
-import com.klatencor.klara.future.job.Job;
+import com.klatencor.klara.future.job.JobState;
 import com.klatencor.klara.future.server.ServerConfiguration;
 
 /**
@@ -108,8 +108,20 @@ public class ServerMetrics {
 		return messages;
 	}
 	
+	public long getJobIdAndInc() {
+		return jobIdCounter.getAndIncrement();
+	}
+	
 	public int getUnprocessedMessage() {
 		return messageQueue.size();
+	}
+	
+	public boolean hasUncompletedJob() {
+		int runningJobCount = 0;
+		synchronized(runningJobs) {
+			runningJobCount = runningJobs.size();
+		}
+		return runningJobCount != 0;
 	}
 	
 	public class JobMessageWorker extends Thread {		
@@ -138,7 +150,7 @@ public class ServerMetrics {
 					if (runningJobs.containsKey(jobId)) {
 						jobRecord = runningJobs.get(jobId);
 					} else {
-						if (msg.getState() != Job.State.SETUP) {
+						if (msg.getState() != JobState.SETUP) {
 							logger.info("Invalid message: " + msg.formatMessage());
 							continue;
 						} else {
@@ -154,15 +166,15 @@ public class ServerMetrics {
 					synchronized(runningJobs) {
 						jobRecord.addMessage(msg.getTime(), msg.getMsg());
 						jobRecord.setState(msg.getState());
-						if (msg.getState() == Job.State.SETUP) {
+						if (msg.getState() == JobState.SETUP) {
 							jobRecord.setStartTime(new Date(msg.getTime()));
 						}
-						if (msg.getState() == Job.State.DONE) {
+						if (msg.getState() == JobState.DONE) {
 							jobRecord.setEndTime(new Date(msg.getTime()));
 						}						
 					}
 					
-					if (jobRecord.getState() == Job.State.DONE) {
+					if (jobRecord.getState() == JobState.DONE) {
 						doJobDoneAction(jobId);
 					}
 					
@@ -191,7 +203,7 @@ public class ServerMetrics {
 						- jobRecord.getStartTime().getTime());
 				jobStats.put(jobName, stats);
 			}
-			logger.debug("Job statistics: " + stats.formartJobStatistics());
+			logger.info("Job statistics: " + stats.formartJobStatistics());
 			synchronized(runningJobs) {
 				runningJobs.remove(jobId);
 			}
