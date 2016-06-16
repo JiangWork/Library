@@ -62,6 +62,6 @@ struct Reponse {
 }
 
 service Future {
-    Reponse storeRecipe(1:i64 when, 2:Request request),
+    Reponse storeRecipe(1:i64 time, 2:Request request),
 }
 

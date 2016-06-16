@@ -191,7 +191,7 @@ public class ServerMetrics {
 						- jobRecord.getStartTime().getTime());
 				jobStats.put(jobName, stats);
 			}
-			logger.info("Job statistics: " + stats.formartJobStatistics());
+			logger.debug("Job statistics: " + stats.formartJobStatistics());
 			synchronized(runningJobs) {
 				runningJobs.remove(jobId);
 			}
