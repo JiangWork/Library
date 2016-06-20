@@ -23,6 +23,7 @@ public class CastorXmlParser<T> implements XmlParser<T> {
 	private static final Logger logger = Logger.getLogger(CastorXmlParser.class);
 	
 	private String mappingPath;
+	private long elapsed;
 	
 	public CastorXmlParser() {
 		this(null);
@@ -38,8 +39,9 @@ public class CastorXmlParser<T> implements XmlParser<T> {
 		try {
 			T object = parseInternal(xmlPath);
 			long endTime = System.currentTimeMillis();
+			elapsed = endTime-startTime;
 			logger.info(String.format("%s parsed, elapsed time %d ms.", xmlPath, 
-					(endTime-startTime)));
+					elapsed));
 			return object;
 		} catch (ParsingException e) {
 			throw e;
@@ -92,5 +94,9 @@ public class CastorXmlParser<T> implements XmlParser<T> {
 			throw new ParsingException(e.getMessage(), e);
 		}
 	
+	}
+
+	public long getElapsed() {
+		return elapsed;
 	}
 }

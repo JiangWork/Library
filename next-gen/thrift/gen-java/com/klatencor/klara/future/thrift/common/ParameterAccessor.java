@@ -21,6 +21,14 @@ public class ParameterAccessor {
 		this.parameters = parameters;
 	}
 	
+	public boolean getBoolean(String key, boolean defaultVal) {
+		boolean retVal = defaultVal;
+		if (parameters.containsKey(key)) {
+			retVal = Boolean.parseBoolean(parameters.get(key));
+		}
+		return retVal;
+	}
+	
 	public int getInt(String key, int defaultVal) {
 		int retVal = defaultVal;
 		if (parameters.containsKey(key)) {
@@ -112,8 +120,18 @@ public class ParameterAccessor {
 	}
 	
 	/**
+	 * Get boolean value from {@code parameter},
+	 * false is returned if key does not exist in {@code parameter}.
+	 * @param key
+	 * @return
+	 */
+	public boolean getBoolean(String key) {
+		return this.getBoolean(key, false);
+	}
+	
+	/**
 	 * Get int value from {@code parameter},
-	 * 0 is return if key does not exist in {@code parameter}.
+	 * 0 is returned if key does not exist in {@code parameter}.
 	 * 
 	 * @param key
 	 * @return

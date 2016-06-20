@@ -20,6 +20,13 @@ public class Recipe {
 	private ZCalibration zCalibration;
 	private List<InspectionArea> inspectionAreaList;
 	
+	/**Additional fields**/
+	private String recipeStoragePath;
+	private String recipeType; //S or N
+	private String systemName;
+	private int fmId;
+	private int ppId;
+	
 	public GeneralRecipeData getRecipeGeneral() {
 		return recipeGeneral;
 	}
@@ -50,4 +57,36 @@ public class Recipe {
 	public void setInspectionAreaList(List<InspectionArea> inspectionAreaList) {
 		this.inspectionAreaList = inspectionAreaList;
 	}
+	public String getRecipeStoragePath() {
+		return recipeStoragePath;
+	}
+	public void setRecipeStoragePath(String recipeStoragePath) {
+		this.recipeStoragePath = recipeStoragePath;
+	}
+	public String getRecipeType() {
+		return recipeType;
+	}
+	public void setRecipeType(String recipeType) {
+		this.recipeType = recipeType;
+	}
+	public String getSystemName() {
+		return systemName;
+	}
+	public void setSystemName(String systemName) {
+		this.systemName = systemName;
+	}
+	public int getFmId() {
+		return fmId;
+	}
+	public void setFmId(int fmId) {
+		this.fmId = fmId;
+	}
+	public int getPpId() {
+		return ppId;
+	}
+	public void setPpId(int ppId) {
+		this.ppId = ppId;
+	}
+	
+	
 }

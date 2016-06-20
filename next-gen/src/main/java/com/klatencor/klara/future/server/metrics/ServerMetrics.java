@@ -48,6 +48,8 @@ public class ServerMetrics {
 	
 	private boolean isRunning = false;
 	
+	private int pid = -1;
+	
 	public ServerMetrics() {
 		startupTime = new Date(System.currentTimeMillis());
 		messageQueue = new LinkedBlockingQueue<JobMessage>();
@@ -56,6 +58,11 @@ public class ServerMetrics {
 		runningJobs = new HashMap<Long, JobRecord>();
 		jobStats = new HashMap<String, JobStatistics>();
 		jobIdCounter = new AtomicLong(1);
+		try {
+			pid = Integer.parseInt(System.getProperty("PID", "-1"));
+		} catch (Exception e) {
+			logger.error("can't obtain pid, some functionalities will be disable.", e);
+		}
 	}
 	
 	public void put(JobMessage jobMessage) {
@@ -129,6 +136,14 @@ public class ServerMetrics {
 		return runningJobCount;
 	}
 	
+	public int getPid() {
+		return pid;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+
 	public class JobMessageWorker extends Thread {		
 		private boolean shouldRun = true;
 		

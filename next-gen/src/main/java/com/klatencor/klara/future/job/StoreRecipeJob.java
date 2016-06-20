@@ -33,10 +33,24 @@ public class StoreRecipeJob extends DefaultJob {
 		CastorXmlParser<Recipe> parser = new CastorXmlParser<Recipe>("recipe-mapping.xml");
 		Recipe recipe = parser.parse(xmlPath);
 		
-		RecipeDao recipeDao = new RecipeDao();
 		JobParameters parameters = getParamters();
+		
+		recipe.setRecipeType("S");
+		recipe.setRecipeStoragePath(recipePath);
+		recipe.setSystemName(parameters.getString("systemName"));
+		
+		RecipeDao recipeDao = new RecipeDao();
+		
+		
+		JobResult result = recipeDao.storeRecipe(recipe, parameters.getBoolean("newOrUpdate"), 
+				parameters.getInt("fmid"));
+		
+		
+		
 		int count = parameters.getInt("max.count");
-		JobResult result = new JobResult();
+		
+		
+		
 		result.setStatus(false);
 		result.setReason("Ouch, something is wrong.");
 		this.setJobResult(result);
