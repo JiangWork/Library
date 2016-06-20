@@ -47,7 +47,12 @@ public class JobRunner {
 		}
 		doClean();
 		job.setState(JobState.DONE);
-		doReport("all done.");
+		JobResult result = job.getJobResult();
+		if (result.isStatus()) {
+			doReport("all done, job status: successful.");
+		} else {
+			doReport("all done, job status: fail, reason:" + result.getReason() + ".");
+		}
 	}
 	
 	private void doReport(String message) {

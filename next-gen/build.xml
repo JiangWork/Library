@@ -1,82 +1,74 @@
 <?xml version="1.0"?>
-<project name="6xxinterface" basedir="../" default="makezip">
-	<property name="src.dir" value="src" />
-	<property name="build.dir" value="bin" />
-	<property name="lib.dir" value="lib">
-	</property>
-	<property name="name" value="6xxinterface" />
+<project name="futureserver" basedir="." default="makezip">
+	<property name="src.dir" value="src/main/java" />
+	<property name="build.dir" value="build" />
+	<property name="common.lib.dir" value="lib"/>
+	<property name="thrift.lib.dir" value="thrift/lib"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="dist.lib.dir" value="${dist.dir}/lib"/>
+	<property name="jarname" value="futureserver-1.0.0.jar" />
 	<property name="config.dir" value="config" />
-	<property name="common.jars.dir" value="../analysistool/war/WEB-INF/lib" />
-	<property name="kt9x.jars.dir" value="../appjars" />
-	<property name="pel.dir" value="../exposurelog/dist">
-	</property>
+
 	<path id="master-classpath">
-		<fileset dir="${lib.dir}">
+		<fileset dir="${dist.lib.dir}">
 			<include name="*.jar" />
 		</fileset>
 		<pathelement path="${build.dir}" />
 	</path>
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: clean                      
-         - - - - - - - - - - - - - - - - - -->
-	<target name="clean">
+	
+    <target  name="buildthriftcommon">
+        <ant antfile="build.xml" dir="thrift">
+	        <property name="src.dir" value="gen-java" />
+	        <property name="build.dir" value="bin" />
+	        <property name="lib.dir" value="lib" />
+	        <property name="jarname" value="thriftinterface.jar" />
+        </ant>
+    </target>
+
+    <target name="clean">
 		<delete includeemptydirs="true">
 			<fileset dir="${build.dir}" includes="**/*" />
 		</delete>
 		<delete includeemptydirs="true">
-			<fileset dir="${lib.dir}" includes="**/*.jar" />
+			<fileset dir="${dist.lib.dir}" includes="**/*.jar" />
 		</delete>
 	</target>
-	<target name="getappjars" depends="clean">
-		<copy overwrite="Yes" file="${common.jars.dir}/spring.jar" todir="${lib.dir}" />
-		<copy overwrite="Yes" file="${common.jars.dir}/commons-logging.jar" todir="${lib.dir}" />
-		<copy overwrite="Yes" file="${common.jars.dir}/oracle.jar" todir="${lib.dir}" />
-		<copy overwrite="Yes" file="${common.jars.dir}/commons-pool.jar" todir="${lib.dir}" />
-		<copy overwrite="Yes" file="${common.jars.dir}/commons-dbcp.jar" todir="${lib.dir}" />
-		<copy overwrite="Yes" file="${common.jars.dir}/log4j-1.2.14.jar" tofile="${lib.dir}/log4j.jar" />
-		<copy overwrite="Yes" file="${kt9x.jars.dir}/common23xx.jar" todir="${lib.dir}" />
-		<copy overwrite="Yes" file="${kt9x.jars.dir}/common.jar" tofile="${lib.dir}/commonkt9x.jar" />
-		<copy overwrite="Yes" file="${common.jars.dir}/hessian-3.0.20.jar" tofile="${lib.dir}/hessian-3.0.20.jar" />
-		<copy overwrite="Yes" file="${pel.dir}/plateexposurelog.jar" tofile="${lib.dir}/plateexposurelog.jar">
-		</copy>
+
+
+    <target name="mkdirs">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.lib.dir}"/>
+    </target>
+
+	<target name="copyjars" depends="clean,buildthriftcommon">
+		<copy overwrite="Yes" file="thrift/bin/thriftinterface.jar" todir="${dist.lib.dir}" />
+		<copy overwrite="Yes" todir="${dist.lib.dir}">
+            <fileset dir="${thrift.lib.dir}" includes="**/*.jar"/>
+        </copy>
+		<copy overwrite="Yes" todir="${dist.lib.dir}">
+            <fileset dir="${common.lib.dir}" includes="**/*.jar"/>
+        </copy>
 	</target>
-	<target name="compile" depends="getappjars">
+
+	<target name="compile" depends="copyjars">
 		<javac destdir="${build.dir}" source="1.5" target="1.5" debug="true" deprecation="false" optimize="false" failonerror="true">
 			<src path="${src.dir}" />
-			<exclude name="**/fe6xxinterface/unittest/" />
 			<classpath refid="master-classpath" />
 		</javac>
 	</target>
-	<target name="makejars" depends="compile">
-		<jar destfile="${lib.dir}/6xxinterface.jar" basedir="${build.dir}" />
-		<jar destfile="${lib.dir}/6xxinterfaceclient.jar" basedir="${build.dir}">
-			<exclude name="**/agent/**" />
-			<exclude name="**/jdbc/**" />
-			<exclude name="**/security/**" />
-			<exclude name="**/unittest/**" />
-			<exclude name="**/common/handler/**" />
-			<include name="**/common/**" />
-			<include name="**/io/**" />
-			<include name="**/client/**" />
-		</jar>
+
+	<target name="makejar" depends="mkdirs,compile">
+		<jar destfile="${dist.lib.dir}/${jarname}" basedir="${build.dir}" />
+        <delete dir="${build.dir}"/>
 	</target>
-	<target name="makezip" depends="makejars">
-		<zip destfile="${dest.dir}/6xxinterface.zip">
-			<fileset dir="${basedir}">
-				<include name="${config.dir}/*" />
-				<include name="${lib.dir}/*" />
-				<include name="start6xxinterface.sh" />
-				<include name="stop6xxinterface.sh" />
-				<include name="client.sh" />
-			</fileset>
-		</zip>
-		<zip destfile="${dest.dir}/6xxinterfaceclient.zip">
-			<fileset dir="${basedir}">
-				<include name="${lib.dir}/6xxinterfaceclient.jar" />
-				<include name="${lib.dir}/commons-logging.jar" />
-				<include name="${lib.dir}/log4j.jar" />
-				<include name="start6xxIronMan.sh" />
-			</fileset>
-		</zip>
+	
+    <target name="makezip" depends="makejar">
+        <delete dir="${dist.dir}/config"/>
+        <!--mkdir dir="${dist.dir}/config" /-->
+        <copy todir="${dist.dir}/config">
+            <fileset dir="config"/>
+        </copy>
+		<zip destfile="futureserver.zip" basedir="${dist.dir}" />
 	</target>
+
 </project>

@@ -1,5 +1,6 @@
 package com.klatencor.klara.future.job;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.klatencor.klara.future.thrift.common.Response;
@@ -22,6 +23,10 @@ public class JobResult {
 	/**the output information of the job.**/
 	private Map<String, String> output;
 
+	public JobResult() {
+		output = new HashMap<String, String>();
+	}
+	
 	public boolean isStatus() {
 		return status;
 	}
@@ -46,6 +51,15 @@ public class JobResult {
 		this.output = output;
 	}
 	
+	public void fail(String reason) {
+		this.status = false;
+		this.reason = reason;
+	}
+	
+	public void addResult(String key, String val) {
+		output.put(key, val);
+	}
+	
 	public Response createResponse() {
 		Response response = new Response();
 		response.setStatus(status);
@@ -54,4 +68,9 @@ public class JobResult {
 		return response;
 	}
 	
+	public static JobResult newSuccess() {
+		JobResult result = new JobResult();
+		result.status = true;
+		return result;
+	}
 }

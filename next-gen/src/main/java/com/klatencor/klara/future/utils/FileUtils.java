@@ -33,7 +33,7 @@ public class FileUtils {
 		}
 		File directory = file.getParentFile();
 		if (!directory.exists()) {
-			if (directory.mkdirs()) {
+			if (!directory.mkdirs()) {
 				logger.error("can't make directory:" + directory.getAbsolutePath());
 				return;
 			}

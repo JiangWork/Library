@@ -33,6 +33,7 @@ public class RecipeDao {
 	public JobResult storeRecipe(final Recipe recipe, final boolean newOrUpdate, final int fmId) {
 		SQLExecutor executor = Server.getContext().getSqlExecutor();
 		final JobResult result = new JobResult();
+		result.setStatus(true);
 		executor.doTransaction(new DaoCommand<Void>() {
 
 			@Override

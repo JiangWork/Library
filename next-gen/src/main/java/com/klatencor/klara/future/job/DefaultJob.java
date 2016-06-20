@@ -1,6 +1,7 @@
 package com.klatencor.klara.future.job;
 
 import com.klatencor.klara.future.server.Server;
+import com.klatencor.klara.future.server.metrics.ElapsedTimer;
 import com.klatencor.klara.future.server.metrics.JobMessage;
 
 /**
@@ -29,12 +30,13 @@ public class DefaultJob implements ReportableJob {
 	
 	/**the processed result**/
 	private JobResult result;
+	private ElapsedTimer timer;
 	
 	public DefaultJob(long jobId, String jobName, Reporter reporter) {
 		this.jobId = jobId;
 		this.jobName = jobName;
 		this.reporter = reporter;
-		result = new JobResult();
+		timer = new ElapsedTimer();
 	}
 
 	/**
@@ -128,5 +130,12 @@ public class DefaultJob implements ReportableJob {
 		return parameters;
 	}
 	
+	public void mark(String eventName) {
+		timer.mark(1);
+	}
+	
+	public void mark(String... eventNames) {
+		timer.mark(eventNames.length);
+	}
 
 }

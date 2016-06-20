@@ -3,7 +3,7 @@
 	<property name="src.dir" value="gen-java" />
 	<property name="build.dir" value="bin" />
 	<property name="lib.dir" value="lib" />
-	<property name="name" value="thriftinterface" />
+	<property name="jarname" value="thriftinterface.jar" />
 	<path id="master-classpath">
 		<fileset dir="${lib.dir}">
 			<include name="*.jar" />
@@ -27,6 +27,12 @@
 		</javac>
 	</target>
 	<target name="makejar" depends="mkdirs,compile">
-		<jar destfile="${build.dir}/thriftinterface.jar" basedir="${build.dir}" />
+		<jar destfile="${build.dir}/${jarname}" basedir="${build.dir}" />
+        <delete includeemptydirs="true">
+            <fileset dir="${build.dir}">
+                <include name="**/*"/>
+                <exclude name="${jarname}"/>
+            </fileset>
+        </delete>
 	</target>
 </project>
