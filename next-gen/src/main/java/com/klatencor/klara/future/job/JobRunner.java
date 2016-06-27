@@ -2,7 +2,6 @@ package com.klatencor.klara.future.job;
 
 import org.apache.log4j.Logger;
 
-import com.klatencor.klara.future.server.Server;
 import com.klatencor.klara.future.server.metrics.JobMessage;
 import com.klatencor.klara.future.thrift.common.Response;
 

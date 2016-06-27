@@ -1,0 +1,258 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+
+<description>A mapping settings for LightCalibration class</description>
+    
+<include href="common-mapping.xml"/>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration" auto-complete="true">
+    <map-to xml="LightCalibration"/>  
+
+    <field name="viewName">
+        <bind-xml name="ViewName" node="attribute"/>
+    </field>
+    <field name="method">
+        <bind-xml name="Method" node="attribute"/>
+    </field>
+    <field name="singlePointLightCalibration" type="com.klatencor.klara.future.object.recipe.LightCalibration$SinglePointLightCalibration">
+        <bind-xml name="SinglePointLightCalibration"/>
+    </field>
+    <field name="multiPointLightCalibration" type="com.klatencor.klara.future.object.recipe.LightCalibration$MultiPointLightCalibration">
+        <bind-xml name="MultiPointLightCalibration"/>
+    </field>
+    <field name="threeBeamLightCalibration" type="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamLightCalibration">
+        <bind-xml name="ThreeBeamLightCalibration"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$SinglePointLightCalibration" auto-complete="true">
+    <field name="measureTransmitted">
+        <bind-xml name="MeasureTransmitted" node="attribute"/>
+    </field>
+    <field name="measureReflected">
+        <bind-xml name="MeasureReflected" node="attribute"/>
+    </field>
+    <field name="transmittedBlackGoal">
+        <bind-xml name="TransmittedBlackGoal" node="attribute"/>
+    </field>
+    <field name="transmittedWhiteGoal">
+        <bind-xml name="TransmittedWhiteGoal" node="attribute"/>
+    </field>
+    <field name="reflectedBlackGoal">
+        <bind-xml name="ReflectedBlackGoal" node="attribute"/>
+    </field>
+    <field name="reflectedWhiteGoal">
+        <bind-xml name="ReflectedWhiteGoal" node="attribute"/>
+    </field>
+    <field name="actualBlack">
+        <bind-xml name="ActualBlack" node="attribute"/>
+    </field>
+        <field name="actualWhite">
+        <bind-xml name="ActualWhite" node="attribute"/>
+    </field>
+        <field name="blackWhiteRatio">
+        <bind-xml name="BlackWhiteRatio" node="attribute"/>
+    </field>
+    <field name="lightCalPoints"  type="com.klatencor.klara.future.object.recipe.LightCalibration$SPLightCalLightCalPoints" >
+        <bind-xml name="LightCalPoints"/>
+    </field>
+    <field name="materials"  type="com.klatencor.klara.future.object.recipe.LightCalibration$SPLightCalMaterials" >
+        <bind-xml name="Materials"/>
+    </field>
+    <field name="digitizer" type="com.klatencor.klara.future.object.recipe.LightCalibration$SPLightCalDigitizer">
+        <bind-xml name="Digitizer"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$SPLightCalMaterials" auto-complete="true">
+   <field name="materials"  collection="arraylist" type="com.klatencor.klara.future.object.recipe.LightCalibration$SPLightCalMaterial" >
+        <bind-xml name="Material"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$SPLightCalMaterial" auto-complete="true">
+    <field name="name">
+        <bind-xml name="Name" node="attribute"/>
+    </field>
+    <field name="point">
+        <bind-xml name="Point"/>
+    </field>
+    <field name="transmitedGoal" type="string">
+        <bind-xml name="TransmitedGoal" node="element"/>
+    </field>
+    <field name="reflectedGoal" type="string">
+        <bind-xml name="ReflectedGoal" node="element"/>
+    </field>
+    <field name="transmitedGrayScale" type="string">
+        <bind-xml name="TransmitedGrayScale" node="element"/>
+    </field>
+    <field name="reflectedGrayScale" type="string">
+        <bind-xml name="ReflectedGrayScale" node="element"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$SPLightCalLightCalPoints" auto-complete="true">
+    <field name="lightCalPoints"  collection="arraylist" type="com.klatencor.klara.future.object.recipe.Point" >
+        <bind-xml name="LightCalPoint"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$SPLightCalDigitizer" auto-complete="true">
+    <field name="transmittedGain" type="string">
+        <bind-xml name="TransmittedGain"/>
+    </field>
+    <field name="transmittedOffset" type="string">
+        <bind-xml name="TransmittedOffset"/>
+    </field>
+    <field name="reflectedGain" type="string">
+        <bind-xml name="ReflectedGain"/>
+    </field>
+    <field name="reflectedOffset" type="string">
+        <bind-xml name="ReflectedOffset"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$MultiPointLightCalibration" auto-complete="true">
+   <field name="calList"  collection="arraylist" type="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalibration" >
+        <bind-xml name="MPLightCalibration"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalibration" auto-complete="true">
+    <field name="digitizer"  type="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalDigitizer" >
+        <bind-xml name="Digitizers"/>
+    </field>
+    <field name="goalValues"  type="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalGoalValues" >
+        <bind-xml name="GoalValues"/>
+    </field>
+     <field name="materials" type="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalMaterials" >
+        <bind-xml name="Materials"/>
+    </field>   
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalDigitizer" auto-complete="true">
+    <field name="lightMode"  type="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalDigitizer$LcLightMode" >
+        <bind-xml name="LcLightMode"/>
+    </field>   
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalDigitizer$LcLightMode" auto-complete="true">
+    <field name="illum"  >
+        <bind-xml name="Illum" node="attribute"/>
+    </field>   
+    <field name="lightLevel"  >
+        <bind-xml name="LightLevel" node="attribute"/>
+    </field>   
+    <field name="splitRatio"  >
+        <bind-xml name="SplitRatio" node="attribute"/>
+    </field>   
+    <field name="gain"  >
+        <bind-xml name="Gain" node="attribute"/>
+    </field>   
+    <field name="offset"  >
+        <bind-xml name="Offset" node="attribute"/>
+    </field>   
+    <field name="actualBlack"  >
+        <bind-xml name="ActualBlack" node="attribute"/>
+    </field>  
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalGoalValues" auto-complete="true">    
+     <field name="lightMode" type="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalGoalValues$LcLightMode" >
+        <bind-xml name="LcLightMode"/>
+    </field>   
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalGoalValues$LcLightMode" auto-complete="true">    
+    <field name="illum"  >
+        <bind-xml name="Illum" node="attribute"/>
+    </field>   
+    <field name="blackGoal"  >
+        <bind-xml name="BlackGoal" node="attribute"/>
+    </field>  
+    <field name="whiteGoal"  >
+        <bind-xml name="WhiteGoal" node="attribute"/>
+    </field>  
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalMaterials" auto-complete="true">    
+    <field name="materials"  collection="arraylist" type="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalMaterial" >
+        <bind-xml name="Material"/>
+    </field>  
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalMaterial" auto-complete="true">    
+    <field name="name"  >
+        <bind-xml name="Name" node="attribute"/>
+    </field>   
+    <field name="point" type="com.klatencor.klara.future.object.recipe.Point" >
+        <bind-xml name="Point"/>
+    </field>  
+    <field name="value"  type="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalMaterial$GrayScaleValue">
+        <bind-xml name="GrayScaleValue"/>
+    </field>  
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$MPLightCalMaterial$GrayScaleValue" auto-complete="true">    
+    <field name="value"  >
+        <bind-xml name="Value" node="attribute"/>
+    </field>   
+    <field name="lightMode" >
+        <bind-xml name="LightMode" node="attribute"/>
+    </field>   
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamLightCalibration" auto-complete="true">    
+    <field name="transmittedSingleBeam" type="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamTransmited" >
+        <bind-xml name="transmittedSingleBeam"/>
+    </field>
+    <field name="reflectedSingleBeam" type="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamReflected" >
+        <bind-xml name="reflectedSingleBeam"/>
+    </field>
+    <field name="transmittedLower" type="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamTransmited" >
+        <bind-xml name="transmittedLower"/>
+    </field>
+    <field name="reflectedLower" type="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamReflected" >
+        <bind-xml name="reflectedLower"/>
+    </field>
+    <field name="transmittedMiddle" type="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamTransmited" >
+        <bind-xml name="transmittedMiddle"/>
+    </field>
+    <field name="reflectedMiddle" type="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamReflected" >
+        <bind-xml name="reflectedMiddle"/>
+    </field>
+    <field name="transmittedUpper" type="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamTransmited" >
+        <bind-xml name="transmittedUpper"/>
+    </field>
+    <field name="reflectedUpper" type="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamReflected" >
+        <bind-xml name="reflectedUpper"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamTransmited" auto-complete="true">    
+    <field name="transmitedBlack"  >
+        <bind-xml name="TransmitedBlack" node="attribute"/>
+    </field>   
+    <field name="transmitedWhite" >
+        <bind-xml name="TransmitedWhite" node="attribute"/>
+    </field>   
+    <field name="transmitedOffset" >
+        <bind-xml name="TransmitedOffset" node="attribute"/>
+    </field>   
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.LightCalibration$ThreeBeamReflected" auto-complete="true">    
+    <field name="reflectedBlack"  >
+        <bind-xml name="ReflectedBlack" node="attribute"/>
+    </field>   
+    <field name="reflectedWhite" >
+        <bind-xml name="ReflectedWhite" node="attribute"/>
+    </field>   
+    <field name="reflectedGain" >
+        <bind-xml name="ReflectedGain" node="attribute"/>
+    </field>   
+</class>
+
+</mapping>

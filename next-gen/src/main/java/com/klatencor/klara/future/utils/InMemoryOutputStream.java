@@ -46,6 +46,8 @@ public class InMemoryOutputStream extends OutputStream {
 	 * The number of clip happens.
 	 */
 	private int clipNum = 0;
+	
+	private int discardCount = 0;
 
 		
 	public InMemoryOutputStream() {
@@ -168,8 +170,9 @@ public class InMemoryOutputStream extends OutputStream {
 				this.writeDirectly(b, off, len);
 			}
 			clipNum ++;
-			logger.info(String.format("Overflow count: %d, discarded bytes number: %d", clipNum,
-					discardBytes));
+			discardCount += discardBytes;
+//			logger.info(String.format("Overflow count: %d, discarded bytes number: %d", clipNum,
+//					discardBytes));
 			
 		}
 
@@ -180,6 +183,22 @@ public class InMemoryOutputStream extends OutputStream {
 	 */
 	public void write(int b) throws IOException {}
 	
+	public int getClipNum() {
+		return clipNum;
+	}
+
+	public void setClipNum(int clipNum) {
+		this.clipNum = clipNum;
+	}
+
+	public int getDiscardCount() {
+		return discardCount;
+	}
+
+	public void setDiscardCount(int discardCount) {
+		this.discardCount = discardCount;
+	}
+
 	public static void main(String[] args) {
 		InMemoryOutputStream ios = new InMemoryOutputStream(true, 32, 2);
 		ios.write("hi".getBytes());

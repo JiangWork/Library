@@ -27,4 +27,6 @@
 core.ignore.recursive= 
 
 core.ignore= \
-	{bin} 
+	{.jazzignore} \
+	{bin} \
+	{futureserver.zip} 

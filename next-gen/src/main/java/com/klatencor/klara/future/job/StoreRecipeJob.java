@@ -5,6 +5,8 @@ import java.io.File;
 import com.klatencor.klara.future.dao.RecipeDao;
 import com.klatencor.klara.future.object.recipe.Recipe;
 import com.klatencor.klara.future.parser.CastorXmlParser;
+import com.klatencor.klara.future.support.FeInvoker;
+import com.klatencor.klara.future.utils.IOUtils;
 
 public class StoreRecipeJob extends DefaultJob {
 
@@ -26,7 +28,7 @@ public class StoreRecipeJob extends DefaultJob {
 	
 	@Override
 	public void execute() throws Exception {
-		JobParameters parameters = getParamters();
+		JobParameters parameters = getParameters();
 		JobResult result = JobResult.newSuccess();	
 		this.setJobResult(result);
 		String rcpPath = parameters.getString("recipePath");
@@ -34,33 +36,35 @@ public class StoreRecipeJob extends DefaultJob {
 		File file = new File(rcpPath);
 		if (!file.canRead()) {
 			result.fail("can't read file:" + file.getAbsolutePath());
+			report("can't read file:" + file.getAbsolutePath());
 			return;
 		}
-		String xmlPath  = rcpPath;
-		// invoke FE executable to generate XML
+		String xmlPath  = IOUtils.tempFileName(4);
+		if (!FeInvoker.generateXml(rcpPath, xmlPath)) {
+			result.fail("can't generate the xml for :" + rcpPath + ", see log for details.");
+			report("can't generate the xml for :" + rcpPath);
+			return;
+		}
 		CastorXmlParser<Recipe> parser = new CastorXmlParser<Recipe>("recipe-mapping.xml");
-		Recipe recipe = parser.parse(xmlPath);
+		Recipe recipe = parser.parse(xmlPath + ".xml");
+		report("load XML into Object successfully.");
 		recipe.setRecipeType("S");
 		recipe.setRecipeStoragePath(rcpPath);
-		recipe.setSystemName(parameters.getString("systemName"));		
+		recipe.readHeader(rcpPath);
+		report("####Recipe Plate type: "+recipe.getPlateType());
 		RecipeDao recipeDao = new RecipeDao();		
-		JobResult daoResult = recipeDao.storeRecipe(recipe, parameters.getBoolean("newOrUpdate"), 
-				parameters.getInt("fmid"));
+		JobResult daoResult = recipeDao.storeRecipe(recipe, parameters);
 		if (!daoResult.isStatus()) {
 			result.fail(daoResult.getReason());
+			report("fail to add to DB:" + daoResult.getReason());
 			return;
+		} else {
+			report("load recipe into DB successfully.");
 		}
-		
-		
 		// setting results
-		int count = parameters.getInt("max.count");
-		
-		
-		
-		result.setStatus(false);
-		result.setReason("Ouch, something is wrong.");
-		
-		
+		result.addResult("fmid", ""+recipe.getFmId());
+		result.addResult("ppid", ""+recipe.getPpId());
+		result.addResult("setname", recipe.getRecipeGeneral().getRecipeName());
 	}
 
 	@Override
@@ -68,5 +72,7 @@ public class StoreRecipeJob extends DefaultJob {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }

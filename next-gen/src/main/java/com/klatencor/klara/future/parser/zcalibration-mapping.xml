@@ -1,0 +1,63 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+
+<description>A mapping settings for ZCalibration class</description>
+
+<class name="com.klatencor.klara.future.object.recipe.ZCalibration" auto-complete="true">
+    <map-to xml="ZCalibration"/>
+    <field name="method">
+        <bind-xml name="Method" node="attribute"/>
+    </field>
+    <field name="swathingView">
+        <bind-xml name="SwathingView" node="attribute"/>
+    </field>
+    
+    <field name="swathYSpacing">
+        <bind-xml name="SwathYSpacing" node="attribute"/>
+    </field>
+
+    <field name="cFView">
+        <bind-xml name="CFView" node="attribute"/>
+    </field>
+
+    <field name="measured">
+        <bind-xml name="Measured" node="attribute"/>
+    </field>
+
+    <field name="expandedBorderView">
+        <bind-xml name="ExpandedBorderView" node="attribute"/>
+    </field>
+
+    <field name="expandedBorderType">
+        <bind-xml name="ExpandedBorderType" node="attribute"/>
+    </field>
+
+    <field name="border" type="com.klatencor.klara.future.object.recipe.ZCalibration$Border" >
+        <bind-xml name="Border"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.ZCalibration$Border" auto-complete="true">
+    <field name="type">
+        <bind-xml name="Type" node="attribute"/>
+    </field>
+    <field name="borderPoints" collection="arraylist" type="com.klatencor.klara.future.object.recipe.ZCalibration$BorderPoint" >
+        <bind-xml name="BorderPoint"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.ZCalibration$BorderPoint" auto-complete="true">
+    <field name="location">
+        <bind-xml name="location" node="attribute"/>
+    </field>
+    <field name="x">
+        <bind-xml name="X" node="attribute"/>
+    </field>
+    <field name="y">
+        <bind-xml name="Y" node="attribute"/>
+    </field>
+</class>
+
+</mapping>

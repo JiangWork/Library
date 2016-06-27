@@ -20,6 +20,7 @@ public class SQLExecutor {
 	private TransactionTemplate transactionTemplate;
 	
 	public SQLExecutor() {
+		txCounter = new AtomicLong();
 	}
 	
 	public long getTxId() {

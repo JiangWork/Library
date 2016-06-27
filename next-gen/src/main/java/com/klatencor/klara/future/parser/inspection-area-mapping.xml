@@ -1,0 +1,130 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+
+<description>A mapping settings for InspectionArea class</description>
+
+<include href="common-mapping.xml"/>
+<include href="sensitivity-mapping.xml"/>
+<include href="lightcalibration-mapping.xml"/>
+<include href="imagecalibration-mapping.xml"/>
+<include href="starlightcalibration-mapping.xml"/>
+
+<class name="com.klatencor.klara.future.object.recipe.InspectionArea" auto-complete="true">
+    <map-to xml="InspectionArea"/>  
+
+    <field name="id">
+        <bind-xml name="Id" node="attribute"/>
+    </field>
+    <field name="compositeView">
+        <bind-xml name="CompositeView" node="attribute"/>
+    </field>
+    <field name="inspectionType">
+        <bind-xml name="InspectionType" node="attribute"/>
+    </field>
+    <field name="algo">
+        <bind-xml name="Algo" node="attribute"/>
+    </field>
+    <field name="algoVersion">
+        <bind-xml name="AlgoVersion" node="attribute"/>
+    </field>
+    <field name="surface">
+        <bind-xml name="Surface" node="attribute"/>
+    </field>
+    <field name="shape">
+        <bind-xml name="Shape" node="attribute"/>
+    </field>
+    <field name="center" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="Center"/>
+    </field>
+    <field name="radius">
+        <bind-xml name="Radius"/>
+    </field>
+    <field name="bottomLeftCorner" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="BottomLeftCorner"/>
+    </field>
+    <field name="topRightCorner" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="TopRightCorner"/>
+    </field>
+    <field name="dieCount" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieCount"/>
+    </field>
+    <field name="dieSize" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieSize"/>
+    </field>
+    <field name="diePitch" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DiePitch"/>
+    </field>
+    <field name="dieFirstLeft" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieFirstLeft"/>
+    </field>
+    <field name="dieFirstRight" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieFirstRight"/>
+    </field>
+    <field name="dieNextLeft" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieNextLeft"/>
+    </field>
+    <field name="dieLastRight" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieLastRight"/>
+    </field>
+    <field name="dieFirstBottom" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieFirstBottom"/>
+    </field>
+    <field name="dieFirstTop" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieFirstTop"/>
+    </field>
+    <field name="dieNextBottom" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieNextBottom"/>
+    </field>
+    <field name="dieLastTop" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="DieLastTop"/>
+    </field>
+    <field name="row" collection="arraylist" type="java.lang.String" >
+        <bind-xml name="Row" location="Dropout"/>
+    </field>
+    <field name="sensitivity" type="com.klatencor.klara.future.object.recipe.Sensitivity">
+        <bind-xml name="Sensitivity"/>
+    </field>
+    <field name="lightCalibration" type="com.klatencor.klara.future.object.recipe.LightCalibration">
+        <bind-xml name="LightCalibration"/>
+    </field>
+    <field name="imageCalibration" type="com.klatencor.klara.future.object.recipe.ImageCalibration">
+        <bind-xml name="ImageCalibration"/>
+    </field>
+    <field name="starLightCalibration" type="com.klatencor.klara.future.object.recipe.StarLightCalibration">
+        <bind-xml name="StarLightCalibration"/>
+    </field>
+    <field name="senseRegionList" collection="arraylist" type="com.klatencor.klara.future.object.recipe.SenseRegion" >
+        <bind-xml name="SenseRegion" location="SenseRegionList"/>
+    </field>
+</class>
+
+<class name="com.klatencor.klara.future.object.recipe.SenseRegion" auto-complete="true">
+    <field name="type">
+        <bind-xml name="Type" node="attribute"/>
+    </field>
+    <field name="origin" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="Origin" />
+    </field>
+    <field name="regionCount">
+        <bind-xml name="RowColumn">
+        <class name="com.klatencor.klara.future.object.recipe.Point">
+            <field name="x">
+                <bind-xml name="Row" node="attribute"/>
+            </field>
+            <field name="y">
+                <bind-xml name="Column" node="attribute"/>
+            </field>       
+        </class>
+        </bind-xml>
+    </field>
+    <field name="size" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="Size" />
+    </field>    
+    <field name="pitch" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="Pitch" />
+    </field>    
+</class>
+
+</mapping>

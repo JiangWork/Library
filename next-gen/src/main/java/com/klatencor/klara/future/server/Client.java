@@ -1,22 +1,33 @@
 package com.klatencor.klara.future.server;
 
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.thrift.TException;
 
 import com.klatencor.klara.future.thrift.common.FutureService;
+import com.klatencor.klara.future.thrift.common.Request;
 import com.klatencor.klara.future.thrift.common.Response;
 import com.klatencor.klara.future.thrift.common.ThriftUtils;
 
+/**
+ * A future client application to communicate with sever
+ * and send some requests to sever.
+ * 
+ * @author jiangzhao
+ * @date  Jun 20, 2016
+ * @version V1.0
+ */
 public class Client {
 	
 	public static void printUsage() {
 		String usage = "Utilities to manage future server: util options [global-config]\n"
 				+ "Supported options:\n"
-				+ "\tstop [force]: stop the server by force if optional [force] is set as 1, default is 0."
-				+ "\tmsg [number]: print the latest [number] messages handled by sever if possible, default [number] is 10."
-				+ "\tjob -r|-c:    print running or completed job information since the server startups."
-				+ "\tmem: print the memory usage.\n"
+				+ "\tstop [force]: stop the server by force if optional [force] is set as 1, default is 0.\n"
+				+ "\tserverinfo [mem|runningJob|completedJob|msg]: get the server running information since it startups."
+				+ "\tsubmit jobType [options]: submit a job. As follows:\n"
+				+ "\t\tstoreRecipe recipePath\n"
+				+ "\t\tgenerateXML recipePath xmlFilename (without suffix)\n"
 				+ "Optional global-config:\n"
 				+ "\t-host hostname: specify the host running future server, default is localhost.\n"
 				+ "\t-port portnumber: specify the port number, default is 32100.\n";
@@ -55,7 +66,7 @@ public class Client {
 				}
 			}
 		}
-		// TODO Auto-generated method stub
+
 		FutureService.Iface client = ThriftUtils.newClient(hostName, port);
 		if (client == null) {
 			System.err.println("No future server is running at " + hostName + "@" + port);
@@ -65,38 +76,56 @@ public class Client {
 		if (args[0].equals("stop")) {
 			String force = getArgs(args, 1, "0");
 			client.shutdown("1".equals(force));
+			System.out.println("Sever " + hostName + "@" + port + " is stopped successfully.");
 		} else if (args[0].equals("msg")) {
 			
 		} else if (args[0].equals("job")) {
 			
 		} else if (args[0].equals("mem")) {
 			
+		} else if (args[0].equals("submit")) {
+			String jobType = getArgs(args, 1, "");
+			if (jobType.equals("storeRecipe")) {
+				long start = System.currentTimeMillis();
+				Request request = new Request();
+				request.setWho("futureClient");
+				Map<String, String> parameters = new HashMap<String, String>();
+				parameters.put("recipePath", getArgs(args, 2, ""));
+				parameters.put("newOrUpdate", "new");
+				parameters.put("fmid", "0");
+				request.setParameters(parameters);
+				Response response = client.storeRecipe(
+						System.currentTimeMillis(), request);
+				if (!response.isStatus()) {
+					System.err.println("Job fails:" + response.getFailure());
+				} else {
+					System.out.println("Store recipe successfully, FmId:"
+							+ response.ret.get("fmid") + ", elapsed time:"
+							+ (System.currentTimeMillis() - start) + "ms");
+				}
+			} else if (jobType.equals("generateXML")) {
+				long start = System.currentTimeMillis();
+				Response response = client.generateXML(
+						System.currentTimeMillis(), getArgs(args, 2, ""),
+						getArgs(args, 3, ""), "futureClient");
+				if (!response.isStatus()) {
+					System.err.println("Job fails:" + response.getFailure());
+				} else {
+					System.out.println("Gnerate XML file successfully"
+							+ ", elapsed time:"
+							+ (System.currentTimeMillis() - start) + "ms, file path:"
+							+ getArgs(args, 3, "") + ".xml");
+				}
+			} else {
+				printUsage();
+			}
 		} else {
+		
 			printUsage();
 		}
 		
 		
 		ThriftUtils.closeClient(client);
-		
-//		Response response = client.whatTime();
-//		if (response.status) {
-//			System.out.println(new Date(Long.parseLong(response.ret.get("server.currenttime"))));
-//		}
-//		
-//		FutureService.Iface client2 = ThriftUtils.newClient("localhost", 32100);
-//		response = client2.whatTime();
-//		if (response.status) {
-//			System.out.println(new Date(Long.parseLong(response.ret.get("server.currenttime"))));
-//		}
-//		client2.shutdown(true);
-//		Thread.sleep(1000);
-//		FutureService.Iface client3 = ThriftUtils.newClient("localhost", 32100);
-//		if (client3 == null) {
-//			System.out.println("Shutdown successfully.");
-//		}
-//		ThriftUtils.closeClient(client2);
-//		
-//		ThriftUtils.closeClient(client);
 	}
 	
 	public static String getArgs(String[] args, int index, String defaultArg) {

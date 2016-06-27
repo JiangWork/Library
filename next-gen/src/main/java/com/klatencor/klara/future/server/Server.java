@@ -1,6 +1,5 @@
 package com.klatencor.klara.future.server;
 
-import java.io.File;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -9,7 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.klatencor.klara.future.thrift.common.ThriftUtils;
-import com.klatencor.klara.future.utils.FileUtils;
+import com.klatencor.klara.future.utils.IOUtils;
 
 /**
  * 
@@ -89,12 +88,12 @@ public class Server {
 				tserver.stop();
 				beanFactory.close();
 				logger.info("Stop the server successfully.");
-				FileUtils.writeFile(ServerConfiguration.APPLICATION_LOCATION + "/tmp/.shutdown",
+				IOUtils.writeFile(ServerConfiguration.APPLICATION_LOCATION + "/tmp/.shutdown",
 						ctx.getMetrics().getPid() + "\nStop the server successfully.");
 				System.exit(0);
 			} else {
 				String msg = "Server isn't stopped due to running jobs, #=" + ctx.getMetrics().getUncompletedJobNumber();
-				FileUtils.writeFile(ServerConfiguration.APPLICATION_LOCATION + "/tmp/.shutdown",
+				IOUtils.writeFile(ServerConfiguration.APPLICATION_LOCATION + "/tmp/.shutdown",
 						ctx.getMetrics().getPid() + "" + msg);
 				logger.info(msg);
 			}

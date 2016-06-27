@@ -126,7 +126,7 @@ public class DefaultJob implements ReportableJob {
 		this.result = result;
 	}
 	
-	public JobParameters getParamters() {
+	public JobParameters getParameters() {
 		return parameters;
 	}
 	
@@ -136,6 +136,10 @@ public class DefaultJob implements ReportableJob {
 	
 	public void mark(String... eventNames) {
 		timer.mark(eventNames.length);
+	}
+	
+	public long unmark() {
+		return timer.unmark();
 	}
 
 }

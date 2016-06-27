@@ -62,7 +62,7 @@ public class ImageCalibration {
 		private String outsideCR;
 		private String totalPoints;
 		private String validPoints;
-		private LightMode lightMode;
+		private List<LightMode> lightMode;
 		private String useWSpotCal;
 		private String wpiRenderMode;
 		private String imageCalibrationStatus;
@@ -102,10 +102,10 @@ public class ImageCalibration {
 		public void setValidPoints(String validPoints) {
 			this.validPoints = validPoints;
 		}
-		public LightMode getLightMode() {
+		public List<LightMode> getLightMode() {
 			return lightMode;
 		}
-		public void setLightMode(LightMode lightMode) {
+		public void setLightMode(List<LightMode> lightMode) {
 			this.lightMode = lightMode;
 		}
 		public String getUseWSpotCal() {

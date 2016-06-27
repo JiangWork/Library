@@ -1,0 +1,27 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+
+<description>A mapping settings for StarLightCalibration class</description>
+
+<include href="common-mapping.xml"/>
+
+<class name="com.klatencor.klara.future.object.recipe.StarLightCalibration" auto-complete="true">
+    <map-to xml="StarLightCalibration"/>  
+
+    <field name="method">
+        <bind-xml name="Method" node="attribute"/>
+    </field>
+    <field name="pixelSize" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="PixelSize"/>
+    </field>
+    <field name="starCalPoints" collection="arraylist" type="com.klatencor.klara.future.object.recipe.Point">
+        <bind-xml name="Point" location="Points"/>
+    </field>
+    <field name="result">
+        <bind-xml name="StarlightCalibrationResult"/>
+    </field>
+</class>
+
+</mapping>

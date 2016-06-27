@@ -13,7 +13,7 @@ public class CastorXmlParserTest {
 
 	public static void main(String[] args) throws ParsingException {
 		// TODO Auto-generated method stub
-		recipe();
+		generalRecipeData();
 	}
 	
 	
@@ -21,7 +21,7 @@ public class CastorXmlParserTest {
 		// TODO Auto-generated method stub
 		CastorXmlParser<GeneralRecipeData> parser 
 		= new CastorXmlParser<GeneralRecipeData>("recipe-general-mapping.xml");
-		GeneralRecipeData data = parser.parse("src/test/resources/generalRecipeData.xml");
+		GeneralRecipeData data = parser.parse("resources/generalRecipeData.xml");
 		System.out.println(data.getDatabaseName());
 		
 	}

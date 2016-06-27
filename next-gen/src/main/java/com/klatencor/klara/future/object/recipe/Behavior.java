@@ -96,6 +96,8 @@ public class Behavior {
 		this.storeAfterReview = storeAfterReview;
 	}
 	public String getStoreImages() {
+		if(storeImages == null)
+			storeImages = "";
 		return storeImages;
 	}
 	public void setStoreImages(String storeImages) {

@@ -2,8 +2,8 @@ package com.klatencor.klara.future.server.metrics;
 
 import org.apache.log4j.Logger;
 
+import com.klatencor.klara.future.job.DefaultJob;
 import com.klatencor.klara.future.job.DefaultReporter;
-import com.klatencor.klara.future.job.Job;
 import com.klatencor.klara.future.job.JobRunner;
 import com.klatencor.klara.future.job.Reporter;
 
@@ -34,11 +34,11 @@ public class ServerMetricsTest {
 		
 	}
 	
-	static class SimpleJob extends Job {
+	static class SimpleJob extends DefaultJob {
 		
 		public SimpleJob(String jobName, long jobId) {
-			this.setJobId(jobId);
-			this.setJobName(jobName);
+			super(jobId, jobName, null);
+
 		}
 
 		@Override

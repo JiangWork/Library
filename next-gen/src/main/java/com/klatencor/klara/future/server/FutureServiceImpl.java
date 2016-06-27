@@ -1,12 +1,15 @@
 package com.klatencor.klara.future.server;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
 
 import com.klatencor.klara.future.job.DefaultJob;
 import com.klatencor.klara.future.job.EchoTimeJob;
+import com.klatencor.klara.future.job.GenerateXmlJob;
 import com.klatencor.klara.future.job.JobParameters;
 import com.klatencor.klara.future.job.JobRunner;
 import com.klatencor.klara.future.job.StoreRecipeJob;
@@ -36,6 +39,7 @@ public class FutureServiceImpl implements FutureService.Iface {
 	public Response storeRecipe(long time, Request request) throws TException {
 		logger.info(String.format("Reciving storeRecipe task from %s, created at %s", 
 				request.who, new Date(time).toString()));
+		logger.info("Parameters:" + request.parameters.toString());
 		StoreRecipeJob job = new StoreRecipeJob(0);
 		return runJob(job, request);
 	}
@@ -64,6 +68,33 @@ public class FutureServiceImpl implements FutureService.Iface {
 		logger.info("about to run job " + job.getJobId());
 		runner.run();
 		return runner.getResponse();
+	}
+
+	@Override
+	public Response generateXML(long time, String inPath, String outPath,
+			String who) throws TException {
+		logger.info(String.format("Reciving generateXml task from %s, created at %s", 
+				who, new Date(time).toString()));
+		GenerateXmlJob job = new GenerateXmlJob(0);
+		Request request = new Request();
+		request.setWho(who);
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("inPath", inPath);
+		parameters.put("outPath", outPath);
+		request.setParameters(parameters);
+		return runJob(job, request);
+	}
+
+	@Override
+	public Response serverInfo(long time, Request request) throws TException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Response jobStatus(long time, String who) throws TException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

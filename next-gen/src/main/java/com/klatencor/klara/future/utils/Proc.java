@@ -152,7 +152,7 @@ public class Proc {
 				lock.release();
 				result.setEndTime(System.currentTimeMillis());
 				if (process != null) result.setExitCode(process.exitValue());
-				logger.info("Command done, exit code: " + result.getExitCode() + ", output: " + result.getOutput());
+				logger.info("Command done, exit code: " + result.getExitCode());
 			}
 		}
 		

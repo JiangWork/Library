@@ -58,14 +58,6 @@ public class CastorXmlParser<T> implements XmlParser<T> {
 			throw new ParsingException("can't read file: " + xmlPath);
 		}
 
-		File mappingFile = new File(mappingPath);
-		if (!mappingFile.canRead()) {
-			URL url = CastorXmlParser.class.getResource(mappingPath);
-		    if (url != null) mappingPath = url.getFile();
-		} else {
-			mappingPath = mappingFile.getAbsolutePath();
-		}
-		
 		Reader reader = null;
 		try {
 			reader = new FileReader(file);
@@ -80,7 +72,13 @@ public class CastorXmlParser<T> implements XmlParser<T> {
 		if (mappingPath != null) {
 			Mapping map = new Mapping();
 			try {
-				map.loadMapping(mappingPath);
+				File mappingFile = new File(mappingPath);
+				if (!mappingFile.canRead()) {
+					URL url = CastorXmlParser.class.getResource(mappingPath);
+					map.loadMapping(url);
+				} else {
+					map.loadMapping(mappingPath);
+				}
 				unmarshaller.setMapping(map);
 			} catch (Exception e) {  // re-throw
 				throw new ParsingException(e.getMessage(), e);

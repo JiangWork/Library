@@ -11,7 +11,9 @@ cd -  1>/dev/null 2>&1
 appwhere=`dirname $scriptwhere`
 libwhere=$appwhere/lib
 libs=`find $libwhere -name "*.jar" -print`
-CLASSPATH=$appwhere/config
+CLASSPATH=""
+SERVERCONFIG=$appwhere/config/server
+CLIENTCONFIG=$appwhere/config/client
 JAVA_OPTS="-Xms20m -Xmx4g"
 
 for jarFile in $libs
@@ -29,7 +31,7 @@ if [ "$1" = "start" ]; then
          echo "invalid port: $PORT"
          exit 1
     fi
-    exec /app/java/bin/java $JAVA_OPTS -DAPP=FUTURESERVICE -DPID=$pid -DAPPLOCATION=$appwhere -cp $CLASSPATH com.klatencor.klara.future.server.Server $PORT
+    exec /app/java/bin/java $JAVA_OPTS -DAPP=FUTURESERVICE -DPID=$pid -DAPPLOCATION=$appwhere -cp $CLASSPATH\:$SERVERCONFIG com.klatencor.klara.future.server.Server $PORT
 
 elif [ "$1" = "stop" ]; then
     shift
@@ -38,9 +40,10 @@ elif [ "$1" = "stop" ]; then
        FORCE=1
        shift
     fi
-    /app/java/bin/java  -cp $CLASSPATH  com.klatencor.klara.future.server.Client stop $FORCE 2>/dev/null
-    sleep 1s
     SHUTDOWNFILE=$appwhere/tmp/.shutdown
+    rm $SHUTDOWNFILE 1> /dev/null 2>&1
+    /app/java/bin/java  -cp $CLASSPATH\:$CLIENTCONFIG  com.klatencor.klara.future.server.Client stop $FORCE "@"
+    sleep 0.2s
     if [ ! -s $SHUTDOWNFILE ]; then
         FUTUREPID=`ps -ef | grep FUTURESERVICE | grep -v grep | awk '{print $2}'`
     else
@@ -55,12 +58,12 @@ elif [ "$1" = "stop" ]; then
     # server is still running
         cat $SHUTDOWNFILE | tail -n 1
     else 
-        echo "Stop the server successfully."
+        echo "You can use startup.sh to start server again."
     fi
 
 elif [ "$1" = "util" ]; then
     shift
-    /app/java/bin/java -cp $CLASSPATH  com.klatencor.klara.future.server.Client "$@"
+    /app/java/bin/java -cp $CLASSPATH\:$CLIENTCONFIG  com.klatencor.klara.future.server.Client "$@"
 
 else
     echo "Usage: $0 (commands)"

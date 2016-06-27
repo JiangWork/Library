@@ -29,6 +29,19 @@ public class ParameterAccessor {
 		return retVal;
 	}
 	
+	public short getShort(String key, short defaultVal) {
+		short retVal = defaultVal;
+		if (parameters.containsKey(key)) {
+			String value = parameters.get(key);
+			try {
+				retVal = Short.parseShort(value);
+			} catch(Exception e) {
+				// do nothing
+			}
+		} 
+		return retVal;	
+	}
+	
 	public int getInt(String key, int defaultVal) {
 		int retVal = defaultVal;
 		if (parameters.containsKey(key)) {
@@ -130,6 +143,16 @@ public class ParameterAccessor {
 	}
 	
 	/**
+	 * Get short value from {@code parameter}.
+	 * 0 is returned if key does not exist in {@code parameter}.
+	 * @param key
+	 * @return
+	 */
+	public short getShort(String key) {
+		return this.getShort(key, (short)0);
+	}
+	
+	/**
 	 * Get int value from {@code parameter},
 	 * 0 is returned if key does not exist in {@code parameter}.
 	 * 
@@ -185,5 +208,7 @@ public class ParameterAccessor {
 		return this.getMap(key, ",", ":");
 	}
 	
-	
+	public String toString() {
+		return this.parameters.toString();
+	}
 }

@@ -53,8 +53,33 @@ struct Response {
 }
 
 service FutureService {
+
+    /**
+    * store recipe for all versions.
+    */
     Response storeRecipe(1:i64 time, 2:Request request),
+    
+    /**
+    * shutdown the service.
+    */
     oneway void shutdown(1:bool force),
+
     Response whatTime(),
+
+    /**
+    * generate XML for IR and recipe with all version support
+    **/
+    Response generateXML(1:i64 time, 2:string inPath, 3:string outPath, 4:string who),
+
+    /**
+    * get the server infomation, include startup date, memory usage, messages handled, job processed etc.
+    */
+    Response serverInfo(1:i64 time, 2:Request request),
+
+    /**
+    * get the job status, including running and completed jobs.
+    */
+    Response jobStatus(1:i64 time, 2:string who),
+
 }
 
