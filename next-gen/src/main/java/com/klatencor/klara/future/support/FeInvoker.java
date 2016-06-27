@@ -3,6 +3,7 @@ package com.klatencor.klara.future.support;
 import org.apache.log4j.Logger;
 
 import com.klatencor.klara.future.object.FEConstants;
+import com.klatencor.klara.future.server.ServerConfiguration;
 import com.klatencor.klara.future.utils.IOUtils;
 import com.klatencor.klara.future.utils.Proc;
 import com.klatencor.klara.future.utils.ProcResult;
@@ -47,8 +48,8 @@ public class FeInvoker {
 	}
 	
 	public static boolean invokeFEXml(String executable, String inPath, String outPath) {
-		Proc process = new Proc.ProcBuilder("FeXml", executable, "-xml2", "-o", outPath, inPath, " 1>/tmp/xml.log")
-		.withTimeOut(20000).build();
+		Proc process = new Proc.ProcBuilder("FeXml", "/bin/bash", "-c", executable +" -xml2 -o " +  outPath + " " + inPath + " 1>/tmp/xml.log")
+		.withTimeOut(ServerConfiguration.FE_INVOCATION_TIMEOUT).build();
 		try {
 			ProcResult result = process.run();
 			if (result.getExitCode() != 0) {

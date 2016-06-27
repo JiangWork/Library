@@ -16,6 +16,8 @@ public final class ServerConfiguration {
 	
 	public static final int KEEP_MESSAGE_SIZE = Integer.MAX_VALUE;
 	
+	public static final long FE_INVOCATION_TIMEOUT = 20000; // 20s
+	
 	
 	
 }

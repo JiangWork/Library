@@ -41,7 +41,7 @@ public class StoreRecipeJob extends DefaultJob {
 		}
 		String xmlPath  = IOUtils.tempFileName(4);
 		if (!FeInvoker.generateXml(rcpPath, xmlPath)) {
-			result.fail("can't generate the xml for :" + rcpPath + ", see log for details.");
+			result.fail("can't generate the xml for :" + rcpPath + ", see log for details, rcpVersion=" + IOUtils.getVersion(rcpPath));
 			report("can't generate the xml for :" + rcpPath);
 			return;
 		}
