@@ -35,6 +35,8 @@ public class JobDefinition {
 	public final static String JOB_JARS_KEY = "job.jars";
 	public final static String JOB_RESOURCES_KEY = "job.resources";
 	public final static String JOB_ENV_KEY = "job.env";
+	public final static String JOB_REPORTER_CLASS_KEY = "job.reporter.class";
+	public final static String JOB_ID_KEY = "job.id";
 	
 	private String jobName;
 	private String mainClass;
@@ -142,12 +144,17 @@ public class JobDefinition {
 	}
 	
 	public boolean write(String path) throws IOException {
+		return this.write(path, -1);
+	}
+	
+	public boolean write(String path, long jobId) throws IOException {
 		boolean status = false;
 		BufferedWriter bw = null;
 		try {
 			File file = new File(path);
 			Set<String> vistedKeys = new HashSet<String>();
 			bw = new BufferedWriter(new FileWriter(file));
+			bw.write(JOB_ID_KEY + "=" + jobId + "\n");
 			bw.write(JOB_NAME_KEY + "=" + StringUtils.stringfyObject(jobName) + "\n");
 			bw.write(JOB_MAINCLASS_KEY + "=" + StringUtils.stringfyObject(mainClass) + "\n");
 			bw.write(JOB_METHOD_KEY + "=" + StringUtils.stringfyObject(enterMethod) + "\n");
@@ -157,6 +164,7 @@ public class JobDefinition {
 			bw.write(JOB_JARS_KEY + "=" + StringUtils.stringfyList(jarsList) + "\n");
 			bw.write(JOB_RESOURCES_KEY + "=" + StringUtils.stringfyList(resourcesList) + "\n");
 			bw.write(JOB_ENV_KEY + "=" + StringUtils.stringfyMap(env) + "\n");
+			vistedKeys.add(JOB_ID_KEY);
 			vistedKeys.add(JOB_NAME_KEY);
 			vistedKeys.add(JOB_MAINCLASS_KEY);
 			vistedKeys.add(JOB_METHOD_KEY);
