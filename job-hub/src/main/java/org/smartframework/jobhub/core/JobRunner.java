@@ -91,7 +91,7 @@ public class JobRunner implements Runnable {
 	public void setup() throws JobException, IOException {
 		createWorkingDirectory();
 		// write the job configuration
-		entry.getDefinition().write(DirectoryAllocator.configPath(jobId));
+		entry.getDefinition().write(DirectoryAllocator.configPath(jobId), jobId);
 		//construct the script
 		createScript();
 		logger.info("Setup done.");
@@ -113,7 +113,8 @@ public class JobRunner implements Runnable {
 		bw.write("cd " + DirectoryAllocator.workingDirectory(jobId) + "\n");
 		bw.write("JAVA_OPTS=\"-Xms20m -Xmx4g\"\n");
 		bw.write("JAVA_EXEC=`which java`\n");
-		bw.write("exec $JAVA_EXEC $JAVA_OPTS org.smartframework.jobhub.core.LaunchJob");
+		bw.write("exec $JAVA_EXEC $JAVA_OPTS ");
+		bw.write(LaunchJobTask.class.getName());
 		bw.write(" 	127.0.0.1 " + JobServer.INNER_PROTOCOL_PORT + 
 				" " + DirectoryAllocator.configPath(jobId) + 
 				" " + DirectoryAllocator.logPath(jobId));
@@ -128,7 +129,7 @@ public class JobRunner implements Runnable {
 		for (String jar: jars) {
 			sb.append(":" + DirectoryAllocator.uploadDirectory(jobId) + File.separator + jar);
 		}
-		// add framework dependencies
+		// add framework dependencies: thrift and api
 		String appDir = DirectoryAllocator.APP_LOCATION;
 		if (appDir != null) {
 			File file = new File(appDir + File.separator + "lib");

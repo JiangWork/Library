@@ -1,5 +1,7 @@
 package org.smartframework.jobhub.utils;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -45,5 +47,11 @@ public class StringUtils {
 		}
 		return sb.length() >= 1 ? sb.toString().substring(1) : "";
 	}
-
+	
+	public static String stringfyException(Exception e) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		e.printStackTrace(pw);
+		return sw.toString();
+	}
 }

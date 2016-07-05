@@ -39,11 +39,11 @@
 namespace java org.smartframework.jobhub.protocol
 
 enum JobState {
-PREPARE = 1,
-SUBMITTED = 2, // the job is just submitted and need to be scheduled to run.
-RUNNING = 3,  // the job is running.
-RESCHEDULE = 4,  // the job is finished, but need to be scheduled next run
-DONE = 5     // the job is done, no more schedule is needed.
+  PREPARE = 1,   // new job id is assigned, but files are needed to be uploaded.
+  SUBMITTED = 2, // the job is just submitted and need to be scheduled to run.
+  RUNNING = 3,  // the job is running.
+  RESCHEDULE = 4,  // the job is finished, but need to be scheduled next run
+  DONE = 5     // the job is done, no more schedule is needed.
 }
 
 

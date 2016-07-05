@@ -53,7 +53,12 @@ service InnerProtocol {
     /**
     * report pid to framework
     **/
-    oneway void pid(1:i64 jobId, 2:i32 pid),
+    oneway void setPid(1:i64 jobId, 2:i32 pid),
+
+    /**
+    * set the job state
+    */
+    oneway void setJobState(1:i64 jobId, 2:common.JobState jobState),
 
 }
 
