@@ -1,4 +1,7 @@
-package org.smartframework.jobhub.core;
+package org.smartframework.jobhub.core.support;
+
+import org.smartframework.jobhub.core.JobEntry;
+import org.smartframework.jobhub.core.StateChangedListener;
 
 public class StateChangedAdapter implements StateChangedListener {
 

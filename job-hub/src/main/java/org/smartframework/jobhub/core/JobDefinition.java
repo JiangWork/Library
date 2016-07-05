@@ -2,13 +2,23 @@ package org.smartframework.jobhub.core;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.smartframework.jobhub.utils.IOUtils;
+import org.smartframework.jobhub.utils.ParameterAccessor;
 import org.smartframework.jobhub.utils.StringUtils;
 
 
@@ -35,6 +45,9 @@ public class JobDefinition {
 	private List<String> jarsList;  // the depend jar files
 	private List<String> resourcesList; // the resource files
 	private Map<String, String> env;
+	
+	/**This map contains all configurations, including above**/
+	private Map<String, String> allConfigMap;
 	
 	public String getJobName() {
 		return jobName;
@@ -84,9 +97,48 @@ public class JobDefinition {
 	public void setEnv(Map<String, String> env) {
 		this.env = env;
 	}
+	/**
+	 * Get value from allConfigMap
+	 * @param key
+	 * @return
+	 */
+	public String getProperty(String key) {
+		return allConfigMap.get(key);
+	}
 	
-	public void read(String path) {
-		
+	
+	
+	public String getEnterArgs() {
+		return enterArgs;
+	}
+	public void setEnterArgs(String enterArgs) {
+		this.enterArgs = enterArgs;
+	}
+	public void read(String path) throws IOException {
+		FileInputStream fis = new FileInputStream(new File(path));
+		read(fis);
+	}
+	
+	public void read(InputStream is) throws IOException {
+		Properties prop = new Properties();
+		prop.load(is);
+		allConfigMap = new HashMap<String, String>();
+		Iterator<Entry<Object, Object>> iter = prop.entrySet().iterator();
+		while(iter.hasNext()) {
+			Entry<Object, Object> entry = iter.next();
+			allConfigMap.put((String)entry.getKey(), (String)entry.getValue());
+		}
+		ParameterAccessor pa = new ParameterAccessor(allConfigMap);
+		jobName = pa.getString(JOB_NAME_KEY, "undefined");
+		mainClass = pa.getString(JOB_MAINCLASS_KEY);
+		enterMethod = pa.getString(JOB_METHOD_KEY, "main");
+		enterArgs = pa.getString(JOB_METHODARGS_KEY);
+		submitter = pa.getString(JOB_SUBMITTER_KEY);
+		timeout = pa.getLong(JOB_TIMEOUT_KEY, 1000*1000);
+		jarsList = pa.getList(JOB_JARS_KEY);
+		resourcesList = pa.getList(JOB_RESOURCES_KEY);
+		env = pa.getMap(JOB_ENV_KEY);
+		IOUtils.closeQuietly(is);
 	}
 	
 	public boolean write(String path) throws IOException {
@@ -94,6 +146,7 @@ public class JobDefinition {
 		BufferedWriter bw = null;
 		try {
 			File file = new File(path);
+			Set<String> vistedKeys = new HashSet<String>();
 			bw = new BufferedWriter(new FileWriter(file));
 			bw.write(JOB_NAME_KEY + "=" + StringUtils.stringfyObject(jobName) + "\n");
 			bw.write(JOB_MAINCLASS_KEY + "=" + StringUtils.stringfyObject(mainClass) + "\n");
@@ -104,6 +157,21 @@ public class JobDefinition {
 			bw.write(JOB_JARS_KEY + "=" + StringUtils.stringfyList(jarsList) + "\n");
 			bw.write(JOB_RESOURCES_KEY + "=" + StringUtils.stringfyList(resourcesList) + "\n");
 			bw.write(JOB_ENV_KEY + "=" + StringUtils.stringfyMap(env) + "\n");
+			vistedKeys.add(JOB_NAME_KEY);
+			vistedKeys.add(JOB_MAINCLASS_KEY);
+			vistedKeys.add(JOB_METHOD_KEY);
+			vistedKeys.add(JOB_METHODARGS_KEY);
+			vistedKeys.add(JOB_SUBMITTER_KEY);
+			vistedKeys.add(JOB_JARS_KEY);
+			vistedKeys.add(JOB_RESOURCES_KEY);
+			vistedKeys.add(JOB_ENV_KEY);
+			Iterator<String> iter = allConfigMap.keySet().iterator();
+			while(iter.hasNext()) {
+				String key = iter.next();
+				if (!vistedKeys.contains(key)) {
+					bw.write(key + "=" + StringUtils.stringfyObject(allConfigMap.get(key)) + "\n");
+				}
+			}
 			bw.close();
 			status = true;
 		} catch(IOException e) {

@@ -20,15 +20,21 @@ public class InnerProtocolImpl implements InnerProtocol.Iface {
 	}
 	
 	@Override
-	public boolean progress(double precent) throws TException {
+	public boolean progress(long jobId, int precent) throws TException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean message(String message) throws TException {
+	public boolean message(long jobId, String message) throws TException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void pid(long jobId, int pid) throws TException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

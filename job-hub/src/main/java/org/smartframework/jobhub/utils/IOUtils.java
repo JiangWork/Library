@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 
 import org.apache.log4j.Logger;
-import org.omg.CORBA_2_3.portable.InputStream;
+
 
 
 public class IOUtils {

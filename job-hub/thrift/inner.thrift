@@ -41,14 +41,19 @@ namespace java org.smartframework.jobhub.protocol
 service InnerProtocol {
 
     /**
-    * report the progress
+    * report the progress to server
     */
-    bool progress(1:double precent),
+    bool progress(1:i64 jobId, 2:i32 precent),
 
     /**
     * report message if necessary.
     **/
-    bool message(1:string message),
+    bool message(1:i64 jobId, 2:string message),
+
+    /**
+    * report pid to framework
+    **/
+    oneway void pid(1:i64 jobId, 2:i32 pid),
 
 }
 

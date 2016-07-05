@@ -1,4 +1,4 @@
-package org.smartframework.jobhub.core;
+package org.smartframework.jobhub.core.support;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +8,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.smartframework.jobhub.core.JobEntry;
+import org.smartframework.jobhub.core.JobRunner;
+import org.smartframework.jobhub.core.Scheduler;
+import org.smartframework.jobhub.core.StateChangedListener;
 
 public class DefaultScheduler implements Scheduler {
 	

@@ -8,7 +8,7 @@ package org.smartframework.jobhub.common;
 public interface ProgressReporter extends Reporter {
 
 	/**
-	 * Report the progress percent.
+	 * Report the progress percent to framework.
 	 * @param precent
 	 */
 	public void report(int percent);

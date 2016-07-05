@@ -5,13 +5,15 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.smartframework.jobhub.core.support.DefaultJobRegistry;
+import org.smartframework.jobhub.core.support.DefaultScheduler;
+import org.smartframework.jobhub.core.support.StateChangedAdapter;
 import org.smartframework.jobhub.protocol.JobState;
 
 
 public class JobManager implements JobRegistry {
 	
 	private static final Logger logger = Logger.getLogger(JobManager.class);
-	
 	
 	private JobRegistry jobRegistry;
 	private Scheduler scheduler;

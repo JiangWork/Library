@@ -113,8 +113,10 @@ public class JobRunner implements Runnable {
 		bw.write("cd " + DirectoryAllocator.workingDirectory(jobId) + "\n");
 		bw.write("JAVA_OPTS=\"-Xms20m -Xmx4g\"\n");
 		bw.write("JAVA_EXEC=`which java`\n");
-		bw.write("exec $JAVA_EXEC $JAVA_OPTS org.smartframework.jobhub.core.LaunchJob 127.0.0.1 "
-				+ JobServer.INNER_PROTOCOL_PORT + " " + DirectoryAllocator.configPath(jobId));
+		bw.write("exec $JAVA_EXEC $JAVA_OPTS org.smartframework.jobhub.core.LaunchJob");
+		bw.write(" 	127.0.0.1 " + JobServer.INNER_PROTOCOL_PORT + 
+				" " + DirectoryAllocator.configPath(jobId) + 
+				" " + DirectoryAllocator.logPath(jobId));
 		bw.write(" 1>>" + DirectoryAllocator.stdoutPath(jobId));
 		bw.write(" 2>>" + DirectoryAllocator.stderrPath(jobId) + "\n");
 		bw.close();

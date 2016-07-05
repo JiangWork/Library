@@ -21,6 +21,8 @@ public class JobEntry {
 	
 	private long lastUpdated;
 	
+	private long pid;
+	
 	private JobDefinition definition;
 
 	public long getId() {

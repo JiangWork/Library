@@ -55,6 +55,10 @@ public class DirectoryAllocator {
 		return workingDirectory(jobid) + File.separator + "stderr";
 	}
 	
+	public static String logPath(long jobid) {
+		return workingDirectory(jobid) + File.separator + "log";
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(DirectoryAllocator.WORKING_DIRECTORY);
 		System.out.println(DirectoryAllocator.UPLOAD_DIRECTORY);
