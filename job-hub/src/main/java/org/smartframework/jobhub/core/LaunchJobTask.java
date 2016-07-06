@@ -10,6 +10,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.thrift.TException;
+import org.smartframework.jobhub.common.JobIdAware;
 import org.smartframework.jobhub.common.ProgressReporter;
 import org.smartframework.jobhub.common.Progressable;
 import org.smartframework.jobhub.core.support.DefaultProgressReporter;
@@ -119,18 +120,28 @@ public class LaunchJobTask {
 	}
 
 	public void setInterfaces(Object obj, JobDefinition def) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+		// set the JobId
+		if (obj instanceof JobIdAware) {
+			JobIdAware jobIdAware = (JobIdAware)obj;
+			jobIdAware.setJobId(jobId);
+		}
+		
 		// set the progress reporter
 		if (obj instanceof Progressable) {
+			Progressable progressable = (Progressable) obj;
 			String reporterClass = def.getProperty(JobDefinition.JOB_REPORTER_CLASS_KEY);
 			if (reporterClass == null) {
-				reporterClass = DefaultProgressReporter.class.getName();
+				DefaultProgressReporter reporter = new DefaultProgressReporter();
+				reporter.setClient(client);
+				reporter.setJobId(jobId);
+				progressable.setReporter(reporter);
+			} else {
+				Class<?> clazz = Class.forName(reporterClass);
+				if (!ProgressReporter.class.isAssignableFrom(clazz)) {
+					throw new IllegalArgumentException(reporterClass + " is not a subclass of " + ProgressReporter.class.getName());
+				}
+				progressable.setReporter((ProgressReporter)clazz.newInstance());
 			}
-			Class<?> clazz = Class.forName(reporterClass);
-			if (!ProgressReporter.class.isAssignableFrom(clazz)) {
-				throw new IllegalArgumentException(reporterClass + " is not a subclass of " + ProgressReporter.class.getName());
-			}
-			Progressable progressable = (Progressable) obj;
-			progressable.setReporter((ProgressReporter)clazz.newInstance());
 		}
 	}
 	
