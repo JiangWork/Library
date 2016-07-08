@@ -8,8 +8,6 @@ import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.smartframework.jobhub.protocol.InnerProtocol;
-import org.smartframework.jobhub.protocol.InnerProtocol.Iface;
-import org.smartframework.jobhub.protocol.InnerProtocol.Processor;
 import org.smartframework.jobhub.protocol.impl.InnerProtocolImpl;
 
 
@@ -61,7 +59,7 @@ public class InnerProtocolServer {
 		} catch (InterruptedException e) {
 			//ignored
 		}
-		logger.info("InnerProtocolServer is stopped successfully.");
+		logger.info("InnerProtocolServer is stopped successfully localhost@" + ctx.getClientProtocolPort());
 	}
 
 

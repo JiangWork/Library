@@ -8,8 +8,6 @@ import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.smartframework.jobhub.protocol.ClientProtocol;
-import org.smartframework.jobhub.protocol.ClientProtocol.Iface;
-import org.smartframework.jobhub.protocol.ClientProtocol.Processor;
 import org.smartframework.jobhub.protocol.impl.ClientProtocolImpl;
 
 /**
@@ -62,6 +60,6 @@ public class ClientProtocolServer {
 		} catch (InterruptedException e) {
 			//ignored
 		}
-		logger.info("ClientProtocolServer is stopped successfully.");
+		logger.info("ClientProtocolServer is stopped successfully localhost@" + ctx.getClientProtocolPort());
 	}
 }

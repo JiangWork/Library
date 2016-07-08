@@ -3,6 +3,7 @@ package org.smartframework.jobhub.core;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
 import org.smartframework.jobhub.core.support.DefaultJobRegistry;
@@ -17,19 +18,16 @@ public class JobManager implements JobRegistry {
 	
 	private JobRegistry jobRegistry;
 	private Scheduler scheduler;
-	private StateChangedListener defaultListener;
 	
-	private List<StateChangedListener> listeners;
+	private volatile boolean  shouldRun;
+	
+	private AtomicLong jobId;
 	
 	public JobManager() {
 		jobRegistry = new DefaultJobRegistry();
 		scheduler = new DefaultScheduler();
-		defaultListener = new StateChangedAdapter() {
-			public void onSubmit(JobEntry jobEntry) {
-				scheduler.schedule(jobEntry);
-			}
-		};
-		listeners = new ArrayList<StateChangedListener>();
+		shouldRun = true;
+		jobId = new AtomicLong();
 	}
 
 	/**
@@ -37,18 +35,14 @@ public class JobManager implements JobRegistry {
 	 * @param jobId
 	 */
 	public void submit(long jobId) throws JobException {
-		
 		JobEntry entry = getJobEntry(jobId);
 		if (entry == null) {
 			throw new JobException("No such job id found:" + jobId);
 		}
-		
-		
-		defaultListener.onSubmit(entry);
-		for (StateChangedListener listener: listeners) {
-			listener.onSubmit(entry);
-		}
+		scheduler.schedule(entry);
 	}
+	
+	
 	
 	/**
 	 * Add and entry to {@link JobRegistry} when a
@@ -57,10 +51,6 @@ public class JobManager implements JobRegistry {
 	@Override
 	public void registerJobEntry(JobEntry entry) {
 		jobRegistry.registerJobEntry(entry);
-		defaultListener.onPrepare(entry);
-		for (StateChangedListener listener: listeners) {
-			listener.onPrepare(entry);
-		}
 	}
 
 	@Override
@@ -87,4 +77,14 @@ public class JobManager implements JobRegistry {
 		return false;
 	}
 
+	public long getJobId () {
+		return jobId.getAndIncrement();
+	}
+	
+	public boolean checkService() {
+		if (!shouldRun) {
+			return false; 
+		}
+		return true;
+	}
 }
