@@ -24,10 +24,10 @@ public class Client {
 		String usage = "Utilities to manage future server: util options [global-config]\n"
 				+ "Supported options:\n"
 				+ "\tstop [force]: stop the server by force if optional [force] is set as 1, default is 0.\n"
-				+ "\tserverinfo [mem|runningJob|completedJob|msg]: get the server running information since it startups."
+				+ "\tserverinfo [mem|runningJob|completedJob|msg]: get the server running information since it startups.\n"
 				+ "\tsubmit jobType [options]: submit a job. As follows:\n"
 				+ "\t\tstoreRecipe recipePath\n"
-				+ "\t\tgenerateXML recipePath xmlFilename (without suffix)\n"
+				+ "\t\tgenerateXML recipePath xmlFilename\n"
 				+ "Optional global-config:\n"
 				+ "\t-host hostname: specify the host running future server, default is localhost.\n"
 				+ "\t-port portnumber: specify the port number, default is 32100.\n";
@@ -111,10 +111,14 @@ public class Client {
 				if (!response.isStatus()) {
 					System.err.println("Job fails:" + response.getFailure());
 				} else {
+					String xmlPath = getArgs(args, 3, "");
+					if (!getArgs(args, 3, "").endsWith(".xml")) {
+						xmlPath += ".xml";
+					}
 					System.out.println("Gnerate XML file successfully"
 							+ ", elapsed time:"
 							+ (System.currentTimeMillis() - start) + "ms, file path:"
-							+ getArgs(args, 3, "") + ".xml");
+							+ xmlPath);
 				}
 			} else {
 				printUsage();

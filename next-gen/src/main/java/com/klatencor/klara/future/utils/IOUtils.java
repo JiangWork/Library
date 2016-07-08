@@ -1,12 +1,25 @@
 package com.klatencor.klara.future.utils;
 
+import java.awt.Point;
+import java.awt.image.BandedSampleModel;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 
@@ -107,13 +120,7 @@ public class IOUtils {
 		} catch (IOException e) {
 			logger.error(e.getMessage(),e );
 		} finally {
-			if (bw != null) {
-				try {
-					bw.close();
-				} catch (IOException e) {
-					logger.error(e.getMessage(),e );
-				}
-			}
+			closeQuietly(bw);
 		}
 	}
 
@@ -160,4 +167,68 @@ public class IOUtils {
 		return ServerConfiguration.TEMP_DIRECTORY + "/tmp_" + System.currentTimeMillis() + "_" + sb.toString();
 	}
 
+	/**
+	 * Close the InputStream without throw Exception
+	 * @param is
+	 */
+	public static void closeQuietly(InputStream is) {
+		if(is != null) {
+			try {
+				is.close();
+			} catch (IOException e) {
+				logger.error(e.getMessage(), e);
+			}
+		}
+	}
+	
+	/**
+	 * Close the OutputStream without throw Exception
+	 * @param is
+	 */
+	public static void closeQuietly(OutputStream is) {
+		if(is != null) {
+			try {
+				is.close();
+			} catch (IOException e) {
+				logger.error(e.getMessage(), e);
+			}
+		}
+	}
+	
+	/**
+	 * Close the Writer without throw Exception
+	 * @param is
+	 */
+	public static void closeQuietly(Writer is) {
+		if(is != null) {
+			try {
+				is.close();
+			} catch (IOException e) {
+				logger.error(e.getMessage(), e);
+			}
+		}
+	}
+	
+	/**
+	 * Close the Reader without throw Exception
+	 * @param is
+	 */
+	public static void closeQuietly(Reader is) {
+		if(is != null) {
+			try {
+				is.close();
+			} catch (IOException e) {
+				logger.error(e.getMessage(), e);
+			}
+		}
+	}
+	
+	public static void writeImages(byte[] imageData, int width, int height, String filePath, String format) throws IOException {
+		BandedSampleModel bsm = new BandedSampleModel(DataBuffer.TYPE_BYTE, width, height, 1);
+		DataBufferByte dataBufferByte = new DataBufferByte(imageData, imageData.length);
+		WritableRaster writableRaster = Raster.createWritableRaster( bsm,dataBufferByte, new Point());
+		BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+		bufferedImage.setData(writableRaster);
+		ImageIO.write(bufferedImage, format, new File(filePath));
+	}
 }

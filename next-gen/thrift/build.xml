@@ -29,6 +29,7 @@
 	<target name="makejar" depends="mkdirs,compile">
 		<jar destfile="${build.dir}/${jarname}" basedir="${build.dir}" />
         <copy file="${build.dir}/${jarname}" todir="../../jarzipfiles/redist"/>
+        <copy file="${build.dir}/${jarname}" todir="../../appjars"/>
         <delete includeemptydirs="true">
             <fileset dir="${build.dir}">
                 <include name="**/*"/>

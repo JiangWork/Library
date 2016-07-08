@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 public class JniDataOperations {
 	
 	private final static Logger logger = Logger.getLogger(JniDataOperations.class);
-	private static boolean LOAD_SO_SUCCESS = false;
+	public static boolean LOAD_SO_SUCCESS = false;
 	
 	/**
 	 * Construct a recipe instance in C++ side and return the recipe point. 
@@ -62,12 +62,12 @@ public class JniDataOperations {
 	 */
 	public native byte[] queryRecipe(ByteBuffer recipe, String xmlParameters);
 	
-	// Following is demo functions
-	public native boolean jniUpdateSetName(ByteBuffer handler, String newSetName);
-	
-	public native byte[] jniGetPlateAlignmentImages(ByteBuffer handler);
-	
-	public native boolean jniUpdateSenseSlider(ByteBuffer handler, String xmlParameters);
+//	// Following is demo functions
+//	public native boolean jniUpdateSetName(ByteBuffer handler, String newSetName);
+//	
+//	public native byte[] jniGetPlateAlignmentImages(ByteBuffer handler);
+//	
+//	public native boolean jniUpdateSenseSlider(ByteBuffer handler, String xmlParameters);
 	
 		
 	static {
@@ -77,13 +77,7 @@ public class JniDataOperations {
 			LOAD_SO_SUCCESS = true;
 			logger.info("load native library successfully.");
 		} catch(Exception e) {
-			logger.error(e.getMessage(), e);
-			logger.fatal("Can't load native library");
+			logger.fatal("Can't load native library: " + e.getMessage());
 		}
-	}
-
-
-	public static void main(String[] args) {
-		JniDataOperations op = new JniDataOperations();
 	}
 }

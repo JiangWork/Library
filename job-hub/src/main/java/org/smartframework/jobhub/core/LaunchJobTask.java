@@ -140,10 +140,15 @@ public class LaunchJobTask {
 				if (!ProgressReporter.class.isAssignableFrom(clazz)) {
 					throw new IllegalArgumentException(reporterClass + " is not a subclass of " + ProgressReporter.class.getName());
 				}
-				progressable.setReporter((ProgressReporter)clazz.newInstance());
+				Object reporter = clazz.newInstance();
+				if (reporter instanceof JobIdAware) {
+					((JobIdAware)reporter).setJobId(jobId);
+				}
+				progressable.setReporter((ProgressReporter)reporter);
 			}
 		}
 	}
+	
 	
 	public void invokeMethod(Object obj, JobDefinition def) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		Class<?> clazz = obj.getClass();

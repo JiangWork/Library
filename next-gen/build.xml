@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <project name="futureserver" basedir="." default="makezip">
 	<property name="src.dir" value="src/main/java" />
+	<property name="src.test.dir" value="src/test/java" />
 	<property name="build.dir" value="build" />
 	<property name="common.lib.dir" value="lib"/>
 	<property name="thrift.lib.dir" value="thrift/lib"/>
@@ -32,6 +33,7 @@
 		<delete includeemptydirs="true">
 			<fileset dir="${dist.lib.dir}" includes="**/*.jar" />
 		</delete>
+        <echo>Java/JVM detail version: ${java.version}</echo>
 	</target>
 
 
@@ -58,6 +60,7 @@
         </copy>
         <javac destdir="${build.dir}" source="1.5" target="1.5" debug="true" deprecation="false" optimize="false" failonerror="true">
 			<src path="${src.dir}" />
+            <src path="${src.test.dir}"/>
 			<classpath refid="master-classpath" />
 		</javac>
 	</target>
