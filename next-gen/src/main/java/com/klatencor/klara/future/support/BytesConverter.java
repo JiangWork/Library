@@ -11,9 +11,12 @@ package com.klatencor.klara.future.support;
 public interface BytesConverter<T> {
 
 	/**
+	 * The caller use this method to convert the byte array into
+	 * desired Objects.
 	 * 
-	 * @param buffer
+	 * @param buffer the byte buffer.
+	 * @param fromIndex the index from which to decode.
 	 * @return
 	 */
-	public T to(byte[] buffer) throws ConversionException;
+	public T to(BytesWapper buf) throws ConversionException;
 }

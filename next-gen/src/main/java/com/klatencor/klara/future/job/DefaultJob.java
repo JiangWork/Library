@@ -142,4 +142,17 @@ public class DefaultJob implements ReportableJob {
 		return timer.unmark();
 	}
 
+	/**
+	 * Actions if the test condition is fasle. 
+	 * @param cond
+	 * @param msg
+	 * @return
+	 */
+	public boolean actionIfFailure(boolean condition, String msg) {
+		if (!condition) {
+			report(msg);
+			result.fail(msg);
+		}
+		return condition;
+	}
 }

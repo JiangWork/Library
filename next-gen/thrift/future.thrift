@@ -39,10 +39,48 @@
 namespace java com.klatencor.klara.future.thrift.common
 
 
-
 struct Request {
   1: string who,
   2: map<string,string> parameters
+}
+
+struct TSenseSlider {
+  1: string name,
+  2: i32 type,
+  3: double fValue,
+  4: double fMin,
+  5: double fMax,
+  6: i32 value,
+  7: i32 min,
+  8: i32 max
+}
+
+struct TIntPoint {
+   1: i32 x,
+   2: i32 y,
+}
+
+struct TRecipeDescriptor {
+   1: string name,
+   2: string systemName,
+   3: i32 version,
+   4: i32 iaNum,
+   6: list<TIntPoint> alignmentPoints,
+}
+
+struct TInspAreaDescriptor {
+  1: i32 index,    // index in the ia array
+  2: i32 iaId,
+  3: string inspType,
+  4: TIntPoint dieSize,
+  5: TIntPoint diePitch,
+  6: i32 columnCount,
+  7: i32 rowCount,
+  8: TIntPoint inspOrgin,
+  9: string mode,
+  10: i32 surface,
+  11: list<TIntPoint> diePoints,
+  13: i32 senseCount,
 }
 
 
@@ -80,6 +118,21 @@ service FutureService {
     * get the job status, including running and completed jobs.
     */
     Response jobStatus(1:i64 time, 2:string who),
+
+    /**
+    * get the sensesliders of a selected recipe in specific inspeaction area 
+    */
+    list<TSenseSlider> getIaSenseSliders(1:i64 fmid, 2:i32 iaIndex),
+
+    /**
+    * get information of Recipe needed by KT9Xe using fmid
+    **/
+    TRecipeDescriptor getRecipeDescriptor(1:i64 fmid),
+
+    /**
+    * get infomation of Inspection Area needed by KT9Xe using fmid
+    **/
+    TInspAreaDescriptor getIaDescriptor(1:i64 fmid, 2:i32 iaIndex),
 
 }
 

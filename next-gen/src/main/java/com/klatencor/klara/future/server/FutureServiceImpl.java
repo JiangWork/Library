@@ -2,6 +2,7 @@ package com.klatencor.klara.future.server;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -14,8 +15,11 @@ import com.klatencor.klara.future.job.JobParameters;
 import com.klatencor.klara.future.job.JobRunner;
 import com.klatencor.klara.future.job.StoreRecipeJob;
 import com.klatencor.klara.future.thrift.common.FutureService;
-import com.klatencor.klara.future.thrift.common.Response;
 import com.klatencor.klara.future.thrift.common.Request;
+import com.klatencor.klara.future.thrift.common.Response;
+import com.klatencor.klara.future.thrift.common.TInspAreaDescriptor;
+import com.klatencor.klara.future.thrift.common.TRecipeDescriptor;
+import com.klatencor.klara.future.thrift.common.TSenseSlider;
 
 
 /**
@@ -96,7 +100,25 @@ public class FutureServiceImpl implements FutureService.Iface {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
+	@Override
+	public List<TSenseSlider> getIaSenseSliders(long fmid, int iaIndex)
+			throws TException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TRecipeDescriptor getRecipeDescriptor(long fmid) throws TException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TInspAreaDescriptor getIaDescriptor(long fmid, int iaIndex)
+			throws TException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

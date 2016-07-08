@@ -4,8 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.apache.log4j.Logger;
-
 /**
  * 
  * A InMemoryOutputStream which keeps the bytes written in memory, i.e., in a 
@@ -18,7 +16,6 @@ import org.apache.log4j.Logger;
  */
 public class InMemoryOutputStream extends OutputStream {
 	
-	private static final Logger logger = Logger.getLogger(InMemoryOutputStream.class);
 	
 	private final static int DEFAULT_MAX_BYTES = 4 * 1024;
 

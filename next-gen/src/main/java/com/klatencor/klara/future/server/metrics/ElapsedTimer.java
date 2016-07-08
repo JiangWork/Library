@@ -34,6 +34,10 @@ public class ElapsedTimer {
 		}
 	}
 	
+	public void mark() {
+		this.mark(1);
+	}
+	
 	/**
 	 * Get the elapsed time in millisecond through substracting top element in Stack
 	 * from current time.
