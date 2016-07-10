@@ -10,13 +10,13 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.thrift.TException;
+import org.smartframework.jobhub.client.InnerProtocolClient;
 import org.smartframework.jobhub.common.JobIdAware;
 import org.smartframework.jobhub.common.ProgressReporter;
 import org.smartframework.jobhub.common.Progressable;
 import org.smartframework.jobhub.core.support.DefaultProgressReporter;
 import org.smartframework.jobhub.protocol.InnerProtocol;
 import org.smartframework.jobhub.protocol.JobState;
-import org.smartframework.jobhub.protocol.impl.InnerProtocolClient;
 import org.smartframework.jobhub.utils.StringUtils;
 
 /**

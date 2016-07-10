@@ -1,4 +1,4 @@
-package org.smartframework.jobhub.protocol.impl;
+package org.smartframework.jobhub.server;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;

@@ -3,8 +3,12 @@ package org.smartframework.jobhub.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * A convenient way to access different type of parameters.
@@ -19,6 +23,16 @@ public class ParameterAccessor {
 	
 	public ParameterAccessor(Map<String, String> parameters) {
 		this.parameters = parameters;
+	}
+	
+	public ParameterAccessor(Properties prop) {
+		parameters = new HashMap<String, String>();
+		Iterator<Entry<Object, Object>> iter = prop.entrySet().iterator();
+		while(iter.hasNext()) {
+			Entry<Object, Object> entry = iter.next();
+			parameters.put((String)entry.getKey(), (String)entry.getValue());
+		}
+		
 	}
 	
 	public boolean getBoolean(String key, boolean defaultVal) {

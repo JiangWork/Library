@@ -1,4 +1,4 @@
-package org.smartframework.jobhub.protocol.impl;
+package org.smartframework.jobhub.server;
 
 import org.apache.log4j.Logger;
 import org.apache.thrift.TException;

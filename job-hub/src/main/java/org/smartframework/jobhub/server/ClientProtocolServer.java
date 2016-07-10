@@ -8,7 +8,6 @@ import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.smartframework.jobhub.protocol.ClientProtocol;
-import org.smartframework.jobhub.protocol.impl.ClientProtocolImpl;
 
 /**
  * A client protocol server handles user's job submission,

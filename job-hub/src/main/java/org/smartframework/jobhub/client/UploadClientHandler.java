@@ -30,11 +30,13 @@ public class UploadClientHandler extends ChannelInboundHandlerAdapter  {
 	private FileInputStream fis;
 	private int writeBytes = 0;
 	
+	private long jobId;
 	private ChannelHandlerContext ctx;
 	
-	public UploadClientHandler(String filePath) {
+	public UploadClientHandler(String filePath, long jobId) {
 		this.filePath = filePath;
 		success = true;
+		this.jobId = jobId;
 	}
 	
 	@Override
@@ -52,7 +54,8 @@ public class UploadClientHandler extends ChannelInboundHandlerAdapter  {
 		long fileSize = file.length();
 		ByteBuf content = ctx.alloc().buffer();
 		byte[] fileNameBytes = fileName.getBytes();
-		content.writeInt(4+fileNameBytes.length+8);
+		content.writeInt(8 + 4 +fileNameBytes.length+8);
+		content.writeLong(jobId);
 		content.writeInt(fileNameBytes.length);
 		content.writeBytes(fileNameBytes);
 		content.writeLong(fileSize);

@@ -32,8 +32,8 @@ public class UploadClient {
 	}
 	
 	//"/Users/Miller/Downloads/netty-4.0.36.Final/jar/all-in-one/netty-all-4.0.36.Final.jar"
-	public boolean upload(String filePath) throws InterruptedException {
-    	final UploadClientHandler handler = new UploadClientHandler(filePath);
+	public boolean upload(String filePath, long jobId) throws InterruptedException {
+    	final UploadClientHandler handler = new UploadClientHandler(filePath, jobId);
         // Configure the client.
         EventLoopGroup group = new NioEventLoopGroup();
         try {
@@ -87,7 +87,7 @@ public class UploadClient {
 		boolean status = client.upload("/Users/Miller/Downloads/Casual S01E08 720p I Amsterdam.mp4");
 		System.out.println(status);
 		System.out.println(client.reply);
-		status = client.upload("/Users/Miller/Downloads/progit-en.1084.pdf");
+		status = client.upload("/Users/Miller/Downloads/progit-en.1084.pdf", 1);
 		System.out.println(status);
 		System.out.println(client.reply);
     }

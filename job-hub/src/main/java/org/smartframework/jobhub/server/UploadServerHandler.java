@@ -42,12 +42,13 @@ public class UploadServerHandler extends ChannelInboundHandlerAdapter {
 			logger.debug("header length:" + headerLength);
 		} 
 		if (headerLength != -1 && !headerRead && buf.readableBytes() >= headerLength) {
+			long jobId = buf.readLong();
 			byte[] bytes = new byte[buf.readInt()];
 			buf.readBytes(bytes);
 			fileName = new String(bytes);
 			fileLength = buf.readLong();
 			headerRead = true;
-			outFilePath = uploadDirectory + File.separator + fileName;
+			outFilePath = uploadDirectory + File.separator + String.valueOf(jobId) + fileName;
 			fos = new FileOutputStream(outFilePath);
 			logger.info("reciving fileName:" + fileName + " filelength:" + fileLength);
 		}
