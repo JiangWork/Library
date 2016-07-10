@@ -12,21 +12,18 @@ import org.smartframework.jobhub.core.support.StateChangedAdapter;
 import org.smartframework.jobhub.protocol.JobState;
 
 
-public class JobManager implements JobRegistry {
+public class JobManager {
 	
 	private static final Logger logger = Logger.getLogger(JobManager.class);
 	
 	private JobRegistry jobRegistry;
 	private Scheduler scheduler;
 	
-	private volatile boolean  shouldRun;
-	
 	private AtomicLong jobId;
 	
 	public JobManager() {
 		jobRegistry = new DefaultJobRegistry();
 		scheduler = new DefaultScheduler();
-		shouldRun = true;
 		jobId = new AtomicLong();
 	}
 
@@ -37,54 +34,61 @@ public class JobManager implements JobRegistry {
 	public void submit(long jobId) throws JobException {
 		JobEntry entry = getJobEntry(jobId);
 		if (entry == null) {
-			throw new JobException("No such job id found:" + jobId);
+			throw new JobException("No such job id was found:" + jobId + ", you didn't register ");
 		}
 		scheduler.schedule(entry);
 	}
 	
 	
+	public boolean cancel(long jobId) {
+		return scheduler.cancel(jobId);
+	}
 	
-	/**
-	 * Add and entry to {@link JobRegistry} when a
-	 * new job is request
-	 */
-	@Override
 	public void registerJobEntry(JobEntry entry) {
+		entry.setCreatedTime(System.currentTimeMillis());
+		entry.setLastUpdated(System.currentTimeMillis());
+		entry.setState(JobState.PREPARE);
 		jobRegistry.registerJobEntry(entry);
 	}
 
-	@Override
 	public JobEntry getJobEntry(long jobId) {
-		// TODO Auto-generated method stub
-		return null;
+		return jobRegistry.getJobEntry(jobId);
 	}
 
-	@Override
+
 	public JobEntry remove(long jobId) {
-		// TODO Auto-generated method stub
-		return null;
+		return jobRegistry.remove(jobId);
 	}
 
-	@Override
+
 	public Set<JobEntry> getJobEntries(JobState state) {
-		// TODO Auto-generated method stub
-		return null;
+		return jobRegistry.getJobEntries(state);
 	}
 
-	@Override
 	public boolean contains(long jobId) {
 		// TODO Auto-generated method stub
-		return false;
+		return jobRegistry.contains(jobId);
 	}
 
 	public long getJobId () {
 		return jobId.getAndIncrement();
 	}
-	
-	public boolean checkService() {
-		if (!shouldRun) {
-			return false; 
-		}
-		return true;
+
+	public JobRegistry getJobRegistry() {
+		return jobRegistry;
 	}
+
+	public void setJobRegistry(JobRegistry jobRegistry) {
+		this.jobRegistry = jobRegistry;
+	}
+
+	public Scheduler getScheduler() {
+		return scheduler;
+	}
+
+	public void setScheduler(Scheduler scheduler) {
+		this.scheduler = scheduler;
+	}
+	
+	
 }

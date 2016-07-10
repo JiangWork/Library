@@ -11,6 +11,11 @@ import org.smartframework.jobhub.core.JobManager;
  */
 public class ServerContext {
 	
+	public final static int CLIENT_PROTOCOL_PORT = 32101;
+	public final static int INNER_PROTOCOL_PORT = 32102;
+	public final static int UPLOAD_PROTOCOL_PORT = 32103;
+	
+	
 	private JobServer jobServer;
 	private JobManager jobManager;
 	private UploadServer uploadServer;

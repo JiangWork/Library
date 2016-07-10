@@ -4,9 +4,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -47,6 +50,8 @@ public class JobDefinition {
 	private List<String> jarsList;  // the depend jar files
 	private List<String> resourcesList; // the resource files
 	private Map<String, String> env;
+	
+	private long jobId = -1;
 	
 	/**This map contains all configurations, including above**/
 	private Map<String, String> allConfigMap;
@@ -108,13 +113,18 @@ public class JobDefinition {
 		return allConfigMap.get(key);
 	}
 	
-	
-	
 	public String getEnterArgs() {
 		return enterArgs;
 	}
 	public void setEnterArgs(String enterArgs) {
 		this.enterArgs = enterArgs;
+	}
+	
+	public synchronized Map<String, String> getAllConfigMap() {
+		return allConfigMap;
+	}
+	public synchronized void setAllConfigMap(Map<String, String> allConfigMap) {
+		this.allConfigMap = allConfigMap;
 	}
 	public void read(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(new File(path));
@@ -143,17 +153,24 @@ public class JobDefinition {
 		IOUtils.closeQuietly(is);
 	}
 	
-	public boolean write(String path) throws IOException {
-		return this.write(path, -1);
+	public synchronized long getJobId() {
+		return jobId;
+	}
+	public synchronized void setJobId(long jobId) {
+		this.jobId = jobId;
 	}
 	
-	public boolean write(String path, long jobId) throws IOException {
+	public boolean write(String path) throws IOException {
+		FileOutputStream fos = new FileOutputStream(new File(path));
+		return this.write(fos);
+	}
+	
+	public boolean write(OutputStream os) throws IOException {
 		boolean status = false;
 		BufferedWriter bw = null;
 		try {
-			File file = new File(path);
 			Set<String> vistedKeys = new HashSet<String>();
-			bw = new BufferedWriter(new FileWriter(file));
+			bw = new BufferedWriter(new OutputStreamWriter(os));
 			bw.write(JOB_ID_KEY + "=" + jobId + "\n");
 			bw.write(JOB_NAME_KEY + "=" + StringUtils.stringfyObject(jobName) + "\n");
 			bw.write(JOB_MAINCLASS_KEY + "=" + StringUtils.stringfyObject(mainClass) + "\n");
@@ -189,5 +206,6 @@ public class JobDefinition {
 			IOUtils.closeQuietly(bw);
 		}
 		return status;
+	
 	}
 }

@@ -50,7 +50,7 @@ public class DefaultScheduler implements Scheduler {
 	}
 	
 	@Override
-	public void cancel(long jobId) {
+	public boolean cancel(long jobId) {
 		JobRunner runner = null;
 		synchronized(jobRunnerMap) {
 			if (jobRunnerMap.containsKey(jobId)) {
@@ -60,8 +60,13 @@ public class DefaultScheduler implements Scheduler {
 		if (runner != null) {
 			executor.remove(runner);
 			runner.stop();
+			logger.info("Job " + jobId + "is canceled successfully.");
+			return true;
+		} else {
+			logger.info("Request cancelled job doesn't exists: " + jobId);
+			return false;
 		}
-		logger.info("Job " + jobId + "is canceled successfully.");
+		
 	}
 
 }

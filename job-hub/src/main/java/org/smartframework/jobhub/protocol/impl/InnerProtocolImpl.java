@@ -1,9 +1,12 @@
 package org.smartframework.jobhub.protocol.impl;
 
+import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
+import org.smartframework.jobhub.core.JobEntry;
 import org.smartframework.jobhub.core.JobManager;
 import org.smartframework.jobhub.protocol.InnerProtocol;
 import org.smartframework.jobhub.protocol.InnerProtocol.Iface;
+import org.smartframework.jobhub.protocol.JobState;
 
 /**
  * A InnerProtocolImpl used to report job progress.
@@ -13,6 +16,8 @@ import org.smartframework.jobhub.protocol.InnerProtocol.Iface;
  */
 public class InnerProtocolImpl implements InnerProtocol.Iface {
 
+	private final Logger logger = Logger.getLogger(InnerProtocolImpl.class);
+	
 	private JobManager jobManager;
 	
 	public InnerProtocolImpl(JobManager jobManager) {
@@ -21,20 +26,45 @@ public class InnerProtocolImpl implements InnerProtocol.Iface {
 	
 	@Override
 	public boolean progress(long jobId, int precent) throws TException {
-		// TODO Auto-generated method stub
+		logger.debug("Report progress, jobId=" + jobId + " precent=" + precent);
+		if (jobManager.contains(jobId)) {
+			JobEntry entry = jobManager.getJobEntry(jobId);
+			int beforePrecent = entry.getProgress();
+			if (beforePrecent < precent) {
+				entry.setProgress(precent);
+			}
+		} else {
+			logger.error("Fail to report progress, no such job is running, jobId=" + jobId);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean message(long jobId, String message) throws TException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	public void pid(long jobId, int pid) throws TException {
-		// TODO Auto-generated method stub
+	public void setPid(long jobId, int pid) throws TException {
+		logger.debug("SetPid is invoked.");
+		if (jobManager.contains(jobId)) {
+			JobEntry entry = jobManager.getJobEntry(jobId);
+			entry.setPid(pid);
+			logger.info("Job " + jobId + " was set PID as " + pid);
+		}
 		
 	}
+
+	@Override
+	public void setJobState(long jobId, JobState jobState) throws TException {
+		logger.debug("SetPid is invoked.");
+		if (jobManager.contains(jobId)) {
+			JobEntry entry = jobManager.getJobEntry(jobId);
+			entry.setState(jobState);
+			logger.info("Job " + jobId + " was set JobState as " + jobState);
+		}
+	}
+
 
 }

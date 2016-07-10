@@ -14,6 +14,6 @@ public interface Scheduler {
 	 * If the job is running, then stop it.
 	 * @param jobId
 	 */
-	public void cancel(long jobId);
+	public boolean cancel(long jobId);
 	
 }

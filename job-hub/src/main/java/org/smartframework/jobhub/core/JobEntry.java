@@ -25,76 +25,87 @@ public class JobEntry {
 	
 	private JobDefinition definition;
 
-	public long getId() {
+	
+	
+
+	public synchronized long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public synchronized void setId(long id) {
 		this.id = id;
 	}
 
-	public JobState getState() {
+	public synchronized JobState getState() {
 		return state;
 	}
 
-	public void setState(JobState state) {
+	public synchronized void setState(JobState state) {
 		this.state = state;
 	}
 
-	public long getCreatedTime() {
+	public synchronized long getCreatedTime() {
 		return createdTime;
 	}
 
-	public void setCreatedTime(long createdTime) {
+	public synchronized void setCreatedTime(long createdTime) {
 		this.createdTime = createdTime;
 	}
 
-	public boolean isSuccess() {
-		return success;
-	}
-
-	public void setSuccess(boolean success) {
-		this.success = success;
-	}
-
-	public String getReason() {
-		return reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
-
-	public int getProgress() {
-		return progress;
-	}
-
-	public void setProgress(int progress) {
-		this.progress = progress;
-	}
-
-	public long getLastUpdated() {
-		return lastUpdated;
-	}
-
-	public void setLastUpdated(long lastUpdated) {
-		this.lastUpdated = lastUpdated;
-	}
-	
-	public JobDefinition getDefinition() {
-		return definition;
-	}
-
-	public void setDefinition(JobDefinition definition) {
-		this.definition = definition;
-	}
-
-	public long getStartTime() {
+	public synchronized long getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(long startTime) {
+	public synchronized void setStartTime(long startTime) {
 		this.startTime = startTime;
+	}
+
+	public synchronized boolean isSuccess() {
+		return success;
+	}
+
+	public synchronized void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public synchronized String getReason() {
+		return reason;
+	}
+
+	public synchronized void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public synchronized int getProgress() {
+		return progress;
+	}
+
+	public synchronized void setProgress(int progress) {
+		this.progress = progress;
+	}
+
+	public synchronized long getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public synchronized void setLastUpdated(long lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
+	public synchronized long getPid() {
+		return pid;
+	}
+
+	public synchronized void setPid(long pid) {
+		this.pid = pid;
+	}
+
+	public synchronized JobDefinition getDefinition() {
+		return definition;
+	}
+
+	public synchronized void setDefinition(JobDefinition definition) {
+		this.definition = definition;
 	}
 
 	@Override

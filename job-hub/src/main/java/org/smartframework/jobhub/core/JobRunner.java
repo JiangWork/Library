@@ -13,7 +13,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
-import org.smartframework.jobhub.server.JobServer;
+import org.smartframework.jobhub.protocol.JobState;
+import org.smartframework.jobhub.server.ServerContext;
 import org.smartframework.jobhub.utils.IOUtils;
 import org.smartframework.jobhub.utils.Proc;
 import org.smartframework.jobhub.utils.ProcResult;
@@ -89,9 +90,11 @@ public class JobRunner implements Runnable {
 	 * @throws IOException
 	 */
 	public void setup() throws JobException, IOException {
+		entry.setStartTime(System.currentTimeMillis());
+		entry.setState(JobState.RUNNING);
 		createWorkingDirectory();
 		// write the job configuration
-		entry.getDefinition().write(DirectoryAllocator.configPath(jobId), jobId);
+		entry.getDefinition().write(DirectoryAllocator.configPath(jobId));
 		//construct the script
 		createScript();
 		logger.info("Setup done.");
@@ -115,7 +118,7 @@ public class JobRunner implements Runnable {
 		bw.write("JAVA_EXEC=`which java`\n");
 		bw.write("exec $JAVA_EXEC $JAVA_OPTS ");
 		bw.write(LaunchJobTask.class.getName());
-		bw.write(" 	127.0.0.1 " + JobServer.INNER_PROTOCOL_PORT + 
+		bw.write(" 	127.0.0.1 " + ServerContext.INNER_PROTOCOL_PORT + 
 				" " + DirectoryAllocator.configPath(jobId) + 
 				" " + DirectoryAllocator.logPath(jobId));
 		bw.write(" 1>>" + DirectoryAllocator.stdoutPath(jobId));

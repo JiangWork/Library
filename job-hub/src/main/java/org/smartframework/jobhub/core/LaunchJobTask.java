@@ -67,7 +67,6 @@ public class LaunchJobTask {
 		pid = Integer.parseInt(System.getenv("PID"));
 		jobId = Long.parseLong(def.getProperty(JobDefinition.JOB_ID_KEY));
 		client.setPid(jobId, pid);
-		client.setJobState(jobId, JobState.RUNNING);
 		client.progress(jobId, 5);
 	}
 	

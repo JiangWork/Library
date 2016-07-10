@@ -20,7 +20,6 @@ public class ClientProtocolClient {
 				transport.open();
 				TProtocol protocol = new TBinaryProtocol(transport);
 				client = new ClientProtocol.Client(protocol);
-				logger.info("Obtained client successfully " + client);
 				break;
 			} catch (TTransportException e) {
 				logger.error(
