@@ -1,14 +1,11 @@
 package org.smartframework.jobhub.core;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
 import org.smartframework.jobhub.core.support.DefaultJobRegistry;
 import org.smartframework.jobhub.core.support.DefaultScheduler;
-import org.smartframework.jobhub.core.support.StateChangedAdapter;
 import org.smartframework.jobhub.protocol.JobState;
 
 
@@ -24,7 +21,7 @@ public class JobManager {
 	public JobManager() {
 		jobRegistry = new DefaultJobRegistry();
 		scheduler = new DefaultScheduler();
-		jobId = new AtomicLong();
+		jobId = new AtomicLong(1);
 	}
 
 	/**

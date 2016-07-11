@@ -35,10 +35,10 @@ public class ClientProtocolServer {
 	 */
 	public void start() throws TTransportException {
 		ClientProtocolImpl impl = new ClientProtocolImpl(ctx.getJobManager());
-		TServerTransport serverTransport = new TServerSocket(ctx.getClientProtocolPort());
+		TServerTransport serverTransport = new TServerSocket(ServerContext.CLIENT_PROTOCOL_PORT);
 		TProcessor processor = new ClientProtocol.Processor<ClientProtocol.Iface>(impl);
 		tserver = new TThreadPoolServer(new TThreadPoolServer.Args(serverTransport).processor(processor));
-		logger.info("Starting ClientProtocolServer localhost@" + ctx.getClientProtocolPort());
+		logger.info("Starting ClientProtocolServer localhost@" + ServerContext.CLIENT_PROTOCOL_PORT);
 		offerService(tserver);
 	}
 	
@@ -59,6 +59,10 @@ public class ClientProtocolServer {
 		} catch (InterruptedException e) {
 			//ignored
 		}
-		logger.info("ClientProtocolServer is stopped successfully localhost@" + ctx.getClientProtocolPort());
+		logger.info("ClientProtocolServer is stopped successfully localhost@" + ServerContext.CLIENT_PROTOCOL_PORT);
+	}
+	
+	public void waitForServing() {
+		while(!tserver.isServing());
 	}
 }

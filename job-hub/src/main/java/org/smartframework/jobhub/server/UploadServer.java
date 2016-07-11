@@ -29,6 +29,7 @@ public class UploadServer {
 	private int port;
 	private Thread thread;
 	
+	
 	public UploadServer(int port) {
 		this.port = port;
 	}
@@ -40,8 +41,7 @@ public class UploadServer {
 		// Configure the server.
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
-		final UploadServerHandler handler = new UploadServerHandler();
-		handler.setUploadDirectory(uploadDirectory);
+		
 		bootstrap = new ServerBootstrap();
 		bootstrap.group(bossGroup, workerGroup)
 		.channel(NioServerSocketChannel.class)
@@ -51,6 +51,8 @@ public class UploadServer {
 			@Override
 			public void initChannel(SocketChannel ch) throws Exception {
 				ChannelPipeline p = ch.pipeline();
+				UploadServerHandler handler = new UploadServerHandler();
+				handler.setUploadDirectory(uploadDirectory);
 				p.addLast(handler);
 			}
 		});
@@ -62,6 +64,7 @@ public class UploadServer {
 		// Start the server.
 		thread = new Thread() {
 			public void run() {
+				setName("UploadServer");
 				ChannelFuture f;
 				try {
 					f = bootstrap.bind(port).sync();
@@ -75,14 +78,19 @@ public class UploadServer {
 	}
 	
 	
-	public void stop() throws InterruptedException {
+	public void stop() {
 		if (bootstrap == null) {
 			logger.info("server hasn't been startup.");
+			return;
 		}
 		bootstrap.group().shutdownGracefully().syncUninterruptibly();
 		bootstrap.childGroup().shutdownGracefully().syncUninterruptibly();
-		thread.join();
-		logger.info("server was closed successfully.");
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			//ignored.
+		}
+		logger.info("UploadServer is stopped successfully localhost@" + ServerContext.UPLOAD_PROTOCOL_PORT);
 	}
 	
 	
@@ -95,7 +103,7 @@ public class UploadServer {
 	}
 
 	public static void main(String[] args) throws Exception {
-		final UploadServer server = new UploadServer(32100);
+		final UploadServer server = new UploadServer(32102);
 		server.start();
 
 //		Thread.sleep(10*1000);

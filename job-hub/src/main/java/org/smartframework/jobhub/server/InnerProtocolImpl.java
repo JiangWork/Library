@@ -58,7 +58,7 @@ public class InnerProtocolImpl implements InnerProtocol.Iface {
 
 	@Override
 	public void setJobState(long jobId, JobState jobState) throws TException {
-		logger.debug("SetPid is invoked.");
+		logger.debug("SetJobState is invoked.");
 		if (jobManager.contains(jobId)) {
 			JobEntry entry = jobManager.getJobEntry(jobId);
 			entry.setState(jobState);

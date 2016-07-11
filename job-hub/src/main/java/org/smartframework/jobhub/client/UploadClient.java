@@ -83,8 +83,8 @@ public class UploadClient {
 	}
 
 	public static void main(String[] args) throws Exception {
-		UploadClient client = new UploadClient("localhost", 32100);
-		boolean status = client.upload("/Users/Miller/Downloads/Casual S01E08 720p I Amsterdam.mp4");
+		UploadClient client = new UploadClient("localhost", 32102);
+		boolean status = client.upload("/Users/Miller/Downloads/Casual S01E08 720p I Amsterdam.mp4", 1);
 		System.out.println(status);
 		System.out.println(client.reply);
 		status = client.upload("/Users/Miller/Downloads/progit-en.1084.pdf", 1);

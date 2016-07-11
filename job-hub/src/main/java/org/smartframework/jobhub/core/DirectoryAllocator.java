@@ -2,6 +2,8 @@ package org.smartframework.jobhub.core;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
+
 /**
  * This class allocate different kinds of directories
  * used by the framework and different default files. 
@@ -10,16 +12,21 @@ import java.io.File;
  * @date Jul 3, 2016 7:12:36 PM
  */
 public class DirectoryAllocator {
+	private final static Logger logger = Logger.getLogger(DirectoryAllocator.class);
 	public static String WORKING_DIRECTORY;
 	public static String UPLOAD_DIRECTORY;
 	public static String JOB_DIRECTORY;
 	public static String APP_LOCATION;
 	
 	static {
-		WORKING_DIRECTORY = System.getProperty("work.dir", System.getProperty("user.home"));
+		WORKING_DIRECTORY = System.getProperty("jobhub.workdir", System.getProperty("user.home"));
 		UPLOAD_DIRECTORY = WORKING_DIRECTORY + File.separator + "upload";
 		JOB_DIRECTORY = WORKING_DIRECTORY + File.separator + "job";
 		APP_LOCATION = System.getProperty("app.location");
+		logger.debug("WORKING_DIRECTORY: " + WORKING_DIRECTORY);
+		logger.debug("UPLOAD_DIRECTORY: " + UPLOAD_DIRECTORY);
+		logger.debug("JOB_DIRECTORY: " + JOB_DIRECTORY);
+		logger.debug("APP_LOCATION: " + APP_LOCATION);
 	}
 	
 	

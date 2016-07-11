@@ -11,19 +11,17 @@ import org.smartframework.jobhub.core.JobManager;
  */
 public class ServerContext {
 	
-	public final static int CLIENT_PROTOCOL_PORT = 32101;
-	public final static int INNER_PROTOCOL_PORT = 32102;
-	public final static int UPLOAD_PROTOCOL_PORT = 32103;
+	public static int CLIENT_PROTOCOL_PORT = 32100;
+	public static int INNER_PROTOCOL_PORT = 32101;
+	public static int UPLOAD_PROTOCOL_PORT = 32102;
 	
 	
 	private JobServer jobServer;
 	private JobManager jobManager;
 	private UploadServer uploadServer;
 	private ClientProtocolServer clientProtocolServer;
+	private InnerProtocolServer innerProtocolServer;
 	
-	private int clientProtocolPort;
-	private int innerProtocolPort;
-	private int uploadServerPort;
 	
 	
 	public JobServer getJobServer() {
@@ -31,24 +29,6 @@ public class ServerContext {
 	}
 	public void setJobServer(JobServer jobServer) {
 		this.jobServer = jobServer;
-	}
-	public int getClientProtocolPort() {
-		return clientProtocolPort;
-	}
-	public void setClientProtocolPort(int clientProtocolPort) {
-		this.clientProtocolPort = clientProtocolPort;
-	}
-	public int getInnerProtocolPort() {
-		return innerProtocolPort;
-	}
-	public void setInnerProtocolPort(int innerProtocolPort) {
-		this.innerProtocolPort = innerProtocolPort;
-	}
-	public int getUploadServerPort() {
-		return uploadServerPort;
-	}
-	public void setUploadServerPort(int uploadServerPort) {
-		this.uploadServerPort = uploadServerPort;
 	}
 	public UploadServer getUploadServer() {
 		return uploadServer;
@@ -67,6 +47,12 @@ public class ServerContext {
 	}
 	public void setJobManager(JobManager jobManager) {
 		this.jobManager = jobManager;
+	}
+	public InnerProtocolServer getInnerProtocolServer() {
+		return innerProtocolServer;
+	}
+	public void setInnerProtocolServer(InnerProtocolServer innerProtocolServer) {
+		this.innerProtocolServer = innerProtocolServer;
 	}
 	
 	

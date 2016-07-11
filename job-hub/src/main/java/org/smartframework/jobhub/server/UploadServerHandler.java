@@ -48,7 +48,13 @@ public class UploadServerHandler extends ChannelInboundHandlerAdapter {
 			fileName = new String(bytes);
 			fileLength = buf.readLong();
 			headerRead = true;
-			outFilePath = uploadDirectory + File.separator + String.valueOf(jobId) + fileName;
+			String destDir = uploadDirectory + File.separator + String.valueOf(jobId);
+			File file = new File(destDir);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			outFilePath = destDir + File.separator + fileName;
+			
 			fos = new FileOutputStream(outFilePath);
 			logger.info("reciving fileName:" + fileName + " filelength:" + fileLength);
 		}
@@ -64,7 +70,7 @@ public class UploadServerHandler extends ChannelInboundHandlerAdapter {
 				reply.writeBytes(message.getBytes());
 				ctx.writeAndFlush(reply).sync();
 				ctx.close();
-				logger.info("data recived:" + byteRead);
+				logger.info("data recived:" + byteRead + " located at: " + outFilePath);
 			}
 		}
     }

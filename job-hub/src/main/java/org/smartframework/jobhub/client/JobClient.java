@@ -1,10 +1,12 @@
 package org.smartframework.jobhub.client;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +16,10 @@ import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
 import org.smartframework.jobhub.core.JobDefinition;
 import org.smartframework.jobhub.core.JobException;
+import org.smartframework.jobhub.protocol.ActionResult;
 import org.smartframework.jobhub.protocol.ClientProtocol;
+import org.smartframework.jobhub.protocol.JobState;
+import org.smartframework.jobhub.protocol.JobStatus;
 import org.smartframework.jobhub.utils.ParameterAccessor;
 
 /**
@@ -28,17 +33,15 @@ public class JobClient {
 	private final Logger logger = Logger.getLogger(JobClient.class);
 	private final static String DEFAULT_HOSTNAME = "localhost";
 	private final static int DEFAULT_JOB_SERVER_PORT = 32100;
-	private final static int DEFAULT_UPLOAD_SERVER_PORT = 32100;
+	private final static int DEFAULT_UPLOAD_SERVER_PORT = 32102;
 	private final static int DEFAULT_UPDATE_INTERVAL = 1000;
-	private final static boolean DEFAULT_SHOW_PROGRESS = true;
 	
 	private final static String HOSTNAME_KEY = "jobhub.hostname";
 	private final static String JOBSERVER_PORT_KEY = "jobhub.jobserver.port";
 	private final static String UPLOADSERVER_PORT_KEY = "jobhub.uploadserver.port";
-	private final static String SHOW_PROGRESS_KEY = "jobhub.showprogress";
 	private final static String UPDATE_INTERVAL_KEY = "jobhub.updateinterval";
 		
-	private final static String APP_CONFIG_FILE = "app.properties";
+	private final static String APP_CONFIG_FILE = "client.properties";
 	
 	private String hostName; // the job client server.
 	private int jobServerPort;  // the port for submitting job.
@@ -56,6 +59,7 @@ public class JobClient {
 	private Properties prop;
 	
 	private long updateInterval;
+	private long jobId;
 	
 	public JobClient() {
 		jarsList = new ArrayList<String>();
@@ -88,8 +92,8 @@ public class JobClient {
 		} else {
 			System.out.println("No application config was found, default is used.");
 		}
-		System.out.println(String.format("\thostname:%s\n\tjobserver port:%d\n\t"
-				+ "uploadserver port:%d\n\trefresh interval:%d\n", 
+		System.out.println(String.format("\thostname:\t\t%s\n\tjobserver port:\t\t%d\n\t"
+				+ "uploadserver port:\t%d\n\trefresh interval:\t%d\n", 
 				this.hostName, this.jobServerPort, this.uploadServerPort,
 			    this.updateInterval));
 	}
@@ -179,6 +183,7 @@ public class JobClient {
 	}
 	
 	private void uploadFiles(JobDefinition def) throws JobException {
+		long start = System.currentTimeMillis();
 		int total = def.getJarsList().size() + def.getResourcesList().size();
 		System.out.println("Total upload files: " + total);
 		int current = 1;
@@ -199,42 +204,82 @@ public class JobClient {
 				throw new JobException(e.getMessage(), e);
 			}
 		}
+		System.out.println("Upload files done. Elapsed time:" + (System.currentTimeMillis() - start) + " ms.");
 	}
 	
 	/**
 	 * Get new jobId, upload related files and submit the job.
 	 * @throws JobException
 	 */
-	public void submitAsync() throws JobException {
+	public void submit() throws JobException {
 		client = ClientProtocolClient.newClient(hostName, jobServerPort);
 		if (client == null) {
 			throw new JobException("Can't connect JobServer " + hostName + "@" + jobServerPort);
 		}
-		long jobId = -1;
+		jobId = -1;
 		try {
 			jobId = client.newJobId();
 			def.setJobId(jobId);
 			checkFiles(def);
 			uploadFiles(def);
-			ByteArrayOutputStream bos = new Byte
-			ByteBuffer bb = ByteBuffer.wrap(array)
-			client.submit(jobId, configData)
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			def.write(bos);
+			ByteBuffer bb = ByteBuffer.wrap(bos.toByteArray());
+			ActionResult result = client.submit(jobId, bb);
+			if (!result.success) {
+				throw new JobException(result.reason);
+			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			throw new JobException(e.getMessage(), e);
-		} finally {
-			ClientProtocolClient.close(client);
-		}
+		} 
 		System.out.println(String.format("Submit job to %s@%d successfully, returned jobid=%d.", hostName, jobServerPort, jobId));
 		logger.info(String.format("Submit job to %s@%d successfully, returned jobid=%d.", hostName, jobServerPort, jobId));
 	}
 	
-	
-	
 	public void submitSync() throws JobException {
+		submit();
+		JobStatus status = null;
+		while(true) {
+			try {
+				Thread.sleep(updateInterval);
+			} catch (InterruptedException e) {
+				//ignored
+			}
+			try {
+				status = client.query(jobId);
+				System.out.println(String.format("JobStatus [%s]: %d of 100 ", status.getState(), status.progress));
+				if (status.progress >= 100 || status.getState() == JobState.DONE) {
+					System.out.print("SUMMARY: >> startTime=" + new Date(status.startTime));
+					if (!status.success) {
+						System.out.println(" status=FAIL, reason=" + status.reason);
+					} else {
+						System.out.println(" status=SUCCESS.");
+					}
+					break;
+				}
+			} catch (TException e) {
+				logger.error(e.getMessage(), e);
+			}
+		}
 		
 	}
 	
+	public void close() {
+		ClientProtocolClient.close(client);
+	}
 	
+	public static void main(String[] args) throws JobException {
+		JobClient client = new JobClient();
+		client.setJobName("JobTest");
+		client.setSubmitter("Jiang");
+		client.setMainClass("test.main.class");
+		client.setEnterMethod("test.method");
+		client.setTimeout(10000);
+		client.addJar("target/dependency-jars/zookeeper-3.4.6.jar");
+		client.addJar("target/dependency-jars/spring-beans-4.1.6.RELEASE.jar");
+		client.addResource("future.log");
+		client.submitSync();
+	}
 	
 }
