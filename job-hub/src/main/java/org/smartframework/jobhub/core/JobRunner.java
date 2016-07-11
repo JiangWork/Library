@@ -70,6 +70,7 @@ public class JobRunner implements Runnable {
 				entry.finishSuccess();
 			} else {
 				entry.finishFail(IOUtils.read(DirectoryAllocator.stderrPath(jobId)));
+				logger.error(entry.getReason());
 			}
 		} catch (Exception e) {
 			entry.finishFail(e.getMessage());
@@ -135,7 +136,8 @@ public class JobRunner implements Runnable {
 		// add framework dependencies: thrift and api
 		String appDir = DirectoryAllocator.APP_LOCATION;
 		if (appDir != null) {
-			File file = new File(appDir + File.separator + "lib");
+			String libDir = appDir + File.separator + "lib";
+			File file = new File(libDir);
 			String[] dependJars = file.list(new FilenameFilter() {
 
 				@Override
@@ -146,7 +148,7 @@ public class JobRunner implements Runnable {
 			});
 			if (dependJars != null) {
 				for (String dependJar: dependJars) {
-					sb.append(":" + appDir + File.separator + dependJar);
+					sb.append(":" + libDir + File.separator + dependJar);
 				}
 			}
 		}
@@ -232,6 +234,7 @@ public class JobRunner implements Runnable {
 		list.add("A.jar");
 		list.add("b.jar");
 		def.setJarsList(list);
+		def.setAllConfigMap(envs);
 		JobRunner runner = new JobRunner(entry);
 		runner.run();
 		System.out.println(entry.isSuccess());

@@ -141,6 +141,7 @@ public class JobDefinition {
 			allConfigMap.put((String)entry.getKey(), (String)entry.getValue());
 		}
 		ParameterAccessor pa = new ParameterAccessor(allConfigMap);
+		jobId = pa.getLong(JOB_ID_KEY, -1);
 		jobName = pa.getString(JOB_NAME_KEY, "undefined");
 		mainClass = pa.getString(JOB_MAINCLASS_KEY);
 		enterMethod = pa.getString(JOB_METHOD_KEY, "main");

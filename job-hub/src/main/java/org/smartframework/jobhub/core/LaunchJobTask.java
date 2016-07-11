@@ -35,16 +35,19 @@ public class LaunchJobTask {
 	private long jobId;
 	
 	public static void main(String[] args)  {
+		int ret = 0;
 		LaunchJobTask task = new LaunchJobTask();
 		try {
 			task.setup(args);
 			task.doRun();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			task.cleanUp();
 			System.err.println(StringUtils.stringfyException(e)); // to be caught and redirected to err
-			System.exit(1);       // to be caught by script runner
+			ret = 1;       // to be caught by script runner
+		} finally {
+			task.complete();
 		}
+		System.exit(ret);
 	}
 	
 	public void setup(String[] args) throws JobException, IOException, TException {
@@ -56,6 +59,8 @@ public class LaunchJobTask {
 		String configPath = args[2];
 		String logPath = args[3];
 		configureLog(logPath);
+		System.out.println("Input parameters: hostName=" + hostName +  " port=" 
+				+ port + " config=" + configPath + " logpath=" + logPath);
 		logger.info("Input parameters: hostName=" + hostName +  " port=" 
 				+ port + " config=" + configPath + " logpath=" + logPath);
 		client = InnerProtocolClient.newClient(hostName, port);
@@ -70,13 +75,14 @@ public class LaunchJobTask {
 		client.progress(jobId, 5);
 	}
 	
-	public void cleanUp() {
+	public void complete() {
 		try {
 			client.setJobState(jobId, JobState.DONE);
 			client.progress(jobId, 100);
 			InnerProtocolClient.close(client);
 		} catch (TException e) {
 			//ignored 
+			logger.error(e.getMessage(), e);
 		}
 		
 	}
@@ -89,8 +95,6 @@ public class LaunchJobTask {
 		setInterfaces(obj, def);
 		client.progress(jobId, 10);
 		invokeMethod(obj, def);
-		client.setJobState(jobId, JobState.DONE);
-		client.progress(jobId, 100);
 	}
 	
 	/**

@@ -1,0 +1,310 @@
+[DEBUG][main][11 Jul 2016 22:18:40,822][org.smartframework.jobhub.core.DirectoryAllocator:26] WORKING_DIRECTORY: /Users/Miller/Work/Workspace/JobHub
+[DEBUG][main][11 Jul 2016 22:18:40,825][org.smartframework.jobhub.core.DirectoryAllocator:27] UPLOAD_DIRECTORY: /Users/Miller/Work/Workspace/JobHub/upload
+[DEBUG][main][11 Jul 2016 22:18:40,825][org.smartframework.jobhub.core.DirectoryAllocator:28] JOB_DIRECTORY: /Users/Miller/Work/Workspace/JobHub/job
+[DEBUG][main][11 Jul 2016 22:18:40,826][org.smartframework.jobhub.core.DirectoryAllocator:29] APP_LOCATION: /Users/Miller/GitHub/Smart-Framework/job-hub/dist
+[DEBUG][main][11 Jul 2016 22:18:40,844][io.netty.util.internal.logging.InternalLoggerFactory:46] Using Log4J as the default logging framework
+[DEBUG][main][11 Jul 2016 22:18:40,847][io.netty.channel.MultithreadEventLoopGroup:41] -Dio.netty.eventLoopThreads: 8
+[DEBUG][main][11 Jul 2016 22:18:40,856][io.netty.util.internal.PlatformDependent0:71] java.nio.Buffer.address: available
+[DEBUG][main][11 Jul 2016 22:18:40,858][io.netty.util.internal.PlatformDependent0:79] sun.misc.Unsafe.theUnsafe: available
+[DEBUG][main][11 Jul 2016 22:18:40,859][io.netty.util.internal.PlatformDependent0:88] sun.misc.Unsafe.copyMemory: available
+[DEBUG][main][11 Jul 2016 22:18:40,860][io.netty.util.internal.PlatformDependent0:129] java.nio.Bits.unaligned: true
+[DEBUG][main][11 Jul 2016 22:18:40,861][io.netty.util.internal.PlatformDependent:676] Java version: 8
+[DEBUG][main][11 Jul 2016 22:18:40,862][io.netty.util.internal.PlatformDependent:683] -Dio.netty.noUnsafe: false
+[DEBUG][main][11 Jul 2016 22:18:40,867][io.netty.util.internal.PlatformDependent:710] sun.misc.Unsafe: available
+[DEBUG][main][11 Jul 2016 22:18:40,869][io.netty.util.internal.PlatformDependent:793] -Dio.netty.noJavassist: false
+[DEBUG][main][11 Jul 2016 22:18:40,871][io.netty.util.internal.PlatformDependent:806] Javassist: unavailable
+[DEBUG][main][11 Jul 2016 22:18:40,871][io.netty.util.internal.PlatformDependent:807] You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+[DEBUG][main][11 Jul 2016 22:18:40,874][io.netty.util.internal.PlatformDependent:825] -Dio.netty.tmpdir: /var/folders/2g/w_n_qv857fv5_9syq32bm8g00000gn/T (java.io.tmpdir)
+[DEBUG][main][11 Jul 2016 22:18:40,876][io.netty.util.internal.PlatformDependent:904] -Dio.netty.bitMode: 64 (sun.arch.data.model)
+[DEBUG][main][11 Jul 2016 22:18:40,876][io.netty.util.internal.PlatformDependent:94] -Dio.netty.noPreferDirect: false
+[DEBUG][main][11 Jul 2016 22:18:40,900][io.netty.channel.nio.NioEventLoop:97] -Dio.netty.noKeySetOptimization: false
+[DEBUG][main][11 Jul 2016 22:18:40,900][io.netty.channel.nio.NioEventLoop:98] -Dio.netty.selectorAutoRebuildThreshold: 512
+[INFO][main][11 Jul 2016 22:18:40,929][org.smartframework.jobhub.server.UploadServer:59] Starting UploadServer localhost@32102
+[DEBUG][UploadServer][11 Jul 2016 22:18:40,969][io.netty.util.internal.ThreadLocalRandom:169] -Dio.netty.initialSeedUniquifier: 0x965c1a696d88a60a (took 20 ms)
+[INFO][main][11 Jul 2016 22:18:40,977][org.smartframework.jobhub.server.ClientProtocolServer:41] Starting ClientProtocolServer localhost@32100
+[INFO][main][11 Jul 2016 22:18:40,983][org.smartframework.jobhub.server.InnerProtocolServer:40] Starting InnerProtocolServer localhost@32101
+[DEBUG][UploadServer][11 Jul 2016 22:18:41,039][io.netty.buffer.ByteBufUtil:70] -Dio.netty.allocator.type: unpooled
+[DEBUG][UploadServer][11 Jul 2016 22:18:41,040][io.netty.buffer.ByteBufUtil:82] -Dio.netty.threadLocalDirectBufferSize: 65536
+[DEBUG][UploadServer][11 Jul 2016 22:18:41,040][io.netty.buffer.ByteBufUtil:85] -Dio.netty.maxThreadLocalCharBufferSize: 16384
+[DEBUG][UploadServer][11 Jul 2016 22:18:41,048][io.netty.util.NetUtil:209] Loopback interface: lo0 (lo0, 0:0:0:0:0:0:0:1)
+[DEBUG][UploadServer][11 Jul 2016 22:18:41,051][io.netty.util.NetUtil:260] /proc/sys/net/core/somaxconn: 128 (non-existent)
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:18:41,067][io.netty.handler.logging.LoggingHandler:100] [id: 0x38b727ce] REGISTERED
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:18:41,068][io.netty.handler.logging.LoggingHandler:100] [id: 0x38b727ce] BIND(0.0.0.0/0.0.0.0:32102)
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:18:41,072][io.netty.handler.logging.LoggingHandler:100] [id: 0x38b727ce, L:/0:0:0:0:0:0:0:0:32102] ACTIVE
+[INFO][main][11 Jul 2016 22:18:41,485][org.smartframework.jobhub.server.JobServer:179] JobServer starts up successfully.
+[INFO][StoppingJobServer][11 Jul 2016 22:19:37,280][org.smartframework.jobhub.server.JobServer:145] Stopping JobServer...
+[INFO][StoppingJobServer][11 Jul 2016 22:19:37,282][org.smartframework.jobhub.server.ClientProtocolServer:62] ClientProtocolServer is stopped successfully localhost@32100
+[INFO][StoppingJobServer][11 Jul 2016 22:19:37,283][org.smartframework.jobhub.server.InnerProtocolServer:61] InnerProtocolServer is stopped successfully localhost@32101
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:19:37,286][io.netty.handler.logging.LoggingHandler:100] [id: 0x38b727ce, L:/0:0:0:0:0:0:0:0:32102] UNREGISTERED
+[INFO][StoppingJobServer][11 Jul 2016 22:19:41,617][org.smartframework.jobhub.server.UploadServer:93] UploadServer is stopped successfully localhost@32102
+[ERROR][main][11 Jul 2016 22:25:45,580][org.smartframework.jobhub.client.ClientProtocolClient:25] Fail to obtain client at try 0: java.net.ConnectException: Connection refused
+org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection refused
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:226)
+	at org.smartframework.jobhub.client.ClientProtocolClient.newClient(ClientProtocolClient.java:20)
+	at org.smartframework.jobhub.client.JobClient.submit(JobClient.java:237)
+	at org.smartframework.jobhub.client.JobClient.submitSync(JobClient.java:264)
+	at org.smartframework.jobhub.client.JobClient.main(JobClient.java:305)
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:221)
+	... 4 more
+[ERROR][main][11 Jul 2016 22:25:45,586][org.smartframework.jobhub.client.ClientProtocolClient:25] Fail to obtain client at try 1: java.net.ConnectException: Connection refused
+org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection refused
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:226)
+	at org.smartframework.jobhub.client.ClientProtocolClient.newClient(ClientProtocolClient.java:20)
+	at org.smartframework.jobhub.client.JobClient.submit(JobClient.java:237)
+	at org.smartframework.jobhub.client.JobClient.submitSync(JobClient.java:264)
+	at org.smartframework.jobhub.client.JobClient.main(JobClient.java:305)
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:221)
+	... 4 more
+[ERROR][main][11 Jul 2016 22:25:45,587][org.smartframework.jobhub.client.ClientProtocolClient:25] Fail to obtain client at try 2: java.net.ConnectException: Connection refused
+org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection refused
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:226)
+	at org.smartframework.jobhub.client.ClientProtocolClient.newClient(ClientProtocolClient.java:20)
+	at org.smartframework.jobhub.client.JobClient.submit(JobClient.java:237)
+	at org.smartframework.jobhub.client.JobClient.submitSync(JobClient.java:264)
+	at org.smartframework.jobhub.client.JobClient.main(JobClient.java:305)
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:221)
+	... 4 more
+[ERROR][main][11 Jul 2016 22:33:03,950][org.smartframework.jobhub.client.ClientProtocolClient:25] Fail to obtain client at try 0: java.net.ConnectException: Connection refused
+org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection refused
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:226)
+	at org.smartframework.jobhub.client.ClientProtocolClient.newClient(ClientProtocolClient.java:20)
+	at org.smartframework.jobhub.client.JobClient.submit(JobClient.java:237)
+	at org.smartframework.jobhub.client.JobClient.submitSync(JobClient.java:264)
+	at org.smartframework.jobhub.client.JobClient.main(JobClient.java:305)
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:221)
+	... 4 more
+[ERROR][main][11 Jul 2016 22:33:03,953][org.smartframework.jobhub.client.ClientProtocolClient:25] Fail to obtain client at try 1: java.net.ConnectException: Connection refused
+org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection refused
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:226)
+	at org.smartframework.jobhub.client.ClientProtocolClient.newClient(ClientProtocolClient.java:20)
+	at org.smartframework.jobhub.client.JobClient.submit(JobClient.java:237)
+	at org.smartframework.jobhub.client.JobClient.submitSync(JobClient.java:264)
+	at org.smartframework.jobhub.client.JobClient.main(JobClient.java:305)
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:221)
+	... 4 more
+[ERROR][main][11 Jul 2016 22:33:03,954][org.smartframework.jobhub.client.ClientProtocolClient:25] Fail to obtain client at try 2: java.net.ConnectException: Connection refused
+org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection refused
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:226)
+	at org.smartframework.jobhub.client.ClientProtocolClient.newClient(ClientProtocolClient.java:20)
+	at org.smartframework.jobhub.client.JobClient.submit(JobClient.java:237)
+	at org.smartframework.jobhub.client.JobClient.submitSync(JobClient.java:264)
+	at org.smartframework.jobhub.client.JobClient.main(JobClient.java:305)
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:221)
+	... 4 more
+[DEBUG][main][11 Jul 2016 22:34:11,272][org.smartframework.jobhub.core.DirectoryAllocator:26] WORKING_DIRECTORY: /Users/Miller/Work/Workspace/JobHub
+[DEBUG][main][11 Jul 2016 22:34:11,274][org.smartframework.jobhub.core.DirectoryAllocator:27] UPLOAD_DIRECTORY: /Users/Miller/Work/Workspace/JobHub/upload
+[DEBUG][main][11 Jul 2016 22:34:11,275][org.smartframework.jobhub.core.DirectoryAllocator:28] JOB_DIRECTORY: /Users/Miller/Work/Workspace/JobHub/job
+[DEBUG][main][11 Jul 2016 22:34:11,275][org.smartframework.jobhub.core.DirectoryAllocator:29] APP_LOCATION: /Users/Miller/GitHub/Smart-Framework/job-hub/dist
+[DEBUG][main][11 Jul 2016 22:34:11,294][io.netty.util.internal.logging.InternalLoggerFactory:46] Using Log4J as the default logging framework
+[DEBUG][main][11 Jul 2016 22:34:11,298][io.netty.channel.MultithreadEventLoopGroup:41] -Dio.netty.eventLoopThreads: 8
+[DEBUG][main][11 Jul 2016 22:34:11,307][io.netty.util.internal.PlatformDependent0:71] java.nio.Buffer.address: available
+[DEBUG][main][11 Jul 2016 22:34:11,308][io.netty.util.internal.PlatformDependent0:79] sun.misc.Unsafe.theUnsafe: available
+[DEBUG][main][11 Jul 2016 22:34:11,309][io.netty.util.internal.PlatformDependent0:88] sun.misc.Unsafe.copyMemory: available
+[DEBUG][main][11 Jul 2016 22:34:11,310][io.netty.util.internal.PlatformDependent0:129] java.nio.Bits.unaligned: true
+[DEBUG][main][11 Jul 2016 22:34:11,311][io.netty.util.internal.PlatformDependent:676] Java version: 8
+[DEBUG][main][11 Jul 2016 22:34:11,319][io.netty.util.internal.PlatformDependent:683] -Dio.netty.noUnsafe: false
+[DEBUG][main][11 Jul 2016 22:34:11,320][io.netty.util.internal.PlatformDependent:710] sun.misc.Unsafe: available
+[DEBUG][main][11 Jul 2016 22:34:11,322][io.netty.util.internal.PlatformDependent:793] -Dio.netty.noJavassist: false
+[DEBUG][main][11 Jul 2016 22:34:11,324][io.netty.util.internal.PlatformDependent:806] Javassist: unavailable
+[DEBUG][main][11 Jul 2016 22:34:11,324][io.netty.util.internal.PlatformDependent:807] You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+[DEBUG][main][11 Jul 2016 22:34:11,325][io.netty.util.internal.PlatformDependent:825] -Dio.netty.tmpdir: /var/folders/2g/w_n_qv857fv5_9syq32bm8g00000gn/T (java.io.tmpdir)
+[DEBUG][main][11 Jul 2016 22:34:11,326][io.netty.util.internal.PlatformDependent:904] -Dio.netty.bitMode: 64 (sun.arch.data.model)
+[DEBUG][main][11 Jul 2016 22:34:11,326][io.netty.util.internal.PlatformDependent:94] -Dio.netty.noPreferDirect: false
+[DEBUG][main][11 Jul 2016 22:34:11,349][io.netty.channel.nio.NioEventLoop:97] -Dio.netty.noKeySetOptimization: false
+[DEBUG][main][11 Jul 2016 22:34:11,350][io.netty.channel.nio.NioEventLoop:98] -Dio.netty.selectorAutoRebuildThreshold: 512
+[INFO][main][11 Jul 2016 22:34:11,376][org.smartframework.jobhub.server.UploadServer:59] Starting UploadServer localhost@32102
+[DEBUG][UploadServer][11 Jul 2016 22:34:11,447][io.netty.util.internal.ThreadLocalRandom:169] -Dio.netty.initialSeedUniquifier: 0xbaa07f5f74d8456d (took 36 ms)
+[INFO][main][11 Jul 2016 22:34:11,456][org.smartframework.jobhub.server.ClientProtocolServer:41] Starting ClientProtocolServer localhost@32100
+[INFO][main][11 Jul 2016 22:34:11,465][org.smartframework.jobhub.server.InnerProtocolServer:40] Starting InnerProtocolServer localhost@32101
+[DEBUG][UploadServer][11 Jul 2016 22:34:11,505][io.netty.buffer.ByteBufUtil:70] -Dio.netty.allocator.type: unpooled
+[DEBUG][UploadServer][11 Jul 2016 22:34:11,507][io.netty.buffer.ByteBufUtil:82] -Dio.netty.threadLocalDirectBufferSize: 65536
+[DEBUG][UploadServer][11 Jul 2016 22:34:11,508][io.netty.buffer.ByteBufUtil:85] -Dio.netty.maxThreadLocalCharBufferSize: 16384
+[DEBUG][UploadServer][11 Jul 2016 22:34:11,513][io.netty.util.NetUtil:209] Loopback interface: lo0 (lo0, 0:0:0:0:0:0:0:1)
+[DEBUG][UploadServer][11 Jul 2016 22:34:11,515][io.netty.util.NetUtil:260] /proc/sys/net/core/somaxconn: 128 (non-existent)
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:34:11,531][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86] REGISTERED
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:34:11,532][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86] BIND(0.0.0.0/0.0.0.0:32102)
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:34:11,537][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86, L:/0:0:0:0:0:0:0:0:32102] ACTIVE
+[INFO][main][11 Jul 2016 22:34:12,472][org.smartframework.jobhub.server.JobServer:179] JobServer starts up successfully.
+[INFO][pool-2-thread-1][11 Jul 2016 22:34:19,271][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:79] newJobId start to call.
+[DEBUG][pool-2-thread-1][11 Jul 2016 22:34:19,272][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:100] JobId 1 is returned.
+[INFO][pool-2-thread-1][11 Jul 2016 22:34:19,274][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:81] newJobId end of call.
+[INFO][pool-2-thread-2][11 Jul 2016 22:37:05,218][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:79] newJobId start to call.
+[DEBUG][pool-2-thread-2][11 Jul 2016 22:37:05,218][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:100] JobId 2 is returned.
+[INFO][pool-2-thread-2][11 Jul 2016 22:37:05,219][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:81] newJobId end of call.
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:37:05,687][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86, L:/0:0:0:0:0:0:0:0:32102] RECEIVED: [id: 0xeb4c04b6, L:/127.0.0.1:32102 - R:/127.0.0.1:60525]
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 22:37:05,695][io.netty.buffer.AbstractByteBuf:48] -Dio.netty.buffer.bytebuf.checkAccessible: true
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 22:37:05,697][io.netty.util.ResourceLeakDetector:106] -Dio.netty.leakDetection.level: simple
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 22:37:05,697][io.netty.util.ResourceLeakDetector:107] -Dio.netty.leakDetection.maxRecords: 4
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 22:37:05,703][io.netty.util.internal.Cleaner0:52] java.nio.ByteBuffer.cleaner(): available
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 22:37:05,704][org.smartframework.jobhub.server.UploadServerHandler:42] header length:41
+[INFO][nioEventLoopGroup-3-1][11 Jul 2016 22:37:05,706][org.smartframework.jobhub.server.UploadServerHandler:59] reciving fileName:commons-codec-1.9.jar filelength:263965
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 22:37:05,711][io.netty.util.Recycler:62] -Dio.netty.recycler.maxCapacity.default: 262144
+[INFO][nioEventLoopGroup-3-1][11 Jul 2016 22:37:05,717][org.smartframework.jobhub.server.UploadServerHandler:73] data recived:263965 located at: /Users/Miller/Work/Workspace/JobHub/upload/2/commons-codec-1.9.jar
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:37:05,724][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86, L:/0:0:0:0:0:0:0:0:32102] RECEIVED: [id: 0xcf1a307d, L:/127.0.0.1:32102 - R:/127.0.0.1:60526]
+[DEBUG][nioEventLoopGroup-3-2][11 Jul 2016 22:37:05,725][org.smartframework.jobhub.server.UploadServerHandler:42] header length:36
+[INFO][nioEventLoopGroup-3-2][11 Jul 2016 22:37:05,726][org.smartframework.jobhub.server.UploadServerHandler:59] reciving fileName:jobhub-1.0.0.jar filelength:329383
+[INFO][nioEventLoopGroup-3-2][11 Jul 2016 22:37:05,748][org.smartframework.jobhub.server.UploadServerHandler:73] data recived:329383 located at: /Users/Miller/Work/Workspace/JobHub/upload/2/jobhub-1.0.0.jar
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:37:05,752][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86, L:/0:0:0:0:0:0:0:0:32102] RECEIVED: [id: 0x012f2092, L:/127.0.0.1:32102 - R:/127.0.0.1:60527]
+[DEBUG][nioEventLoopGroup-3-3][11 Jul 2016 22:37:05,753][org.smartframework.jobhub.server.UploadServerHandler:42] header length:30
+[INFO][nioEventLoopGroup-3-3][11 Jul 2016 22:37:05,754][org.smartframework.jobhub.server.UploadServerHandler:59] reciving fileName:jobhub.log filelength:20169
+[INFO][nioEventLoopGroup-3-3][11 Jul 2016 22:37:05,755][org.smartframework.jobhub.server.UploadServerHandler:73] data recived:20381 located at: /Users/Miller/Work/Workspace/JobHub/upload/2/jobhub.log
+[INFO][pool-2-thread-2][11 Jul 2016 22:37:05,771][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:79] submit start to call.
+[ERROR][pool-2-thread-2][11 Jul 2016 22:37:05,779][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:141] Missing files:  log/jobhub.log, please make sure it was uploaded successfully.
+java.io.IOException: Missing files:  log/jobhub.log, please make sure it was uploaded successfully.
+	at org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate.submit(ClientProtocolImpl.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolInvocation.invoke(ClientProtocolImpl.java:80)
+	at com.sun.proxy.$Proxy0.submit(Unknown Source)
+	at org.smartframework.jobhub.server.ClientProtocolImpl.submit(ClientProtocolImpl.java:52)
+	at org.smartframework.jobhub.protocol.ClientProtocol$Processor$submit.getResult(ClientProtocol.java:401)
+	at org.smartframework.jobhub.protocol.ClientProtocol$Processor$submit.getResult(ClientProtocol.java:386)
+	at org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)
+	at org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)
+	at org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+[INFO][pool-2-thread-2][11 Jul 2016 22:37:05,782][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:81] submit end of call.
+[INFO][pool-2-thread-3][11 Jul 2016 22:41:10,137][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:79] newJobId start to call.
+[DEBUG][pool-2-thread-3][11 Jul 2016 22:41:10,137][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:100] JobId 3 is returned.
+[INFO][pool-2-thread-3][11 Jul 2016 22:41:10,138][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:81] newJobId end of call.
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:41:10,392][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86, L:/0:0:0:0:0:0:0:0:32102] RECEIVED: [id: 0x85fe7e26, L:/127.0.0.1:32102 - R:/127.0.0.1:60574]
+[DEBUG][nioEventLoopGroup-3-4][11 Jul 2016 22:41:10,405][org.smartframework.jobhub.server.UploadServerHandler:42] header length:41
+[INFO][nioEventLoopGroup-3-4][11 Jul 2016 22:41:10,406][org.smartframework.jobhub.server.UploadServerHandler:59] reciving fileName:commons-codec-1.9.jar filelength:263965
+[INFO][nioEventLoopGroup-3-4][11 Jul 2016 22:41:10,421][org.smartframework.jobhub.server.UploadServerHandler:73] data recived:263965 located at: /Users/Miller/Work/Workspace/JobHub/upload/3/commons-codec-1.9.jar
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:41:10,436][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86, L:/0:0:0:0:0:0:0:0:32102] RECEIVED: [id: 0x722e1011, L:/127.0.0.1:32102 - R:/127.0.0.1:60575]
+[DEBUG][nioEventLoopGroup-3-5][11 Jul 2016 22:41:10,438][org.smartframework.jobhub.server.UploadServerHandler:42] header length:36
+[INFO][nioEventLoopGroup-3-5][11 Jul 2016 22:41:10,439][org.smartframework.jobhub.server.UploadServerHandler:59] reciving fileName:jobhub-1.0.0.jar filelength:329382
+[INFO][nioEventLoopGroup-3-5][11 Jul 2016 22:41:10,456][org.smartframework.jobhub.server.UploadServerHandler:73] data recived:329382 located at: /Users/Miller/Work/Workspace/JobHub/upload/3/jobhub-1.0.0.jar
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 22:41:10,460][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86, L:/0:0:0:0:0:0:0:0:32102] RECEIVED: [id: 0x10cfc652, L:/127.0.0.1:32102 - R:/127.0.0.1:60576]
+[DEBUG][nioEventLoopGroup-3-6][11 Jul 2016 22:41:10,461][org.smartframework.jobhub.server.UploadServerHandler:42] header length:30
+[INFO][nioEventLoopGroup-3-6][11 Jul 2016 22:41:10,462][org.smartframework.jobhub.server.UploadServerHandler:59] reciving fileName:jobhub.log filelength:24722
+[INFO][nioEventLoopGroup-3-6][11 Jul 2016 22:41:10,463][org.smartframework.jobhub.server.UploadServerHandler:73] data recived:24934 located at: /Users/Miller/Work/Workspace/JobHub/upload/3/jobhub.log
+[INFO][pool-2-thread-3][11 Jul 2016 22:41:10,471][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:79] submit start to call.
+[INFO][pool-2-thread-3][11 Jul 2016 22:41:10,474][org.smartframework.jobhub.core.support.DefaultScheduler:49] schedule job successfully.
+[INFO][pool-1-thread-1][11 Jul 2016 22:41:10,477][org.smartframework.jobhub.core.JobRunner:100] Setup done.
+[DEBUG][pool-2-thread-3][11 Jul 2016 22:41:10,484][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:137] Job submitted at Mon Jul 11 22:41:10 CST 2016, jobid:3
+[INFO][pool-2-thread-3][11 Jul 2016 22:41:10,484][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:81] submit end of call.
+[INFO][Thread-4][11 Jul 2016 22:41:10,484][org.smartframework.jobhub.utils.Proc:132] Start to run: [/bin/bash, /Users/Miller/Work/Workspace/JobHub/job/3/jvm.sh].
+[INFO][Thread-4][11 Jul 2016 22:41:10,624][org.smartframework.jobhub.utils.Proc:161] Command done, exit code: 1, output: 
+[INFO][pool-2-thread-3][11 Jul 2016 22:41:11,502][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:79] query start to call.
+[INFO][pool-2-thread-3][11 Jul 2016 22:41:11,504][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:81] query end of call.
+[INFO][StoppingJobServer][11 Jul 2016 23:14:08,536][org.smartframework.jobhub.server.JobServer:145] Stopping JobServer...
+[INFO][StoppingJobServer][11 Jul 2016 23:14:08,538][org.smartframework.jobhub.server.ClientProtocolServer:62] ClientProtocolServer is stopped successfully localhost@32100
+[INFO][StoppingJobServer][11 Jul 2016 23:14:08,539][org.smartframework.jobhub.server.InnerProtocolServer:61] InnerProtocolServer is stopped successfully localhost@32101
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 23:14:08,540][io.netty.handler.logging.LoggingHandler:100] [id: 0x99c48b86, L:/0:0:0:0:0:0:0:0:32102] UNREGISTERED
+[INFO][StoppingJobServer][11 Jul 2016 23:14:12,868][org.smartframework.jobhub.server.UploadServer:93] UploadServer is stopped successfully localhost@32102
+[DEBUG][main][11 Jul 2016 23:14:19,392][org.smartframework.jobhub.core.DirectoryAllocator:26] WORKING_DIRECTORY: /Users/Miller/Work/Workspace/JobHub
+[DEBUG][main][11 Jul 2016 23:14:19,395][org.smartframework.jobhub.core.DirectoryAllocator:27] UPLOAD_DIRECTORY: /Users/Miller/Work/Workspace/JobHub/upload
+[DEBUG][main][11 Jul 2016 23:14:19,395][org.smartframework.jobhub.core.DirectoryAllocator:28] JOB_DIRECTORY: /Users/Miller/Work/Workspace/JobHub/job
+[DEBUG][main][11 Jul 2016 23:14:19,395][org.smartframework.jobhub.core.DirectoryAllocator:29] APP_LOCATION: /Users/Miller/GitHub/Smart-Framework/job-hub/dist
+[DEBUG][main][11 Jul 2016 23:14:19,416][io.netty.util.internal.logging.InternalLoggerFactory:46] Using Log4J as the default logging framework
+[DEBUG][main][11 Jul 2016 23:14:19,420][io.netty.channel.MultithreadEventLoopGroup:41] -Dio.netty.eventLoopThreads: 8
+[DEBUG][main][11 Jul 2016 23:14:19,431][io.netty.util.internal.PlatformDependent0:71] java.nio.Buffer.address: available
+[DEBUG][main][11 Jul 2016 23:14:19,432][io.netty.util.internal.PlatformDependent0:79] sun.misc.Unsafe.theUnsafe: available
+[DEBUG][main][11 Jul 2016 23:14:19,433][io.netty.util.internal.PlatformDependent0:88] sun.misc.Unsafe.copyMemory: available
+[DEBUG][main][11 Jul 2016 23:14:19,435][io.netty.util.internal.PlatformDependent0:129] java.nio.Bits.unaligned: true
+[DEBUG][main][11 Jul 2016 23:14:19,436][io.netty.util.internal.PlatformDependent:676] Java version: 8
+[DEBUG][main][11 Jul 2016 23:14:19,443][io.netty.util.internal.PlatformDependent:683] -Dio.netty.noUnsafe: false
+[DEBUG][main][11 Jul 2016 23:14:19,444][io.netty.util.internal.PlatformDependent:710] sun.misc.Unsafe: available
+[DEBUG][main][11 Jul 2016 23:14:19,444][io.netty.util.internal.PlatformDependent:793] -Dio.netty.noJavassist: false
+[DEBUG][main][11 Jul 2016 23:14:19,445][io.netty.util.internal.PlatformDependent:806] Javassist: unavailable
+[DEBUG][main][11 Jul 2016 23:14:19,446][io.netty.util.internal.PlatformDependent:807] You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+[DEBUG][main][11 Jul 2016 23:14:19,447][io.netty.util.internal.PlatformDependent:825] -Dio.netty.tmpdir: /var/folders/2g/w_n_qv857fv5_9syq32bm8g00000gn/T (java.io.tmpdir)
+[DEBUG][main][11 Jul 2016 23:14:19,448][io.netty.util.internal.PlatformDependent:904] -Dio.netty.bitMode: 64 (sun.arch.data.model)
+[DEBUG][main][11 Jul 2016 23:14:19,448][io.netty.util.internal.PlatformDependent:94] -Dio.netty.noPreferDirect: false
+[DEBUG][main][11 Jul 2016 23:14:19,472][io.netty.channel.nio.NioEventLoop:97] -Dio.netty.noKeySetOptimization: false
+[DEBUG][main][11 Jul 2016 23:14:19,472][io.netty.channel.nio.NioEventLoop:98] -Dio.netty.selectorAutoRebuildThreshold: 512
+[INFO][main][11 Jul 2016 23:14:19,502][org.smartframework.jobhub.server.UploadServer:59] Starting UploadServer localhost@32102
+[INFO][main][11 Jul 2016 23:14:19,567][org.smartframework.jobhub.server.ClientProtocolServer:41] Starting ClientProtocolServer localhost@32100
+[DEBUG][UploadServer][11 Jul 2016 23:14:19,572][io.netty.util.internal.ThreadLocalRandom:169] -Dio.netty.initialSeedUniquifier: 0x440b01024985b454 (took 38 ms)
+[INFO][main][11 Jul 2016 23:14:19,579][org.smartframework.jobhub.server.InnerProtocolServer:40] Starting InnerProtocolServer localhost@32101
+[DEBUG][UploadServer][11 Jul 2016 23:14:19,627][io.netty.buffer.ByteBufUtil:70] -Dio.netty.allocator.type: unpooled
+[DEBUG][UploadServer][11 Jul 2016 23:14:19,627][io.netty.buffer.ByteBufUtil:82] -Dio.netty.threadLocalDirectBufferSize: 65536
+[DEBUG][UploadServer][11 Jul 2016 23:14:19,628][io.netty.buffer.ByteBufUtil:85] -Dio.netty.maxThreadLocalCharBufferSize: 16384
+[DEBUG][UploadServer][11 Jul 2016 23:14:19,631][io.netty.util.NetUtil:209] Loopback interface: lo0 (lo0, 0:0:0:0:0:0:0:1)
+[DEBUG][UploadServer][11 Jul 2016 23:14:19,633][io.netty.util.NetUtil:260] /proc/sys/net/core/somaxconn: 128 (non-existent)
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 23:14:19,652][io.netty.handler.logging.LoggingHandler:100] [id: 0xee835316] REGISTERED
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 23:14:19,652][io.netty.handler.logging.LoggingHandler:100] [id: 0xee835316] BIND(0.0.0.0/0.0.0.0:32102)
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 23:14:19,656][io.netty.handler.logging.LoggingHandler:100] [id: 0xee835316, L:/0:0:0:0:0:0:0:0:32102] ACTIVE
+[INFO][main][11 Jul 2016 23:14:20,585][org.smartframework.jobhub.server.JobServer:179] JobServer starts up successfully.
+[INFO][pool-2-thread-1][11 Jul 2016 23:15:43,265][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:79] newJobId start to call.
+[DEBUG][pool-2-thread-1][11 Jul 2016 23:15:43,266][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:100] JobId 1 is returned.
+[INFO][pool-2-thread-1][11 Jul 2016 23:15:43,267][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:81] newJobId end of call.
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 23:15:43,581][io.netty.handler.logging.LoggingHandler:100] [id: 0xee835316, L:/0:0:0:0:0:0:0:0:32102] RECEIVED: [id: 0x7c463968, L:/127.0.0.1:32102 - R:/127.0.0.1:61095]
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 23:15:43,590][io.netty.buffer.AbstractByteBuf:48] -Dio.netty.buffer.bytebuf.checkAccessible: true
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 23:15:43,593][io.netty.util.ResourceLeakDetector:106] -Dio.netty.leakDetection.level: simple
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 23:15:43,593][io.netty.util.ResourceLeakDetector:107] -Dio.netty.leakDetection.maxRecords: 4
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 23:15:43,600][io.netty.util.internal.Cleaner0:52] java.nio.ByteBuffer.cleaner(): available
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 23:15:43,601][org.smartframework.jobhub.server.UploadServerHandler:42] header length:41
+[INFO][nioEventLoopGroup-3-1][11 Jul 2016 23:15:43,602][org.smartframework.jobhub.server.UploadServerHandler:59] reciving fileName:commons-codec-1.9.jar filelength:263965
+[DEBUG][nioEventLoopGroup-3-1][11 Jul 2016 23:15:43,607][io.netty.util.Recycler:62] -Dio.netty.recycler.maxCapacity.default: 262144
+[INFO][nioEventLoopGroup-3-1][11 Jul 2016 23:15:43,611][org.smartframework.jobhub.server.UploadServerHandler:73] data recived:263965 located at: /Users/Miller/Work/Workspace/JobHub/upload/1/commons-codec-1.9.jar
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 23:15:43,616][io.netty.handler.logging.LoggingHandler:100] [id: 0xee835316, L:/0:0:0:0:0:0:0:0:32102] RECEIVED: [id: 0x0ce84df3, L:/127.0.0.1:32102 - R:/127.0.0.1:61096]
+[DEBUG][nioEventLoopGroup-3-2][11 Jul 2016 23:15:43,619][org.smartframework.jobhub.server.UploadServerHandler:42] header length:36
+[INFO][nioEventLoopGroup-3-2][11 Jul 2016 23:15:43,620][org.smartframework.jobhub.server.UploadServerHandler:59] reciving fileName:jobhub-1.0.0.jar filelength:329521
+[INFO][nioEventLoopGroup-3-2][11 Jul 2016 23:15:43,635][org.smartframework.jobhub.server.UploadServerHandler:73] data recived:329521 located at: /Users/Miller/Work/Workspace/JobHub/upload/1/jobhub-1.0.0.jar
+[INFO][nioEventLoopGroup-2-1][11 Jul 2016 23:15:43,638][io.netty.handler.logging.LoggingHandler:100] [id: 0xee835316, L:/0:0:0:0:0:0:0:0:32102] RECEIVED: [id: 0x61266288, L:/127.0.0.1:32102 - R:/127.0.0.1:61097]
+[DEBUG][nioEventLoopGroup-3-3][11 Jul 2016 23:15:43,640][org.smartframework.jobhub.server.UploadServerHandler:42] header length:30
+[INFO][nioEventLoopGroup-3-3][11 Jul 2016 23:15:43,641][org.smartframework.jobhub.server.UploadServerHandler:59] reciving fileName:jobhub.log filelength:34683
+[INFO][nioEventLoopGroup-3-3][11 Jul 2016 23:15:43,642][org.smartframework.jobhub.server.UploadServerHandler:73] data recived:35185 located at: /Users/Miller/Work/Workspace/JobHub/upload/1/jobhub.log
+[INFO][pool-2-thread-1][11 Jul 2016 23:15:43,659][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:79] submit start to call.
+[INFO][pool-2-thread-1][11 Jul 2016 23:15:43,663][org.smartframework.jobhub.core.support.DefaultScheduler:49] schedule job successfully.
+[INFO][pool-1-thread-1][11 Jul 2016 23:15:43,667][org.smartframework.jobhub.core.JobRunner:100] Setup done.
+[DEBUG][pool-2-thread-1][11 Jul 2016 23:15:43,668][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:137] Job submitted at Mon Jul 11 23:15:43 CST 2016, jobid:1
+[INFO][pool-2-thread-1][11 Jul 2016 23:15:43,669][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:81] submit end of call.
+[INFO][Thread-4][11 Jul 2016 23:15:43,673][org.smartframework.jobhub.utils.Proc:132] Start to run: [/bin/bash, /Users/Miller/Work/Workspace/JobHub/job/1/jvm.sh].
+[DEBUG][pool-3-thread-1][11 Jul 2016 23:15:43,935][org.smartframework.jobhub.server.InnerProtocolImpl:50] SetPid is invoked.
+[INFO][pool-3-thread-1][11 Jul 2016 23:15:43,935][org.smartframework.jobhub.server.InnerProtocolImpl:54] Job 1 was set PID as 10100
+[DEBUG][pool-3-thread-1][11 Jul 2016 23:15:43,939][org.smartframework.jobhub.server.InnerProtocolImpl:29] Report progress, jobId=1 precent=5
+[DEBUG][pool-3-thread-1][11 Jul 2016 23:15:43,949][org.smartframework.jobhub.server.InnerProtocolImpl:61] SetJobState is invoked.
+[INFO][pool-3-thread-1][11 Jul 2016 23:15:43,950][org.smartframework.jobhub.server.InnerProtocolImpl:65] Job 1 was set JobState as DONE
+[DEBUG][pool-3-thread-1][11 Jul 2016 23:15:43,950][org.smartframework.jobhub.server.InnerProtocolImpl:29] Report progress, jobId=1 precent=100
+[INFO][Thread-4][11 Jul 2016 23:15:43,956][org.smartframework.jobhub.utils.Proc:161] Command done, exit code: 1, output: 
+[INFO][pool-2-thread-1][11 Jul 2016 23:15:44,685][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:79] query start to call.
+[INFO][pool-2-thread-1][11 Jul 2016 23:15:44,687][org.smartframework.jobhub.server.ClientProtocolImpl$ClientProtocolImplDelegate:81] query end of call.

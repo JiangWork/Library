@@ -101,6 +101,7 @@ public class JobServer {
 	private void createDirIfNeed(String dir) throws JobException {
 		File file = new File(dir);
 		if (!file.exists()) {
+			logger.debug("Creating directory " + dir);
 			if(!file.mkdirs()) {
 				throw new JobException("Can't create directory: " + dir);
 			}
@@ -151,7 +152,7 @@ public class JobServer {
 		clientProtocolServer.waitForServing();
 		innerProtocolServer.waitForServing();
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			//ignored.
 		}

@@ -22,7 +22,7 @@ public class DirectoryAllocator {
 		WORKING_DIRECTORY = System.getProperty("jobhub.workdir", System.getProperty("user.home"));
 		UPLOAD_DIRECTORY = WORKING_DIRECTORY + File.separator + "upload";
 		JOB_DIRECTORY = WORKING_DIRECTORY + File.separator + "job";
-		APP_LOCATION = System.getProperty("app.location");
+		APP_LOCATION = System.getProperty("APPLOCATION");
 		logger.debug("WORKING_DIRECTORY: " + WORKING_DIRECTORY);
 		logger.debug("UPLOAD_DIRECTORY: " + UPLOAD_DIRECTORY);
 		logger.debug("JOB_DIRECTORY: " + JOB_DIRECTORY);

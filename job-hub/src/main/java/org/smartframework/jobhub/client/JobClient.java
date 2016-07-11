@@ -40,7 +40,8 @@ public class JobClient {
 	private final static String JOBSERVER_PORT_KEY = "jobhub.jobserver.port";
 	private final static String UPLOADSERVER_PORT_KEY = "jobhub.uploadserver.port";
 	private final static String UPDATE_INTERVAL_KEY = "jobhub.updateinterval";
-		
+	private final static String SUBMITTER_KEY = "jobhub.submitter";
+	
 	private final static String APP_CONFIG_FILE = "client.properties";
 	
 	private String hostName; // the job client server.
@@ -85,6 +86,7 @@ public class JobClient {
 				this.jobServerPort = pa.getInt(JOBSERVER_PORT_KEY, DEFAULT_JOB_SERVER_PORT);
 				this.uploadServerPort = pa.getInt(UPLOADSERVER_PORT_KEY, DEFAULT_UPLOAD_SERVER_PORT);
 				this.updateInterval = pa.getLong(UPDATE_INTERVAL_KEY, DEFAULT_UPDATE_INTERVAL);
+				this.def.setSubmitter(pa.getString(SUBMITTER_KEY, "unknown"));
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
 				logger.error(e.getMessage(), e);
@@ -92,7 +94,7 @@ public class JobClient {
 		} else {
 			System.out.println("No application config was found, default is used.");
 		}
-		System.out.println(String.format("\thostname:\t\t%s\n\tjobserver port:\t\t%d\n\t"
+		System.out.println(String.format("Configurations as follows:\n\thostname:\t\t%s\n\tjobserver port:\t\t%d\n\t"
 				+ "uploadserver port:\t%d\n\trefresh interval:\t%d\n", 
 				this.hostName, this.jobServerPort, this.uploadServerPort,
 			    this.updateInterval));
@@ -162,6 +164,26 @@ public class JobClient {
 		this.jobServerPort = jobServerPort;
 	}
 
+	/**Trim the file path of jarsList and resourceList**/
+	private void trimFilePathes(JobDefinition def) {
+		List<String> jars = new ArrayList<String>();
+		for(String jar: jarsList) {
+			int index = jar.lastIndexOf(File.separator);
+			if (index != -1) {
+				jars.add(jar.substring(index + 1));
+			}
+		}
+		def.setJarsList(jars);
+		List<String> resources = new ArrayList<String>();
+		for(String resource: resourcesList) {
+			int index = resource.lastIndexOf(File.separator);
+			if (index != -1) {
+				resources.add(resource.substring(index + 1));
+			}
+		}
+		def.setResourcesList(resources);
+	}
+	
 	/**
 	 * Check the existence of files.
 	 * @param def
@@ -222,6 +244,7 @@ public class JobClient {
 			def.setJobId(jobId);
 			checkFiles(def);
 			uploadFiles(def);
+			trimFilePathes(def);
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			def.write(bos);
 			ByteBuffer bb = ByteBuffer.wrap(bos.toByteArray());
@@ -276,9 +299,9 @@ public class JobClient {
 		client.setMainClass("test.main.class");
 		client.setEnterMethod("test.method");
 		client.setTimeout(10000);
-		client.addJar("target/dependency-jars/zookeeper-3.4.6.jar");
-		client.addJar("target/dependency-jars/spring-beans-4.1.6.RELEASE.jar");
-		client.addResource("future.log");
+		client.addJar("lib/commons-codec-1.9.jar");
+		client.addJar("lib/jobhub-1.0.0.jar");
+		client.addResource("log/jobhub.log");
 		client.submitSync();
 	}
 	

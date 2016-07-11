@@ -42,7 +42,7 @@ struct JobStatus {
   1: common.JobState state,    // the job state 
   2: bool success,      // if the job is success or not
   3: string reason,     // the reason of job failure
-  4: double progress,   // the progress of the job, 30%
+  4: i32 progress,   // the progress of the job, 30%
   5: i64 startTime,      // the start time
 }
 
