@@ -45,8 +45,7 @@ public class MemoryMonitor {
 	/**if we need to remove the dead pid from monitoring**/
 	private boolean autoPurge;
 	
-	private MonitorWorker worker;
-	private PurgeWorker purgeWorker;
+	private Worker worker;
 	
 	public MemoryMonitor() {
 		addLock = new ReentrantLock();
@@ -58,8 +57,7 @@ public class MemoryMonitor {
 		pidsToBeRemoved = new ArrayList<Long>();
 		interval = 1 * 1000;  // 1 s
 		autoPurge = false;
-		worker = new MonitorWorker();
-		purgeWorker = new PurgeWorker();
+		worker = new Worker();
 	}
 	
 	
@@ -141,11 +139,6 @@ public class MemoryMonitor {
 		if(!worker.isRunning()) {
 			worker.startup();
 		}
-		if (autoPurge) {
-			if (!purgeWorker.isRunning()) {
-				purgeWorker.startup();
-			}
-		}
 	}
 	
 	public void stop() {
@@ -154,12 +147,6 @@ public class MemoryMonitor {
 			worker.join();
 		} catch (InterruptedException e) {
 			// ignored
-		}
-		purgeWorker.shutdown();
-		try {
-			purgeWorker.join();
-		} catch (InterruptedException e) {
-			//ignored
 		}
 		statusMap.clear();
 		pids.clear();
@@ -219,57 +206,8 @@ public class MemoryMonitor {
 	}
 
 
-	private class PurgeWorker extends Thread {
-		
-		private volatile boolean stop = true;
-		private long sleepTime = 1 * 60 * 1000;  // 1 min
-				
-		public void run() {
-			System.out.println("Starting PurgeWorker");
-		    setName("PurgeWorker");	
-			while(!stop) {
-				List<Long> cands = new ArrayList<Long>();
-				try {					
-					mainLock.lock();
-					Iterator<Long> iter = statusMap.keySet().iterator();
-					while(iter.hasNext()) {
-						long pid = iter.next();
-						PidStatus ps = statusMap.get(pid);
-						if (ps !=null && !ps.isAlive) {
-							cands.add(pid);
-						}
-					}} finally {
-						mainLock.unlock();
-				}
-				remove(cands);
-				logger.debug("removed pid: " + cands); 
-				logger.debug("Scheduled run.");
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					// ignored
-				}
-			}
-		}
-		
-		public void shutdown() {
-			this.stop = true;
-		}
-		
-		public void startup() {
-			if(stop) {
-				stop = false;
-				start();
-			}
-		}
-		
-		public boolean isRunning() {
-			return !this.stop;
-		}
-	}
 	
-	
-	private class MonitorWorker extends Thread {
+	private class Worker extends Thread {
 		
 		private volatile boolean stop = true;
 		
@@ -295,6 +233,7 @@ public class MemoryMonitor {
 				for (long removeKey: removeCands) {
 					statusMap.remove(removeKey);
 				}
+				logger.debug("removed pids: " + removeCands);
 				} finally {
 					mainLock.unlock();
 				}
@@ -309,6 +248,7 @@ public class MemoryMonitor {
 				}
 
 				//go through all Pids
+				List<Long> purgeList = new ArrayList<Long>();
 				for (long pid: pids) {	
 					try {
 						mainLock.lock();
@@ -318,6 +258,9 @@ public class MemoryMonitor {
 					}
 					PidStatus pidStatus = statusMap.get(pid);
 					boolean isAlive = MemoryMonitor.this.isAlive(pid);
+					if (!isAlive && autoPurge) {
+						purgeList.add(pid);
+					}
 					pidStatus.setAlive(isAlive);
 					try {
 						long bytes = MemoryUtil.usage(String.valueOf(pid));
@@ -330,6 +273,7 @@ public class MemoryMonitor {
 						mainLock.unlock();
 					}
 				}
+				remove(purgeList);
 				
 				logger.debug("Scheduled run at " + (runTimes++) + " time.");
 				
@@ -411,7 +355,7 @@ public class MemoryMonitor {
 	public static void main(String[] args) {
 		MemoryMonitor monitor = new MemoryMonitor();
 		monitor.setAutoPurge(true);
-		for (int i = 25716; i < 30000; ++i) {
+		for (int i = 1; i < 1000; ++i) {
 			monitor.add(i);
 		}
 		monitor.start();
