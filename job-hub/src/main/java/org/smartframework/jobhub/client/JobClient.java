@@ -36,10 +36,10 @@ public class JobClient {
 	private final static int DEFAULT_UPLOAD_SERVER_PORT = 32102;
 	private final static int DEFAULT_UPDATE_INTERVAL = 1000;
 	
-	private final static String HOSTNAME_KEY = "jobhub.hostname";
-	private final static String JOBSERVER_PORT_KEY = "jobhub.jobserver.port";
-	private final static String UPLOADSERVER_PORT_KEY = "jobhub.uploadserver.port";
-	private final static String UPDATE_INTERVAL_KEY = "jobhub.updateinterval";
+	public final static String HOSTNAME_KEY = "jobhub.hostname";
+	public final static String JOBSERVER_PORT_KEY = "jobhub.jobserver.port";
+	public final static String UPLOADSERVER_PORT_KEY = "jobhub.uploadserver.port";
+	public final static String UPDATE_INTERVAL_KEY = "jobhub.updateinterval";
 	private final static String SUBMITTER_KEY = "jobhub.submitter";
 	
 	private final static String APP_CONFIG_FILE = "client.properties";
@@ -92,24 +92,38 @@ public class JobClient {
 				logger.error(e.getMessage(), e);
 			}
 		} else {
-			System.out.println("No application config was found, default is used.");
+			System.out.println("No application config was found, default is used, override is allowed.");
 		}
-		System.out.println(String.format("Configurations as follows:\n\thostname:\t\t%s\n\tjobserver port:\t\t%d\n\t"
-				+ "uploadserver port:\t%d\n\trefresh interval:\t%d\n", 
-				this.hostName, this.jobServerPort, this.uploadServerPort,
-			    this.updateInterval));
 	}
 	
 	public void addJar(String jarName) {
 		this.jarsList.add(jarName);
 	}
 	
+	public void addJars(List<String> jarsList) {
+		this.jarsList.addAll(jarsList);
+	}
+	
+	public void addJars(String[] jars) {
+		for (String jar: jars) {
+			this.jarsList.add(jar);
+		}
+	}
+	
 	public void addResource(String resourceName) {
 		this.resourcesList.add(resourceName);
 	}
 	
+	public void addResources(List<String> resourcesList) {
+		this.resourcesList.addAll(resourcesList);
+	}
+	
 	public void addEnv(String key, String value) {
 		this.env.put(key, value);
+	}
+	
+	public void addEnvs(Map<String, String> envs) {
+		this.env.putAll(envs);
 	}
 	
 	public void addProperty(String key, String value) {
@@ -162,6 +176,14 @@ public class JobClient {
 
 	public void setJobServerPort(int jobServerPort) {
 		this.jobServerPort = jobServerPort;
+	}
+	
+	public int getUploadServerPort() {
+		return uploadServerPort;
+	}
+
+	public void setUploadServerPort(int uploadServerPort) {
+		this.uploadServerPort = uploadServerPort;
 	}
 
 	/**Trim the file path of jarsList and resourceList**/
@@ -234,6 +256,11 @@ public class JobClient {
 	 * @throws JobException
 	 */
 	public void submit() throws JobException {
+		System.out.println(String.format("Configurations as follows:\n\thostname:\t\t%s\n\tjobserver port:\t\t%d\n\t"
+				+ "uploadserver port:\t%d\n\trefresh interval:\t%d\n", 
+				this.hostName, this.jobServerPort, this.uploadServerPort,
+			    this.updateInterval));
+		
 		client = ClientProtocolClient.newClient(hostName, jobServerPort);
 		if (client == null) {
 			throw new JobException("Can't connect JobServer " + hostName + "@" + jobServerPort);
@@ -303,6 +330,7 @@ public class JobClient {
 		client.addJar("lib/jobhub-1.0.0.jar");
 		client.addResource("log/jobhub.log");
 		client.submitSync();
+		client.close();
 	}
 	
 }

@@ -10,6 +10,7 @@ import org.apache.thrift.transport.TTransportException;
 import org.smartframework.jobhub.core.DirectoryAllocator;
 import org.smartframework.jobhub.core.JobException;
 import org.smartframework.jobhub.core.JobManager;
+import org.smartframework.jobhub.core.MemoryMonitor;
 import org.smartframework.jobhub.utils.ParameterAccessor;
 
 /**
@@ -26,6 +27,7 @@ public class JobServer {
 	private UploadServer uploadServer;
 	private ClientProtocolServer clientProtocolServer;
 	private InnerProtocolServer innerProtocolServer;
+	private MemoryMonitor mm;
 	// create working directory
 	
 	private volatile boolean running = false;
@@ -66,7 +68,7 @@ public class JobServer {
 		createDirIfNeed(DirectoryAllocator.JOB_DIRECTORY);
 		
 		// setup different servers
-		jobManager = new JobManager();
+		jobManager = new JobManager(ctx);
 		ctx.setJobManager(jobManager);
 		
 		uploadServer = new UploadServer(uploadServerPort);
@@ -95,6 +97,8 @@ public class JobServer {
 			throw new JobException(e.getMessage(), e);
 		}
 		ctx.setJobServer(this);
+		mm = new MemoryMonitor();
+		mm.start();
 		running = true;
 	}
 	
@@ -127,6 +131,10 @@ public class JobServer {
 		this.clientProtocolServer = clientProtocolServer;
 	}
 	
+	public MemoryMonitor getMm() {
+		return mm;
+	}
+	
 	public synchronized void cleanUp() {
 		if (clientProtocolServer != null) {
 			clientProtocolServer.stop();
@@ -136,6 +144,9 @@ public class JobServer {
 		}
 		if (uploadServer != null) {
 			uploadServer.stop();
+		} 
+		if (mm != null) {
+			mm.stop();
 		}
 		running = false;
 	}

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.smartframework.jobhub.core.support.DefaultJobRegistry;
 import org.smartframework.jobhub.core.support.DefaultScheduler;
 import org.smartframework.jobhub.protocol.JobState;
+import org.smartframework.jobhub.server.ServerContext;
 
 
 public class JobManager {
@@ -18,10 +19,13 @@ public class JobManager {
 	
 	private AtomicLong jobId;
 	
-	public JobManager() {
+	private ServerContext ctx;
+	
+	public JobManager(ServerContext ctx) {
 		jobRegistry = new DefaultJobRegistry();
 		scheduler = new DefaultScheduler();
 		jobId = new AtomicLong(1);
+		this.ctx = ctx;
 	}
 
 	/**
@@ -85,6 +89,14 @@ public class JobManager {
 
 	public void setScheduler(Scheduler scheduler) {
 		this.scheduler = scheduler;
+	}
+
+	public ServerContext getCtx() {
+		return ctx;
+	}
+
+	public void setCtx(ServerContext ctx) {
+		this.ctx = ctx;
 	}
 	
 	

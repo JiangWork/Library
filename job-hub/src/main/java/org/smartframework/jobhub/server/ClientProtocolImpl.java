@@ -133,8 +133,8 @@ public class ClientProtocolImpl implements ClientProtocol.Iface {
 				JobEntry entry = jobManager.getJobEntry(jobId);
 				entry.setDefinition(def);
 				jobManager.submit(jobId);
-				result.reason = "Job submitted at " + new Date() + ", jobid:" + jobId;
-				logger.debug("Job submitted at " + new Date() + ", jobid:" + jobId);
+				result.reason = "Job submitted at " + new Date() + ", jobid:" + jobId + " by " + def.getSubmitter();
+				logger.debug("Job submitted at " + new Date() + ", jobid:" + jobId + " by " + def.getSubmitter());
 			} catch (Exception e) {
 				result.success = false;
 				result.reason = e.getMessage();

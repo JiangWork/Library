@@ -51,6 +51,7 @@ public class InnerProtocolImpl implements InnerProtocol.Iface {
 		if (jobManager.contains(jobId)) {
 			JobEntry entry = jobManager.getJobEntry(jobId);
 			entry.setPid(pid);
+			this.jobManager.getCtx().getJobServer().getMm().add(pid);
 			logger.info("Job " + jobId + " was set PID as " + pid);
 		}
 		

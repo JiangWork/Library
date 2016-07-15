@@ -146,7 +146,7 @@ public class JobDefinition {
 		mainClass = pa.getString(JOB_MAINCLASS_KEY);
 		enterMethod = pa.getString(JOB_METHOD_KEY, "main");
 		enterArgs = pa.getString(JOB_METHODARGS_KEY);
-		submitter = pa.getString(JOB_SUBMITTER_KEY);
+		submitter = pa.getString(JOB_SUBMITTER_KEY, "unknown");
 		timeout = pa.getLong(JOB_TIMEOUT_KEY, 1000*1000);
 		jarsList = pa.getList(JOB_JARS_KEY);
 		resourcesList = pa.getList(JOB_RESOURCES_KEY);
