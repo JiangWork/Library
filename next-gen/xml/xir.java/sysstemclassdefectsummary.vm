@@ -1,7 +1,0 @@
-#set ($defectSummaryVector = $util.getSystemClassDefectSummary($defectList.getDefectVector()))
-		<DefectSummary
-			Surface="$util.format($util.getSurfaceStr($surface))"
-			ClassificationSummary="Defect Classification">
-#parse("defectsummary.vm")
-		</DefectSummary>
-

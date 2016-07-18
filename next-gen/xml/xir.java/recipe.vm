@@ -1,8 +1,0 @@
-		<Recipe>		
-#parse("recipegeneral.vm")
-#parse("behaviour.vm")
-#parse("platealignment.vm")
-#parse("zcalibration.vm")
-#parse("inspectionarea.vm")
-		</Recipe>
-	
