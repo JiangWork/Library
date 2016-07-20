@@ -8,8 +8,9 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
-import org.smartframework.common.utils.ClassUtils;
-import org.smartframework.mvc.dispatcher.annotation.Url;
+
+import library.common.ClassUtils;
+import library.web.dispatcher.annotation.Url;
 
 public class ClassFinderTest {
 

@@ -1,6 +1,6 @@
 package org.smartframework.shell.process;
 
-import org.smartframework.shell.process.InMemoryOutputStream;
+import library.shell.InMemoryOutputStream;
 
 public class InMemoryOutputStreamTest {
 

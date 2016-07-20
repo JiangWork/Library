@@ -1,0 +1,15 @@
+# this is a manifest for dao package
+# it describes the thridparty libraries it
+# depends on and the resources it used.
+
+
+# the directory where depend libraries reside.
+thridparty.jar.directory=thridparty/spring
+
+# the depend jar libraries list
+thridparty.jar.libraries=spring-core-4.1.6.RELEASE.jar,spring-beans-4.1.6.RELEASE.jar,\
+        spring-context-4.1.6.RELEASE.jar,spring-jdbc-4.1.6.RELEASE.jar,spring-tx-4.1.6.RELEASE.jar
+
+# the running method after this module is packaged.
+# the path is relative to this module.manifest file.
+run.method=example.Main#main

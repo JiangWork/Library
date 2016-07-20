@@ -1,5 +1,8 @@
 package org.smartframework.shell.process;
 
+import library.shell.Proc;
+import library.shell.ProcResult;
+
 public class Test {
 
 	public static void main(String[] args) throws Exception {

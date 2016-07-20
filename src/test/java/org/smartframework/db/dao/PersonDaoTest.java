@@ -1,7 +1,7 @@
 package org.smartframework.db.dao;
 
-import org.smartframework.datebase.dao.Person;
-import org.smartframework.datebase.dao.PersonDao;
+import library.datebase.dao.Person;
+import library.datebase.dao.PersonDao;
 
 public class PersonDaoTest {
 

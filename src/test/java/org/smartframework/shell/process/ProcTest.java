@@ -3,8 +3,8 @@ package org.smartframework.shell.process;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
-import org.smartframework.shell.process.Proc;
-import org.smartframework.shell.process.ProcResult;
+import library.shell.Proc;
+import library.shell.ProcResult;
 
 public class ProcTest {
 
