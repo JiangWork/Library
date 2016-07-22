@@ -15,16 +15,12 @@ public class FieldSource implements Source {
 	private static final Logger logger = Logger.getLogger(FieldSource.class);
 	
 	private Field field;
-	private int order;
 	
-	public FieldSource(int order) {
-		this.order = order;
-	}
+	public FieldSource() {}
 	
-	public FieldSource(Field field, int order) {
+	public FieldSource(Field field) {
 		this.field = field;
 		this.field.setAccessible(true);
-		this.order = order;
 	}
 	
 	@Override
@@ -39,10 +35,16 @@ public class FieldSource implements Source {
 	}
 
 	@Override
-	public int getOrder() {
-		return order;
+	public String getName() {
+		return field.getName();
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof FieldSource) {
+			return ((FieldSource)obj).field.equals(this.field);
+		}
+		return false;
+	}
 
 }

@@ -16,6 +16,7 @@ public class MethodSource implements Source {
 	private static final Logger logger = Logger.getLogger(MethodSource.class);
 	
 	private Method method;
+
 	
 	public MethodSource() {}
 	
@@ -40,6 +41,20 @@ public class MethodSource implements Source {
 
 	public void setMethod(Method method) {
 		this.method = method;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return method.getName();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof MethodSource) {
+			return ((MethodSource)obj).method.equals(this.method);
+		}
+		return false;
 	}
 
 }

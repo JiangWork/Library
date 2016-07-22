@@ -14,7 +14,7 @@ public class Criterion implements Comparable<Criterion>{
 
 	private Source source;
 	private int priority;
-	private Order oder;
+	private Order order;
 	
 	
 	public Source getSource() {
@@ -29,20 +29,31 @@ public class Criterion implements Comparable<Criterion>{
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-	public Order getOder() {
-		return oder;
+	public Order getOrder() {
+		return order;
 	}
-	public void setOder(Order oder) {
-		this.oder = oder;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 	
 	@Override
 	public int compareTo(Criterion o) {
 		if (o.priority == this.priority) {
-			return o.source.getOrder() - this.source.getOrder();
+			return source.getName().compareTo(o.source.getName());
 		}
-		return o.priority - this.priority;
+		return this.priority - o.priority;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Criterion) {
+			return ((Criterion)obj).source.equals(this.source);
+		}
+		return false;
+	}
 	
+	public String toString() {
+		return String.format("source=%s priority=%d order=%s", 
+				source.getName(), priority, order);
+	}
 }

@@ -15,12 +15,12 @@ public interface Source {
 	public Object getValue(Object target);
 	
 	/**
-	 * Get the order of this source.
+	 * Get the name of this source.
 	 * Id two sources have the same priority,
-	 * we use this order to determine the comparison 
+	 * we use name to determine the comparison 
 	 * sequence.
 	 * 
 	 * @return
 	 */
-	public int getOrder();
+	public String getName();
 }
