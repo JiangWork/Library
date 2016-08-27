@@ -44,6 +44,7 @@ public class ControllerDescriptor {
 			MethodInfo m = methodMap.get(method);
 			return m.params.iterator();
 		}
+		
 		return new Iterator<ParameterInfo>() {
 			@Override
 			public boolean hasNext() {
@@ -52,6 +53,9 @@ public class ControllerDescriptor {
 			@Override
 			public ParameterInfo next() {
 				return null;
+			}
+			@Override
+			public void remove() {				
 			}
 		};
 	}

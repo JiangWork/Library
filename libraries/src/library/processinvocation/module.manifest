@@ -1,0 +1,11 @@
+# This is a manifest for processinvocation package
+
+# This module provide functions to invoke external process with timeout feature.
+
+# This file describes the thridparty libraries it depends on and the resources it used.
+
+name=processinvocation
+
+
+# no other dependency module
+dependency.modules=none

@@ -1,9 +1,10 @@
-# this is a manifest for comparator package
-# it describes the thridparty libraries it
-# depends on and the resources it used.
+# This is a manifest for comparator package
+
+# This module provide utility to automatically generate comparator for complicated objects
+# using annotation or programming.
+
+# This file describes the thridparty libraries it depends on and the resources it used.
 
 name=comparatorgenerator
-
-
 
 dependency.modules=common

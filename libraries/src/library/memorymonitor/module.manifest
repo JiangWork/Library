@@ -1,0 +1,12 @@
+# This is a manifest for memorymonitor package
+#
+# This module will monitor the memory usage of certain PIDs include its children PIDs
+# ONLY works on Linux platform.
+#
+# it describes the thridparty libraries it depends on and the resources it used.
+
+name=memorymonitor
+
+
+
+dependency.modules=processinvocation
