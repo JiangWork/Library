@@ -12,8 +12,9 @@ import org.apache.log4j.Logger;
 
 /**
  * 
- * Like tar command, this class provide functions to 
- * package multiple files into a single zar file.
+ * Like tar command, this class provides functionalities to 
+ * package multiple files into a single zar file. Notice that
+ * no compression is perforemed.
  * 
  * 
  * @author jiangzhao
