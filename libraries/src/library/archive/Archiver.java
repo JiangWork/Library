@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,6 @@ import org.apache.log4j.Logger;
 public class Archiver {
 	
 	private final static Logger logger = Logger.getLogger(Archiver.class);
-	private final static int BUFFERSIZE = 1024 * 1024 * 4;
 	
 	private List<String> fileNames;
 	private List<FileInfo> fileInfos;
@@ -126,7 +126,9 @@ public class Archiver {
 					fileInfo.file.length(), fileInfo.cSize);
 		}
 		header.gather();
-		DataOutputStream dos = new DataOutputStream(new FileOutputStream(archiveName));
+		FileOutputStream fos = new FileOutputStream(archiveName); 
+		FileChannel targetChannel = fos.getChannel();
+		DataOutputStream dos = new DataOutputStream(fos);
 		header.writeToStream(dos);
 		logger.info(String.format("Writing header done [%d bytes written]", header.headerSize()));
 		System.out.println(String.format("Writing header done [%d bytes written]", header.headerSize()));
@@ -136,7 +138,7 @@ public class Archiver {
 			long start = System.currentTimeMillis();
 			System.out.print(String.format("[%d of %d] Archiving file {%s} ", 
 					++count, num, fileInfo.file.getName()));
-			long copiedSize = copy(fileInfo.file, dos);
+			long copiedSize = copy(fileInfo.file, targetChannel);
 			if (copiedSize != fileInfo.fileSize) {
 				throw new IllegalStateException("File " + fileInfo.file.getName() + " is staled.");
 			}
@@ -145,26 +147,21 @@ public class Archiver {
 			logger.info(String.format("Archiving file {%s} [%d of %d] elapsed time: %.3f s.", 
 					fileInfo.file.getName(), count, num, (end - start)*1.0/1000));
 		}
-		dos.close();
+		targetChannel.close();
 	}
 	
-	private long copy(File from, DataOutputStream dos) throws IOException {
+	private long copy(File from, FileChannel targetChannel) throws IOException {
 		long copiedSize = 0;
-		FileInputStream fis = null;
+		FileChannel srcChannel = null;
 		try {
-			fis = new FileInputStream(from);
-			byte[] buffer = new byte[BUFFERSIZE];
-			int read = 0;
-			while((read = fis.read(buffer)) != -1) {
-				dos.write(buffer, 0, read);
-				copiedSize += read;
-			}
+			srcChannel = new FileInputStream(from).getChannel();
+			copiedSize = srcChannel.transferTo(0, srcChannel.size(), targetChannel);
 		} catch(IOException e) {
 			logger.error(e.getMessage(), e);
 			throw e;
 		} finally {
-			if (fis != null) {
-				fis.close();
+			if (srcChannel != null) {
+				srcChannel.close();
 			}
 		}
 		return copiedSize;
