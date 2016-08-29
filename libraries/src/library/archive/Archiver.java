@@ -151,11 +151,15 @@ public class Archiver {
 	}
 	
 	private long copy(File from, FileChannel targetChannel) throws IOException {
-		long copiedSize = 0;
+		long transferCount = 0;
 		FileChannel srcChannel = null;
 		try {
 			srcChannel = new FileInputStream(from).getChannel();
-			copiedSize = srcChannel.transferTo(0, srcChannel.size(), targetChannel);
+			long leftSize = srcChannel.size();
+			while(leftSize > 0) {
+				transferCount += srcChannel.transferTo(transferCount, leftSize, targetChannel);
+				leftSize -= transferCount;
+			}
 		} catch(IOException e) {
 			logger.error(e.getMessage(), e);
 			throw e;
@@ -164,7 +168,7 @@ public class Archiver {
 				srcChannel.close();
 			}
 		}
-		return copiedSize;
+		return transferCount;
 	}
 	
 	public static class FileInfo {
