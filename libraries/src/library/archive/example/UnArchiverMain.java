@@ -30,8 +30,9 @@ public class UnArchiverMain {
 		}
 		if("list".equals(args[1])) {
 			List<String> files = unArchiver.list();
-			System.out.println("Total file number: " + files.size() 
-					+  "\nContains file: " + files);
+			for (int i = 0; i < files.size(); ++i) {
+				System.out.println(String.format("[%d of %d] %s.", (i+1), files.size(), files.get(i)));
+			}
 		} else if("unarchive".equals(args[1])) {
 			if (args.length == 3) {
 				unArchiver.unArchive(args[2]);

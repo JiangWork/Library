@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,12 +138,19 @@ public class ZarHeader {
 		return new FileInfo();
 	}
 	
+	/**
+	 * Using UTF-8 encoding
+	 * @param os
+	 * @param outStr
+	 * @throws IOException
+	 */
 	private void writeString(DataOutputStream os, String outStr) throws IOException {
 		if(outStr == null) {
 			outStr = "";
 		}
-		os.writeInt(outStr.length());
-		os.write(outStr.getBytes());
+		byte[] bytes = outStr.getBytes("UTF-8");
+		os.writeInt(bytes.length);
+		os.write(bytes);
 	}
 	
 	private String readString(DataInputStream is) throws IOException {
@@ -149,10 +158,10 @@ public class ZarHeader {
 		byte[] buffer = new byte[length];
 		int read = is.read(buffer);
 		if (read != length) {
-			throw new IOException(String.format("Unexpected end of stream: desired %d, read %d bytes.",
+			throw new IOException(String.format("Unexpected end of stream in reading String: desired %d, read %d bytes.",
 					length, read));
 		}
-		return new String(buffer);
+		return new String(buffer, Charset.forName("UTF-8"));
 	}
 	
 	public int headerSize() {
@@ -188,7 +197,11 @@ public class ZarHeader {
 		}
 		
 		public int getClassSize() {
-			return 4 + fileName.getBytes().length + 8 + 8;
+			try {
+				return 4 + fileName.getBytes("UTF-8").length + 8 + 8;
+			} catch (UnsupportedEncodingException e) {
+				return 0;
+			}
 		}
 		
 		public FileInfo copy() {

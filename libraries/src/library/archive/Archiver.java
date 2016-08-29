@@ -103,7 +103,7 @@ public class Archiver {
 		long end = System.currentTimeMillis();
 		if(ret) {
 			File file = new File(archiveName);
-			String msg = String.format("Generated archvie file: %s, elapsed time: %.3f s, size: %s.", 
+			String msg = String.format("Generated archvie file: %s, elapsed time: %.3fs, size: %s.", 
 					file.getAbsolutePath(), (end - start)*1.0/1000, CapacityFormatter.format(file.length()));
 			logger.info(msg);
 			System.out.println(msg);
