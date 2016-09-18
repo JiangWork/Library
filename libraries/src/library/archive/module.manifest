@@ -13,7 +13,7 @@ name=archiver
 dependency.thridparty.directory=thridparty/log
 
 # the depend jar libraries list
-dependency.thridparty.jars=log4j-1.2.17.jar
+dependency.thridparty.jars=log4j-1.2.17.jar,snappy-java-1.1.2.1.jar
 
 
 # the running method after this module is packaged.

@@ -77,6 +77,11 @@
 					<groupId>org.codehaus.castor</groupId>
 					<artifactId>castor-xml</artifactId>
 					<version>1.4.0</version>
+				</dependency>
+				<dependency>
+  					<groupId>org.xerial.snappy</groupId>
+  					<artifactId>snappy-java</artifactId>
+ 					<version>1.1.2.1</version>
 				</dependency>				
 
 			</dependencies>

@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import library.archive.UnArchiver;
+import library.archive.CapacityFormatter;
+import library.archive.v2.MetaData.FileInfo;
+import library.archive.v2.UnArchiver;
+
 
 public class UnArchiverMain {
 
@@ -29,9 +32,11 @@ public class UnArchiverMain {
 			return;
 		}
 		if("list".equals(args[1])) {
-			List<String> files = unArchiver.list();
+			List<FileInfo> files = unArchiver.list();
+			int count = files.size();
 			for (int i = 0; i < files.size(); ++i) {
-				System.out.println(String.format("[%d of %d] %s.", (i+1), files.size(), files.get(i)));
+				System.out.println(String.format("[%d of %d] %s %s.", (i+1), count, files.get(i).filePath, 
+						CapacityFormatter.format(files.get(i).ofs)));
 			}
 		} else if("unarchive".equals(args[1])) {
 			if (args.length == 3) {
