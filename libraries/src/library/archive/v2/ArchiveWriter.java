@@ -19,7 +19,7 @@ import java.io.OutputStream;
  */
 public interface ArchiveWriter {
 	
-	public static final int BUFFER_SIZE = 4 * 1024 * 1024; //4 MB
+	public static final int BUFFER_SIZE = 5 * 1024 * 1024; // 5 MB
 
 	/**
 	 * Write the content of file to OutputStream.

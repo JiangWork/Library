@@ -13,7 +13,7 @@ import java.io.RandomAccessFile;
  */
 public interface UnArchiveWriter {
 
-	public static final int BUFFER_SIZE = 4 * 1024 * 1024; //4 MB
+	public static final int BUFFER_SIZE = 5 * 1024 * 1024; //5 MB
 	
 	/**
 	 * Read a size number of data from  {@link RandomAccessFile} and write them to {@link OutputStream}.
