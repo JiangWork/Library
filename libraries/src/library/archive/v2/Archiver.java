@@ -129,7 +129,8 @@ public class Archiver {
 			File file = new File(archiveName);
 			String msg = String.format("Generated archvie file: %s, elapsed time: %.3fs, size: (in:%s,out:%s), cratio: %.2f, speed: %s/s.", 
 					file.getAbsolutePath(), (end - start)*1.0/1000, CapacityFormatter.format(totalOFS),
-					CapacityFormatter.format(bytesWrittenCount), totalCFS*1.0/totalOFS, CapacityFormatter.format((long)(totalOFS * 1000.0/(end - start))));
+					CapacityFormatter.format(bytesWrittenCount), totalCFS*1.0/totalOFS, 
+					CapacityFormatter.format((long)(totalOFS * 1000.0/(end - start))));
 			logger.info(msg);
 			System.out.println(msg);
 		}
