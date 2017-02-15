@@ -10,7 +10,13 @@ public class LockSupportDemo {
 		public void run() {
 			startLatch.countDown();			
 			System.out.println("Working ... ");
-			parkLatch.countDown();
+
+			try {
+				parkLatch.await();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			LockSupport.park(this);
 			System.out.println("Working after park ...");
 		}
@@ -27,11 +33,12 @@ public class LockSupportDemo {
 		th.start();
 		startLatch.await();
 		System.out.println("Before park, thread state: " + th.getState());
-		parkLatch.await();
+		parkLatch.countDown();
 		System.out.println("After park, thread state: " + th.getState());
 		Thread.sleep(1000);
-		System.out.println("Unparking.. " + th.getState());
+		
 		th.interrupt();
+		System.out.println("Unparking.. " + th.getState());
 	}
 
 }
