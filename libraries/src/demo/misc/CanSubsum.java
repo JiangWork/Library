@@ -1,4 +1,4 @@
-package library.play;
+package demo.misc;
 
 public class CanSubsum {
 

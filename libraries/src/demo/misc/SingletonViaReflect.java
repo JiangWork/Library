@@ -1,4 +1,4 @@
-package library.play;
+package demo.misc;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

@@ -110,30 +110,30 @@ public class RedisLock {
 		return name + ".lock";
 	}
 	
-	public static void main(String[] args) {
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				RedisConnector connector = new RedisConnector();
-				Jedis jedis = connector.createConnection().getShard("test");
-				RedisLock lock = new RedisLock("test", jedis);
-				System.out.println(Thread.currentThread() + " isLocked: " + lock.isLocked());
-				System.out.println(Thread.currentThread() + " isOwned: " + lock.isOwned());
-				System.out.println(Thread.currentThread() + " Release: " + lock.release());
-				System.out.println(Thread.currentThread() + " Obtain: " + lock.obtain());
-				System.out.println(Thread.currentThread() + " Obtain: " + lock.obtain());
-				System.out.println(Thread.currentThread() + " isLocked: " + lock.isLocked());
-				System.out.println(Thread.currentThread() + " isOwned: " + lock.isOwned());
-				System.out.println(Thread.currentThread() + " Release: " + lock.release());
-				System.out.println(Thread.currentThread() + " Release: " + lock.release());
-				System.out.println(Thread.currentThread() + " Obtain: " + lock.obtain());
-				System.out.println(Thread.currentThread() + " Release: " + lock.release());
-			}
-			
-		};
-		new Thread(runnable).start();
-		new Thread(runnable).start();
-	}
+//	public static void main(String[] args) {
+//		Runnable runnable = new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				RedisConnector connector = new RedisConnector();
+//				Jedis jedis = connector.createConnection().getShard("test");
+//				RedisLock lock = new RedisLock("test", jedis);
+//				System.out.println(Thread.currentThread() + " isLocked: " + lock.isLocked());
+//				System.out.println(Thread.currentThread() + " isOwned: " + lock.isOwned());
+//				System.out.println(Thread.currentThread() + " Release: " + lock.release());
+//				System.out.println(Thread.currentThread() + " Obtain: " + lock.obtain());
+//				System.out.println(Thread.currentThread() + " Obtain: " + lock.obtain());
+//				System.out.println(Thread.currentThread() + " isLocked: " + lock.isLocked());
+//				System.out.println(Thread.currentThread() + " isOwned: " + lock.isOwned());
+//				System.out.println(Thread.currentThread() + " Release: " + lock.release());
+//				System.out.println(Thread.currentThread() + " Release: " + lock.release());
+//				System.out.println(Thread.currentThread() + " Obtain: " + lock.obtain());
+//				System.out.println(Thread.currentThread() + " Release: " + lock.release());
+//			}
+//			
+//		};
+//		new Thread(runnable).start();
+//		new Thread(runnable).start();
+//	}
 
 }

@@ -1,4 +1,4 @@
-package library.play;
+package demo.misc;
 
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
