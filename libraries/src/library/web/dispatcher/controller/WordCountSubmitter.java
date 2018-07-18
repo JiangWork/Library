@@ -62,9 +62,9 @@ public class WordCountSubmitter {
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
 //      ##### configuration when run in Eclipse		
-		conf.addResource("classpath:/core-site.xml");
+//		conf.addResource("classpath:/core-site.xml");
 //		Following line uses code to configure. 
-//		conf.set("fs.default.name", "hdfs://localhost:8020");
+		conf.set("fs.default.name", "hdfs://localhost:8021");
 		Job job = Job.getInstance(conf, "word count");
 	    
 //		Following line is used when jar is available
@@ -86,7 +86,14 @@ public class WordCountSubmitter {
 	    		logger.info(outPath.toUri() + " successfully delete.");
 	    	}
 	    }
-	    
+	    Path inputPath = new Path("/user/jiazhao/demo-input/hadoop");
+	    if (!fs.exists(inputPath)) {
+	    	System.out.println(inputPath + " doesn't exist.");
+	    } 
+	    RemoteIterator<LocatedFileStatus> iter= fs.listFiles(new Path("/user"), true);
+	    while(iter.hasNext()) {
+	    	System.out.println(iter.next());
+	    }
 	    FileInputFormat.addInputPath(job, new Path("/user/jiazhao/demo-input/hadoop"));
 	    FileOutputFormat.setOutputPath(job, new Path("output-2"));
 	    boolean status = job.waitForCompletion(true);
@@ -110,6 +117,7 @@ public class WordCountSubmitter {
 	    job.setReducerClass(IntSumReducer.class);
 	    job.setOutputKeyClass(Text.class);
 	    job.setOutputValueClass(IntWritable.class);
+	
 	    
 	    Path outPath = new Path(outputDirectory);
 	    Path inPath = new Path(inputDirectory);
